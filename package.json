@@ -7,9 +7,15 @@
     "db:push": "bunx drizzle-kit push:sqlite"
   },
   "dependencies": {
+    "@elysiajs/html": "^0.7.3",
+    "@libsql/client": "0.3.5-pre.13",
+    "@lucia-auth/adapter-sqlite": "^2.0.0",
+    "@lucia-auth/oauth": "^3.2.0",
+    "@t3-oss/env-core": "^0.6.1",
+    "better-sqlite3": "^9.0.0",
     "drizzle-orm": "^0.28.6",
     "elysia": "latest",
-    "@t3-oss/env-core": "^0.6.1"
+    "lucia": "^2.7.2"
   },
   "devDependencies": {
     "bun-types": "latest",

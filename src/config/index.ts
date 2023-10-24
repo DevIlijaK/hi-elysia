@@ -7,6 +7,8 @@ const env = createEnv({
     // dATABASE_CONNECTION_TYPE: z.enum(["local", "remote", "local-replica"]),
     DATABASE_URL: z.string().min(1),
     DATABASE_AUTH_TOKEN: z.string().optional(),
+    GITHUB_CLIENT_ID: z.string(),
+    GITHUB_CLIENT_SECRET: z.string(),
     // .refine((s) => {
     // not needed for local only
     // const type = process.env.DATABASE_CONNECTION_TYPE;

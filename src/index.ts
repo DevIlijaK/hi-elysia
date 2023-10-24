@@ -1,6 +1,7 @@
 import { plugin } from "bun";
 import { Elysia } from "elysia";
 import { nesto } from "./plugin";
+import { authModule } from "./controlers/auth";
 
 const app = new Elysia()
   .get("/", () => "Hello Elysia")
@@ -50,6 +51,7 @@ const app = new Elysia()
   })
   .use(nesto)
   .get("/version4", ({ store }) => store["plugin-version"])
+  .use(authModule)
   .listen(3000);
 console.log(
   `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`

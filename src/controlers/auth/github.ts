@@ -6,7 +6,7 @@ import { parseCookie, serializeCookie } from "lucia/utils";
 export const github = new Elysia({
   prefix: "/github",
 })
-  .get("", async () => {
+  .get("/login", async () => {
     const [url, state] = await githubAuth.getAuthorizationUrl();
 
     const stateCookie = serializeCookie("github_oauth_state", state, {

@@ -52,6 +52,7 @@ const app = new Elysia()
     };
   })
   .use(nesto)
+  .use(login)
   .get("/version4", ({ store }) => store["plugin-version"])
   .use(authModule)
   .use(pages)

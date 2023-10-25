@@ -71,6 +71,7 @@ export const basic = new Elysia({
 
     await auth.invalidateSession(session.sessionId);
     const sessionCookie = auth.createSessionCookie(null);
+    context.set.headers["Set-Cookie"] = sessionCookie.serialize();
     redirect(
       {
         set: context.set,
@@ -81,7 +82,7 @@ export const basic = new Elysia({
   })
   .post(
     "/login",
-    async ({ body: { username, password } }) => {
+    async ({ body: { username, password }, set, headers }) => {
       try {
         const key = await auth.useKey(
           "username",
@@ -94,13 +95,14 @@ export const basic = new Elysia({
           attributes: {},
         });
         const sessionCookie = auth.createSessionCookie(session);
-        return new Response(null, {
-          headers: {
-            Location: "/",
-            "Set-Cookie": sessionCookie.serialize(),
+        set.headers["Set-Cookie"] = sessionCookie.serialize();
+        redirect(
+          {
+            set: set,
+            headers: headers,
           },
-          status: 302,
-        });
+          "/tenis"
+        );
       } catch (e) {
         if (
           e instanceof LuciaError &&

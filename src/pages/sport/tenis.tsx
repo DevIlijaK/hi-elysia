@@ -1,6 +1,6 @@
 import { html } from "@elysiajs/html";
 import Elysia from "elysia";
-import { BaseHtml } from "./baseHTML";
+import { BaseHtml } from "../baseHTML";
 
 export const tenis = new Elysia({
   prefix: "/tenis",

@@ -15,6 +15,7 @@
     "better-sqlite3": "^9.0.0",
     "drizzle-orm": "^0.28.6",
     "elysia": "latest",
+    "flowbite": "^1.8.1",
     "lucia": "^2.7.2"
   },
   "devDependencies": {

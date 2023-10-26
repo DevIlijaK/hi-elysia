@@ -21,6 +21,11 @@ export const BaseHtml = ({ children }: PropsWithChildren) => (
       <title>THE BETH STACK</title>
       <script src="https://unpkg.com/htmx.org@1.9.5"></script>
       <script src="https://cdn.tailwindcss.com"></script>
+      <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css"
+        rel="stylesheet"
+      />
+      <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
 
       {/* <script>htmx.config.globalViewTransitions = true;</script>
         <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
@@ -50,6 +55,7 @@ export const BaseHtml = ({ children }: PropsWithChildren) => (
     </head>
     <body hx-boost="true" hx-ext="loading-states">
       {children}
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>{" "}
     </body>
   </html>
 );

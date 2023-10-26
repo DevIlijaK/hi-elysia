@@ -28,9 +28,27 @@ export const court = new Elysia({
               </div>
               <div class="w-40 h-40 relative">
                 <div
-                  _="on pointerdown set $isDragging to true then log $isDragging
-                     on pointerup set $isDragging to false then log $isDragging
-                     on pointermove if $isDragging is true add  .bg-red-500 to me else log $isDragging"
+                  _="on pointerdown set $isDragging to true 
+                     on pointerup set $isDragging to false 
+                     on pointermove (x, y)
+                     if $isDragging is true 
+                     measure my left then 
+                     set centerX to left + 80 then 
+                     measure my bottom then
+                     set centerY to bottom - 80 then 
+                     set positionX to x - (left + 80) then
+                     set positiony to y - (bottom - 80) then
+                     set positionXSquare to (positionX) * (positionX) then 
+                     
+                     set positionYSquare to (positiony) * (positiony) then 
+                    
+                     js(positionXSquare, positionYSquare)
+                     return Math.sqrt(positionXSquare + positionYSquare) end then log it then
+                     if it <= 79 
+                     add  .bg-red-500 to me then 
+                     remove .bg-blue-500 from me
+                     else log 'ulazi ovde!' then add .bg-blue-500 to me then 
+                     remove .bg-red-500 from me"
                   class="w-full h-full rounded-full bg-blue-500 absolute"
                 ></div>
                 <div
@@ -39,11 +57,14 @@ export const court = new Elysia({
                   class="w-20 h-20 rounded-full bg-gray-100 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                 ></div>
               </div>
+              <output>--</output>
               {/* <button _="on click set x to 10 then log x">Click Me</button>
               <output>--</output> */}
-              <button _="on mouseup set x to 10 then log x on mousedown set x to 11 then log x">
-                Click Me
-              </button>
+              <div>
+                <button _="on click measure my width then log width">
+                  Click Me
+                </button>
+              </div>
             </div>
           </div>
         </div>

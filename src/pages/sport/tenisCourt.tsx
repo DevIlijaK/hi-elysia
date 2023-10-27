@@ -65,8 +65,55 @@ export const court = new Elysia({
                   Click Me
                 </button>
               </div>
+              <div
+                _="on click (x,y) measure my bounds then log it then 
+                set shapeWidth to bounds.width then 
+                set shapeHeight to bounds.height then 
+                js ( shapeWidth) return shapeWidth / 2 end then
+                set distanceToEnd to it then log distanceToEnd then
+
+                js ( shapeHeight ) return shapeHeight / 2 end then
+                set heightToEnd to it then log heightToEnd then
+
+
+                set shapeLeft to bounds.left then log shapeLeft then
+                set shapeTop to bounds.top then log shapeTop then
+                set centerX to (shapeLeft + distanceToEnd) then log centerX
+                set centerY to (shapeTop + heightToEnd) then log centerY then log x then log y then
+                js (x, y, centerX, centerY) 
+                
+                return Math.sqrt((x - centerX) ** 2 + (y - centerY) **2) end then set length to it then
+
+                log length then 
+
+                js (x, y, centerX, centerY) 
+                
+                return Math.atan2(x - centerY, y - centerX) end then set angle to it then
+                  
+                log angle then 
+
+                log #line then add {top: ${centerY}px; left: ${centerX}px; width: ${length}px; background-color: red;
+              
+              transform: rotate(${angle}rad);
+              } to #line then log #line
+                
+                "
+                id="container"
+                class="relative bg-white p-6 h-40 rounded-lg shadow-md"
+              >
+                <div id="line" class="absolute bg-blue-500"></div>
+              </div>
             </div>
           </div>
+        </div>
+
+        <div
+          id="line"
+          class="absolute bg-blue-500"
+          style="top: 452px; left: 609.25px; width: 142.675px; background-color: red; transform: rotate(3.05267rad);"
+        ></div>
+        <div>
+          <div style="width: 100px; height: 2px; background-color: blue;"></div>
         </div>
       </BaseHtml>
     );

@@ -165,6 +165,22 @@ set pointY to y - bounds.top then
         <div>
           <div style="width: 100px; height: 2px; background-color: blue;"></div>
         </div>
+        <div class="w-40 h-40 relative">
+          <img
+            style="transition: all 1000ms ease-in"
+            src="https://cdn.mos.cms.futurecdn.net/DrRN4BTQ9Wk8fHdGjKB2A.jpg"
+            alt="proba"
+            id="image"
+          />
+          <button
+            _="on click if(#image match .hidden)  remove .hidden from #image then settle 
+            else add .hidden to #image then settle"
+            class="absolute bg-blue-500 hover:bg-blue-700 active:bg-blue-800 
+              text-white font-semibold py-2 px-4 h-16 rounded"
+          >
+            Uradi
+          </button>
+        </div>
       </BaseHtml>
     );
   });

@@ -122,13 +122,12 @@ set pointY to y - bounds.top then
               </div>
             </div>
             <div>
-              <div class="flex relative">
+              <div class="relative ">
                 <div
-                  class="relative bg-white h-80 w-80 rounded-lg shadow-md overflow-hidden"
+                  class="absolute hidden top-0 left-0 bg-white h-80 w-80 rounded-lg shadow-md overflow-hidden"
                   id="imageSun"
                 >
                   <img
-                    class="absolute top-0 left-0 bg-white h-80 w-80 rounded-lg shadow-md overflow-hidden"
                     src="https://pngfre.com/wp-content/uploads/sun-50-1024x1024.png"
                     alt="proba"
                   />
@@ -143,13 +142,17 @@ set pointY to y - bounds.top then
                   />
                 </div>
               </div>
-              <button
-                _="on click log #imageMoon."
-                class="bg-blue-500 hover:bg-blue-700 active:bg-blue-800 
+              <div>
+                <button
+                  style="transition: all 900ms ease-in"
+                  _="on click if(#imageSun match .hidden) add .hidden to #imageMoon then settle then remove .hidden from #imageSun
+                  else add .hidden to #imageSun then settle then remove .hidden from #imageMoon"
+                  class="absolute bg-blue-500 hover:bg-blue-700 active:bg-blue-800 
               text-white font-semibold py-2 px-4 h-16 rounded"
-              >
-                Uradi
-              </button>
+                >
+                  Uradi
+                </button>
+              </div>
             </div>
           </div>
         </div>

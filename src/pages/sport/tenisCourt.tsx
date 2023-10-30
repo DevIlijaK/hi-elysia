@@ -66,43 +66,90 @@ export const court = new Elysia({
                 </button>
               </div>
               <div
-                _="on click (x,y) measure my bounds then log it then 
+                _="on click (x,y) measure my bounds then 
                 set shapeWidth to bounds.width then 
                 set shapeHeight to bounds.height then 
                 js ( shapeWidth) return shapeWidth / 2 end then
-                set distanceToEnd to it then log distanceToEnd then
-
+                set distanceToLeft to it then 
                 js ( shapeHeight ) return shapeHeight / 2 end then
-                set heightToEnd to it then log heightToEnd then
+                set heightToTop to it then 
 
+set pointX to x - bounds.left then 
+set pointY to y - bounds.top then 
 
-                set shapeLeft to bounds.left then log shapeLeft then
-                set shapeTop to bounds.top then log shapeTop then
-                set centerX to (shapeLeft + distanceToEnd) then log centerX
-                set centerY to (shapeTop + heightToEnd) then log centerY then log x then log y then
-                js (x, y, centerX, centerY) 
+                js (pointX, pointY, distanceToLeft, heightToTop) 
                 
-                return Math.sqrt((x - centerX) ** 2 + (y - centerY) **2) end then set length to it then
+                return Math.sqrt((pointX - distanceToLeft) ** 2 + (pointY - heightToTop) **2) end then set length to it then
 
-                log length then 
 
-                js (x, y, centerX, centerY) 
+                js (pointX, pointY, distanceToLeft, heightToTop) 
                 
-                return Math.atan2(x - centerY, y - centerX) end then set angle to it then
-                  
-                log angle then 
-
-                log #line then add {top: ${centerY}px; left: ${centerX}px; width: ${length}px; background-color: red;
-              
-              transform: rotate(${angle}rad);
-              } to #line then log #line
+                return Math.atan2( pointY - heightToTop, pointX - distanceToLeft) end then set angle to it then  
+                 add {
+                  top: ${heightToTop}px; 
+                  left: ${distanceToLeft}px; 
+                  width: ${length}px; 
+                  height: 2px; 
+                  background-color: red;
+                  transform: rotate(${angle}rad);
+                  transform-origin: top left;
+              } to #line 
+               then measure #div1 bounds then set divBounds to bounds then
+               
+               measure #line bounds then set lineBounds to bounds then log lineBounds then  
+               
+//                if((lineBounds.bottom >= divBounds.bottom) or (lineBounds.) and (y >= it.y) and (y <= it.y + it.height))
+// remove .bg-red-500 from #div1 then
+//                 add  .bg-blue-500 to #div1 end
+                
                 
                 "
                 id="container"
-                class="relative bg-white p-6 h-40 rounded-lg shadow-md"
+                class="relative bg-white p-6 h-80 rounded-lg shadow-md"
               >
-                <div id="line" class="absolute bg-blue-500"></div>
+                <div id="line" class="absolute"></div>
+                <div
+                  _="on click measure my top then log it"
+                  id="div1"
+                  class="absolute bg-red-500"
+                  style="width: 50px; height: 50px; top: 100px; left: 100px;"
+                ></div>
+                <div
+                  id="div2"
+                  class="absolute bg-green-500"
+                  style="width: 50px; height: 50px; top: 200px; left: 200px;"
+                ></div>
               </div>
+            </div>
+            <div>
+              <div class="flex relative">
+                <div
+                  class="relative bg-white h-80 w-80 rounded-lg shadow-md overflow-hidden"
+                  id="imageSun"
+                >
+                  <img
+                    class="absolute top-0 left-0 bg-white h-80 w-80 rounded-lg shadow-md overflow-hidden"
+                    src="https://pngfre.com/wp-content/uploads/sun-50-1024x1024.png"
+                    alt="proba"
+                  />
+                </div>
+                <div
+                  class="absolute top-0 left-0 bg-white h-80 w-80 rounded-lg shadow-md overflow-hidden"
+                  id="imageMoon"
+                >
+                  <img
+                    src="https://cdn.mos.cms.futurecdn.net/DrRN4BTQ9Wk8fHdGjKB2A.jpg"
+                    alt="proba"
+                  />
+                </div>
+              </div>
+              <button
+                _="on click log #imageMoon."
+                class="bg-blue-500 hover:bg-blue-700 active:bg-blue-800 
+              text-white font-semibold py-2 px-4 h-16 rounded"
+              >
+                Uradi
+              </button>
             </div>
           </div>
         </div>

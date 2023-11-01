@@ -11,12 +11,7 @@ export const login = new Elysia({
       <div class="bg-gray-100 min-h-screen flex items-center justify-center">
         <div class="container mx-auto max-w-md bg-white p-6 rounded-lg shadow-lg">
           <h2 class="text-2xl font-semibold text-center">Login</h2>
-          <form
-            action="#"
-            method="post"
-            hx-post="/auth/basic/login"
-            hx-swap="innerHTML"
-          >
+          <form action="#" hx-swap="innerHTML">
             <div class="mt-4">
               <label for="username" class="block">
                 Username
@@ -46,6 +41,18 @@ export const login = new Elysia({
             <div class="mt-6">
               <button
                 type="submit"
+                method="post"
+                hx-post="/auth/basic/signup"
+                class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600"
+              >
+                SignIn
+              </button>
+            </div>
+            <div class="mt-6">
+              <button
+                type="submit"
+                method="post"
+                hx-post="/auth/basic/login"
                 class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600"
               >
                 Login

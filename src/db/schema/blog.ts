@@ -3,7 +3,7 @@ import { text, sqliteTable, integer, index } from "drizzle-orm/sqlite-core";
 export const blog = sqliteTable(
   "blog",
   {
-    id: text("id").primaryKey(),
+    id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
     title: text("title").notNull(),
     content: text("content").notNull(),
     author: text("author").notNull(),
@@ -27,3 +27,6 @@ export const blog = sqliteTable(
     };
   }
 );
+
+export type InsertBlog = typeof blog.$inferInsert;
+export type SelectBlog = typeof blog.$inferSelect;

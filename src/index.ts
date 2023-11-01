@@ -4,6 +4,7 @@ import { nesto } from "./plugin";
 import { authModule } from "./controlers/auth";
 import { login } from "./pages/login";
 import { pages } from "./pages";
+import { controllers } from "./controlers/intex";
 
 const app = new Elysia()
   .get("/", () => "Hello Elysia")
@@ -55,6 +56,7 @@ const app = new Elysia()
   .use(login)
   .get("/version4", ({ store }) => store["plugin-version"])
   .use(authModule)
+  .use(controllers)
   .use(pages)
   .listen(3000);
 console.log(

@@ -33,10 +33,10 @@ export function SideNav({ children }: PropsWithChildren) {
               <a href="/sport/court">Home</a>
             </li>
             <li>
-              <a href="#">About</a>
+              <a href="/blog/list">About</a>
             </li>
             <li>
-              <a href="#">Blog</a>
+              <a href="/blog/text">Blog</a>
             </li>
             <li>
               <a href="#">Contact</a>

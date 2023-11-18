@@ -1,6 +1,3 @@
-
-
-
 export const BaseHtml = ({ children }: PropsWithChildren) => (
   <html>
     <head>
@@ -14,6 +11,10 @@ export const BaseHtml = ({ children }: PropsWithChildren) => (
         rel="stylesheet"
       />
       <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      />
 
       {/* <script>htmx.config.globalViewTransitions = true;</script>
         <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>

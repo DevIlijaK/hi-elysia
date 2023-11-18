@@ -39,7 +39,7 @@ export function SideNav({ children }: PropsWithChildren) {
               <a href="/blog/text">Blog</a>
             </li>
             <li>
-              <a href="#">Contact</a>
+              <a href="/blog/create">Contact</a>
             </li>
           </ul>
         </div>

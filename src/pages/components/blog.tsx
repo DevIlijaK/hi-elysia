@@ -1,166 +1,43 @@
 import Elysia from "elysia";
 import { BaseHtml } from "../baseHTML";
 import { SideNav } from "./sidenav";
+import { UploadPicture } from "./uploadPicture";
 
 export const blog = new Elysia({
   prefix: "/blog",
 })
-  .get("/list", () => (
-    <BaseHtml>
-      <SideNav>
-        <main class="container mx-auto py-8">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
-            <div class="bg-white p-4 rounded shadow-md flex items-center h-60">
-              <div class="mr-4">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCWCuRr561z0xxOwIh3uGZVZBrU_ZmFcM1uQ&usqp=CAU"
-                  alt="Blog Post Image"
-                  class="w-16 h-16 object-cover rounded-full"
-                />
-              </div>
-              <div>
-                <h2 class="text-xl font-semibold">Blog Post Title 2</h2>
-                <p class="text-gray-500">Posted on October 31, 2023</p>
-                <p class="mt-4">This is another blog post content.</p>
-              </div>
+  .get("/list", () => {
+    let pageCount = 0;
+    return (
+      <BaseHtml>
+        <SideNav>
+          <main class="container mx-auto py-8">
+            <div
+              hx-get="/blog/posts/${$page}"
+              hx-trigger="load, from:#leftButton"
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8"
+            ></div>
+            <div id="pagination-controls" class="flex justify-center mt-4">
+              <button
+                class="mx-2 p-2 bg-blue-500 text-white rounded hidden"
+                id="leftButton"
+                _="on click decrement $page then log $page"
+              >
+                &lt;&lt;
+              </button>
+              <button class="mx-2 p-2 bg-blue-500 text-white rounded">1</button>
+              <button
+                class="mx-2 p-2 bg-blue-500 text-white rounded"
+                _="on click increment $page then log $page then if $page is greater than 0 remove .hidden from #leftButton"
+              >
+                &gt;&gt;
+              </button>
             </div>
-            <div class="bg-white p-4 rounded shadow-md flex items-center h-60">
-              <div class="mr-4">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdOndK7uPj2I3kjz9hV8UjLa312yDxfRZWaw&usqp=CAU"
-                  alt="Blog Post Image"
-                  class="w-16 h-16 object-cover rounded-full"
-                />
-              </div>
-              <div>
-                <h2 class="text-xl font-semibold">Blog Post Title 2</h2>
-                <p class="text-gray-500">Posted on October 31, 2023</p>
-                <p class="mt-4">This is another blog post content.</p>
-              </div>
-            </div>
-            <div class="bg-white p-4 rounded shadow-md flex items-center h-60">
-              <div class="mr-4">
-                <img
-                  src="https://img.freepik.com/premium-photo/giraffe-dress-with-pattern-flowers-it_859228-150.jpg"
-                  alt="Blog Post Image"
-                  class="w-16 h-16 object-cover rounded-full"
-                />
-              </div>
-              <div>
-                <h2 class="text-xl font-semibold">Blog Post Title 2</h2>
-                <p class="text-gray-500">Posted on October 31, 2023</p>
-                <p class="mt-4">This is another blog post content.</p>
-              </div>
-            </div>
-            <div class="bg-white p-4 rounded shadow-md flex items-center h-60">
-              <div class="mr-4">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCWCuRr561z0xxOwIh3uGZVZBrU_ZmFcM1uQ&usqp=CAU"
-                  alt="Blog Post Image"
-                  class="w-16 h-16 object-cover rounded-full"
-                />
-              </div>
-              <div>
-                <h2 class="text-xl font-semibold">Blog Post Title 2</h2>
-                <p class="text-gray-500">Posted on October 31, 2023</p>
-                <p class="mt-4">This is another blog post content.</p>
-              </div>
-            </div>
-            <div class="bg-white p-4 rounded shadow-md flex items-center h-60">
-              <div class="mr-4">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCWCuRr561z0xxOwIh3uGZVZBrU_ZmFcM1uQ&usqp=CAU"
-                  alt="Blog Post Image"
-                  class="w-16 h-16 object-cover rounded-full"
-                />
-              </div>
-              <div>
-                <h2 class="text-xl font-semibold">Blog Post Title 2</h2>
-                <p class="text-gray-500">Posted on October 31, 2023</p>
-                <p class="mt-4">This is another blog post content.</p>
-              </div>
-            </div>
-            <div class="bg-white p-4 rounded shadow-md flex items-center h-60">
-              <div class="mr-4">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCWCuRr561z0xxOwIh3uGZVZBrU_ZmFcM1uQ&usqp=CAU"
-                  alt="Blog Post Image"
-                  class="w-16 h-16 object-cover rounded-full"
-                />
-              </div>
-              <div>
-                <h2 class="text-xl font-semibold">Blog Post Title 2</h2>
-                <p class="text-gray-500">Posted on October 31, 2023</p>
-                <p class="mt-4">This is another blog post content.</p>
-              </div>
-            </div>
-            <div class="bg-white p-4 rounded shadow-md flex items-center h-60">
-              <div class="mr-4">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCWCuRr561z0xxOwIh3uGZVZBrU_ZmFcM1uQ&usqp=CAU"
-                  alt="Blog Post Image"
-                  class="w-16 h-16 object-cover rounded-full"
-                />
-              </div>
-              <div>
-                <h2 class="text-xl font-semibold">Blog Post Title 2</h2>
-                <p class="text-gray-500">Posted on October 31, 2023</p>
-                <p class="mt-4">This is another blog post content.</p>
-              </div>
-            </div>
-            <div class="bg-white p-4 rounded shadow-md flex items-center h-60">
-              <div class="mr-4">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCWCuRr561z0xxOwIh3uGZVZBrU_ZmFcM1uQ&usqp=CAU"
-                  alt="Blog Post Image"
-                  class="w-16 h-16 object-cover rounded-full"
-                />
-              </div>
-              <div>
-                <h2 class="text-xl font-semibold">Blog Post Title 2</h2>
-                <p class="text-gray-500">Posted on October 31, 2023</p>
-                <p class="mt-4">This is another blog post content.</p>
-              </div>
-            </div>
-            <div class="bg-white p-4 rounded shadow-md flex items-center h-60">
-              <div class="mr-4">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCWCuRr561z0xxOwIh3uGZVZBrU_ZmFcM1uQ&usqp=CAU"
-                  alt="Blog Post Image"
-                  class="w-16 h-16 object-cover rounded-full"
-                />
-              </div>
-              <div>
-                <h2 class="text-xl font-semibold">Blog Post Title 2</h2>
-                <p class="text-gray-500">Posted on October 31, 2023</p>
-                <p class="mt-4">This is another blog post content.</p>
-              </div>
-            </div>
-          </div>
-          <div id="pagination-controls" class="flex justify-center mt-4">
-            <button
-              class="mx-2 p-2 bg-blue-500 text-white rounded"
-              onclick="showPage(0)"
-            >
-              &lt;&lt;
-            </button>
-            <button
-              class="mx-2 p-2 bg-blue-500 text-white rounded"
-              onclick="showPage(1)"
-            >
-              1
-            </button>
-            <button
-              class="mx-2 p-2 bg-blue-500 text-white rounded"
-              onclick="showPage(totalPages - 1)"
-            >
-              &gt;&gt;
-            </button>
-          </div>
-        </main>
-      </SideNav>
-    </BaseHtml>
-  ))
+          </main>
+        </SideNav>
+      </BaseHtml>
+    );
+  })
   .get("/text", () => {
     return (
       <BaseHtml>
@@ -258,4 +135,64 @@ export const blog = new Elysia({
         </SideNav>
       </BaseHtml>
     );
-  });
+  })
+  .get("/create", () => (
+    <BaseHtml>
+      <SideNav>
+        <div class="container mx-auto p-4 mt-8">
+          <div class="bg-white p-8 rounded-lg shadow-lg">
+            <h1 class="text-3xl font-bold mb-4">Create a Blog Post</h1>
+            <form
+              action="submit_blog.php"
+              method="POST"
+              enctype="multipart/form-data"
+            >
+              <div class="mb-4">
+                <label for="title" class="block text-gray-600">
+                  Title
+                </label>
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  class="w-full p-2 border border-gray-300 rounded"
+                />
+              </div>
+              <div class="mb-4">
+                <label for="content" class="block text-gray-600">
+                  Content
+                </label>
+                <textarea
+                  id="content"
+                  name="content"
+                  class="w-full p-2 border border-gray-300 rounded"
+                ></textarea>
+              </div>
+              <div class="mb-4">
+                <label for="image" class="block text-gray-600">
+                  Image
+                </label>
+                <input type="file" id="image" name="image" class="w-full" />
+              </div>
+              <div class="mb-4">
+                <button
+                  type="submit"
+                  class="bg-blue-500 text-white py-2 px-4 rounded"
+                  hx-post="/blog/create"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </SideNav>
+    </BaseHtml>
+  ))
+  .get("/create2", () => (
+    <BaseHtml>
+      <SideNav>
+       <UploadPicture/>
+      </SideNav>
+    </BaseHtml>
+  ));

@@ -15,7 +15,6 @@ export function redirect(
   href: string
 ) {
   if (headers["hx-request"] == "true") {
-    console.log("It works");
     set.headers["HX-Location"] = href;
   } else {
     set.redirect = href;

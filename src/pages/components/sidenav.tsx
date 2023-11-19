@@ -8,8 +8,12 @@ export function SideNav({ children }: PropsWithChildren) {
         <div class="container mx-auto flex items-center justify-between">
           <h1 class="text-2xl text-white font-bold">My Blog</h1>
           <button
-            _="on click toggle .hidden on #sidebar
-            then add .bg-black .opacity-50 to #sidenavClose
+            _="
+            on click toggle .hidden on #sidebar settle
+            then add .opacity-50 to #sidenavClose 
+            then remove .opacity-0 from #sidenavClose 
+            then add .w-64 to #nav 
+            then remove .w-0 from #nav      
             "
             id="menu-button"
             class="block md:hidden text-white p-2"
@@ -46,12 +50,24 @@ export function SideNav({ children }: PropsWithChildren) {
           </ul>
         </div>
         <div
-          class="fixed left-0 top-0 h-full w-full  text-white z-20 hidden md:hidden flex"
-          _="on click log 2"
+        style="transition-duration: 0s;"
+          class="fixed left-0 top-0 h-full w-full z-20 
+                text-white 
+                hidden md:hidden 
+                flex
+                transition-all duration-100 ease-out
+                "
           id="sidebar"
         >
-          <nav class="h-full w-64 bg-gray-800">
-            <div class="p-4 ">
+          <nav
+            id="nav"
+            class="
+            h-full w-0 bg-gray-800 
+            transition-all duration-500 ease-out 
+            overflow-hidden
+            "
+          >
+            <div class="p-4">
               <a href="#" class="block py-2">
                 Home
               </a>
@@ -66,9 +82,22 @@ export function SideNav({ children }: PropsWithChildren) {
               </a>
             </div>
           </nav>
-          <div class="h-full flex-1"
+          <div
+          style="transition-duration: 0s;"
+            class="
+            h-full 
+            flex-1 
+            bg-black 
+            opacity-50
+            "
             id="sidenavClose"
-           _="on click toggle .hidden on #sidebar"
+            _="
+            on click remove .w-64 from #nav 
+            then add .w-0 to #nav settle 
+            then add .opacity-0 to me
+            then remove .opacity-50 from me 
+            then toggle .hidden on #sidebar
+            "
           ></div>
         </div>
       </header>

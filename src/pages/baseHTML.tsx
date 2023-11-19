@@ -15,6 +15,7 @@ export const BaseHtml = ({ children }: PropsWithChildren) => (
         rel="stylesheet"
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
       />
+  
 
       {/* <script>htmx.config.globalViewTransitions = true;</script>
         <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
@@ -42,7 +43,7 @@ export const BaseHtml = ({ children }: PropsWithChildren) => (
         </script>
         <script>{safeScript}</script> */}
     </head>
-    <body hx-boost="true" hx-ext="loading-states">
+    <body hx-boost="true" hx-ext="loading-states" class="select-none">
       {children}
       <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>{" "}
     </body>

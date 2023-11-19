@@ -1,8 +1,8 @@
 export function UploadPicture() {
   return (
-    <div class="container mx-auto py-8 select-none">
+    <div class="container mx-auto py-8 select-none ">
       <form class="bg-white p-4 rounded shadow-lg">
-        <div style="height: 500px" class="mt-6 relative w-full bg-blue-300">
+        <div style="aspect-ratio:3.2/1;" class="mt-6 relative bg-blue-300">
           <div
             class="
               absolute 
@@ -19,13 +19,7 @@ export function UploadPicture() {
               shadow-lg
               "
           >
-            <label
-              for="imageInput"
-              class="cursor-pointer select-none 
-        
-            
-              "
-            >
+            <label for="imageInput" class="cursor-pointer select-none">
               <i class="material-icons text-4xl sm:text-6xl md:text-8xl lg:text-10xl xl:text-12xl">
                 upload_file
               </i>
@@ -44,8 +38,8 @@ export function UploadPicture() {
               />
             </label>
           </div>
-          <div id="imageDiv" class="full hidden">
-            <img id="imagePreview" src="#" alt="Preview" />
+          <div id="imageDiv" style="aspect-ratio:3.2/1;" class="hidden flex items-center justify-center">
+            <img id="imagePreview" src="#" alt="Preview" class="object-cover w-full h-full"/>
           </div>
         </div>
       </form>

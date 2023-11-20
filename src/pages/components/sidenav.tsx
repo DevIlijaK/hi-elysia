@@ -4,15 +4,15 @@ import Elysia from "elysia";
 export function SideNav({ children }: PropsWithChildren) {
   return (
     <div>
-      <header class="bg-blue-500 p-4 ">
+      <header class="bg-blue-500 p-4 fixed top-0 w-full z-50">
         <div class="container mx-auto flex items-center justify-between">
           <h1 class="text-2xl text-white font-bold">My Blog</h1>
           <button
             _="
-            on click toggle .hidden on #sidebar settle
-            then add .opacity-50 to #sidenavClose 
+            on click toggle .hidden on #sidebar 
+            then add .opacity-50 to #sidenavClose
             then remove .opacity-0 from #sidenavClose 
-            then add .w-64 to #nav 
+            then add .w-64 to #nav
             then remove .w-0 from #nav      
             "
             id="menu-button"
@@ -50,12 +50,10 @@ export function SideNav({ children }: PropsWithChildren) {
           </ul>
         </div>
         <div
-        style="transition-duration: 0s;"
           class="fixed left-0 top-0 h-full w-full z-20 
                 text-white 
                 hidden md:hidden 
                 flex
-                transition-all duration-100 ease-out
                 "
           id="sidebar"
         >
@@ -67,23 +65,26 @@ export function SideNav({ children }: PropsWithChildren) {
             overflow-hidden
             "
           >
-            <div class="p-4">
-              <a href="#" class="block py-2">
-                Home
+            <div class="p-4 h-full flex flex-col justify-between">
+              <a href="/blog/list" class="flex items-center flex-1">
+                <i class="material-icons mr-2">description</i>
+                <span>About</span>
               </a>
-              <a href="#" class="block py-2">
-                About
+              <a href="/blog/list" class="flex items-center flex-1">
+                <i class="material-icons mr-2">description</i>
+                <span>About</span>
               </a>
-              <a href="#" class="block py-2">
-                Services
+              <a href="/blog/list" class="flex items-center flex-1">
+                <i class="material-icons mr-2">description</i>
+                <span>About</span>
               </a>
-              <a href="#" class="block py-2">
-                Contact
+              <a href="/blog/list" class="flex items-center flex-1">
+                <i class="material-icons mr-2">description</i>
+                <span>About</span>
               </a>
             </div>
           </nav>
           <div
-          style="transition-duration: 0s;"
             class="
             h-full 
             flex-1 

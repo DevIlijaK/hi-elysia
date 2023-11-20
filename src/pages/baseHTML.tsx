@@ -45,7 +45,6 @@ export const BaseHtml = ({ children }: PropsWithChildren) => (
     </head>
     <body hx-boost="true" hx-ext="loading-states" class="select-none">
       {children}
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>{" "}
     </body>
   </html>
 );

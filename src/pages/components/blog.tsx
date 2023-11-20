@@ -192,7 +192,33 @@ export const blog = new Elysia({
   .get("/create2", () => (
     <BaseHtml>
       <SideNav>
-       <UploadPicture/>
+        <div class="container mx-auto py-8 select-none ">
+          <form class="bg-white p-4 rounded shadow-lg">
+            <label for="blogTitle" class="block text-xl font-bold mb-2">
+              Blog Title:
+            </label>
+            <input
+              type="text"
+              id="blogTitle"
+              name="blogTitle"
+              class="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
+            />
+            <h1 id="blogPreview" class="text-xl font-bold mb-2">
+              Preview Title
+            </h1>
+            <UploadPicture />
+            <label for="blogBody" class="block text-xl font-bold mb-2">
+              Blog Body:
+            </label>
+            <textarea
+              id="blogBody"
+              name="blogBody"
+              rows="10"
+              class="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
+              placeholder="Enter your blog body here..."
+            ></textarea>
+          </form>
+        </div>
       </SideNav>
     </BaseHtml>
   ));

@@ -7,15 +7,24 @@ export const court = new Elysia({
   prefix: "/court",
 })
   .use(html())
-  .get("", () => {
+  .get("", async () => {
+    const file = Bun.file("./src/pages/components/slika.png");
+    const bufferedArray = await file.arrayBuffer();
+    console.log("Slika je: ", bufferedArray);
+
+    const bytes = new Uint8Array(bufferedArray);
+    const binaryString = String.fromCharCode.apply(null, bytes);
+  
+    const base64String = btoa(binaryString);
+  
+    const dataUrl = `data:image/png;base64,${base64String}`;
+
+    const style = `background-image: url('https://d26itsb5vlqdeq.cloudfront.net//image/3A203E31-AF91-4A97-96F3B23C85C04010');`;
     return (
       <BaseHtml>
         <SideNav>
           <div class="grid grid-cols-2 gap-4">
-            <div
-              class="h-screen bg-cover bg-center"
-              style="background-image: url('https://d26itsb5vlqdeq.cloudfront.net//image/3A203E31-AF91-4A97-96F3B23C85C04010');"
-            ></div>
+            <div class="h-screen bg-cover bg-center" style={style}></div>
 
             <div class="bg-white p-4 rounded shadow">
               <h2 class="text-xl font-semibold mb-2">Court Information</h2>
@@ -169,7 +178,7 @@ set pointY to y - bounds.top then
           <div class="w-40 h-40 relative">
             <img
               style="transition: all 1000ms ease-in"
-              src="https://cdn.mos.cms.futurecdn.net/DrRN4BTQ9Wk8fHdGjKB2A.jpg"
+              src={dataUrl}
               alt="proba"
               id="image"
             />

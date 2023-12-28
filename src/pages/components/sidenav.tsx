@@ -4,7 +4,12 @@ import Elysia from "elysia";
 export function SideNav({ children }: PropsWithChildren) {
   return (
     <div>
-      <header class="bg-blue-500 p-4 fixed top-0 w-full z-50">
+      <header
+        _="on load measure my bounds then add {
+                  margin-top: ${bounds.height}px;
+              } to #content"
+        class="bg-blue-500 p-4 fixed top-0 w-full z-50"
+      >
         <div class="container mx-auto flex items-center justify-between">
           <h1 class="text-2xl text-white font-bold">My Blog</h1>
           <button

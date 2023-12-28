@@ -27,6 +27,7 @@ export function UploadPicture() {
             accept="image/*"
             class="hidden"
             id="imageInput"
+            name="mainBlogPicture"
             _="
               on change set file to my.files[0] then 
               js (file) 

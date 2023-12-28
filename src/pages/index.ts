@@ -3,7 +3,7 @@ import { tenis } from "./sport/tenis";
 import { auth } from "../config/auth";
 import { redirect } from "../lib";
 import { sports } from "./sport/*";
-import { blog } from "./components/blog";
+import { blogPages } from "./components/blog";
 
 export const pages = new Elysia()
   .onBeforeHandle(async (context) => {
@@ -22,4 +22,4 @@ export const pages = new Elysia()
     }
   })
   .use(sports)
-  .use(blog);
+  .use(blogPages);

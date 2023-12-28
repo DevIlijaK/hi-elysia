@@ -8,7 +8,6 @@ export const ctx = new Elysia()
   .derive(async (ctx) => {
     const authRequest = ctx.auth.handleRequest(ctx);
     const session = await authRequest.validate();
-    console.log("Sesija je: ", { session });
 
     return { session };
   });

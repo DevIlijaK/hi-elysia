@@ -1,8 +1,10 @@
 import Elysia, { t } from "elysia";
-import { blog } from "../../db/schema";
-import { InsertBlog } from "../../db/schema/blog";
+import { InsertBlog, blog } from "../../db/schema/blog";
 import { ctx } from "../../context/context";
 import { html } from "@elysiajs/html";
+import { db } from "../../db";
+import * as fs from "fs";
+import { eq } from "drizzle-orm";
 
 export const blogController = new Elysia({
   prefix: "/blog",
@@ -67,4 +69,52 @@ export const blogController = new Elysia({
       );
     });
     return html.join(" ");
-  });
+  })
+  .post(
+    "/create2",
+    async ({ body: { blogTitle, mainBlogPicture, blogBody }, session, db }) => {
+      const imageType = extractFileNameFromPath(mainBlogPicture.type);
+      /**
+       * Ovaj path mora da se promeni kada ode na produkciju
+       */
+      const pathToMainBlogPicture = `/home/ilijak/Desktop/projekti/hi-elysia/pictures/${blogTitle}.${imageType}`;
+      const nesto = await Bun.write(
+        pathToMainBlogPicture,
+        await Bun.readableStreamToBlob(mainBlogPicture.stream())
+      );
+      // await db.transaction(async (tx) => {
+      const newBlog = {
+        blogTitle,
+        blogBody,
+        author: "ilija",
+        url: "ilija",
+        publicationDate: new Date(),
+        pathToMainBlogPicture,
+        typeOfMainBlogPicture: mainBlogPicture.type,
+      } satisfies InsertBlog;
+      console.log(newBlog);
+      await db.insert(blog).values(newBlog);
+      // });
+    },
+    {
+      body: t.Object({
+        /**
+         * Ovo treba da se podesi kao validacija
+         */
+        blogTitle: t.String({ maxLength: 100, minLength: 1 }),
+        mainBlogPicture: t.File(),
+        blogBody: t.String({ maxLength: 3000, minLength: 1 }),
+        // author: t.String(),
+        // url: t.String(),
+      }),
+    }
+  )
+  
+function extractFileNameFromPath(filePath: string): string {
+  const lastSlashIndex = filePath.lastIndexOf("/");
+  if (lastSlashIndex !== -1) {
+    return filePath.slice(lastSlashIndex + 1);
+  } else {
+    return filePath; // If no slash is found, return the original path
+  }
+}

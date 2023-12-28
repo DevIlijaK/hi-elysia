@@ -1,4 +1,3 @@
-import { html } from "@elysiajs/html";
 import Elysia from "elysia";
 import { BaseHtml } from "../baseHTML";
 import { SideNav } from "../components/sidenav";
@@ -6,7 +5,6 @@ import { SideNav } from "../components/sidenav";
 export const court = new Elysia({
   prefix: "/court",
 })
-  .use(html())
   .get("", async () => {
     const file = Bun.file("./src/pages/components/slika.png");
     const bufferedArray = await file.arrayBuffer();

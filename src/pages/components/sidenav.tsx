@@ -39,20 +39,28 @@ export function SideNav({ children }: PropsWithChildren) {
               ></path>
             </svg>
           </button>
-          <ul id="menu-list" class="hidden md:flex space-x-4">
-            <li>
-              <a href="/sport/court">Home</a>
-            </li>
-            <li>
-              <a href="/blog/list">About</a>
-            </li>
-            <li>
-              <a href="/blog/text">Blog</a>
-            </li>
-            <li>
-              <a href="/blog/create">Contact</a>
-            </li>
-          </ul>
+          <div id="menu-list" class="hidden md:flex space-x-4">
+            <button
+              hx-get="/sport/court"
+              hx-target="#content"
+              hx-push-url="true"
+            >
+              Tenis
+            </button>
+            <button hx-get="/blog/list" hx-target="#content" hx-push-url="true">
+              Lista
+            </button>
+            <button hx-get="/blog/text" hx-target="#content" hx-push-url="true">
+              Text
+            </button>
+            <button
+              hx-get="/blog/create"
+              hx-target="#content"
+              hx-push-url="true"
+            >
+              Create
+            </button>
+          </div>
         </div>
         <div
           class="fixed left-0 top-0 h-full w-full z-20 

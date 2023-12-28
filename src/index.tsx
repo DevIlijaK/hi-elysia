@@ -3,22 +3,31 @@ import { authModule } from "./controlers/auth";
 import { controllers } from "./controlers/intex";
 import { pages } from "./pages";
 import { login } from "./pages/login";
-import { nesto } from "./plugin";
 import { BaseHtml } from "./pages/baseHTML";
 import { SideNav } from "./pages/components/sidenav";
+import { html } from "@elysiajs/html";
 
 const app = new Elysia()
-  .onAfterHandle(({ response ,set}) => {
+
+  .onAfterHandle(({ response, set, headers }) => {
     console.log("Response", response);
-    set.headers['Content-Type'] = 'text/html; charset=utf8'
+    console.log("Set: ", set);
+    console.log("Headers: ", headers);
+
+    set.headers["Content-Type"] = "text/html; charset=utf8";
     const children: Children = response as Children;
-    return (
-      <BaseHtml>
-        <SideNav>{children}</SideNav>
-      </BaseHtml>
-    );
+    if (headers["hx-request"] == "true") {
+      console.log("Uslo ovde!");
+      return children;
+    } else {
+      return (
+        <BaseHtml>
+          <SideNav>{children}</SideNav>
+        </BaseHtml>
+      );
+    }
   })
-  .use(nesto)
+  .use(html())
   .use(login)
   .use(authModule)
   .use(controllers)

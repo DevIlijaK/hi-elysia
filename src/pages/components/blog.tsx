@@ -92,61 +92,12 @@ export const blogPages = new Elysia({
     );
   })
   .get("/create", () => (
-    <div class="container mx-auto p-4 mt-8">
-      <div class="bg-white p-8 rounded-lg shadow-lg">
-        <h1 class="text-3xl font-bold mb-4">Create a Blog Post</h1>
-        <form
-          action="submit_blog.php"
-          method="POST"
-          enctype="multipart/form-data"
-        >
-          <div class="mb-4">
-            <label for="title" class="block text-gray-600">
-              Title
-            </label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              class="w-full p-2 border border-gray-300 rounded"
-            />
-          </div>
-          <div class="mb-4">
-            <label for="content" class="block text-gray-600">
-              Content
-            </label>
-            <textarea
-              id="content"
-              name="content"
-              class="w-full p-2 border border-gray-300 rounded"
-            ></textarea>
-          </div>
-          <div class="mb-4">
-            <label for="image" class="block text-gray-600">
-              Image
-            </label>
-            <input type="file" id="image" name="image" class="w-full" />
-          </div>
-          <div class="mb-4">
-            <button
-              type="submit"
-              class="bg-blue-500 text-white py-2 px-4 rounded"
-              hx-post="/blog/create"
-            >
-              Submit
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  ))
-  .get("/create2", () => (
     <div class="container mx-auto select-none ">
       <form
         class="bg-white p-4 rounded shadow-lg"
         method="POST"
         enctype="multipart/form-data"
-        hx-post="/blog/create2"
+        hx-post="/blog/create"
         hx-include="[name='mainBlogPicture']"
       >
         <label for="blogTitle" class="block text-xl font-bold mb-2">

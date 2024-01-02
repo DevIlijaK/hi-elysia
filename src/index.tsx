@@ -6,7 +6,6 @@ import { pages } from "./pages";
 import { BaseHtml } from "./pages/baseHTML";
 import { SideNav } from "./pages/components/sidenav";
 import { login } from "./pages/login";
-import staticPlugin from "@elysiajs/static";
 
 const app = new Elysia()
 
@@ -26,7 +25,6 @@ const app = new Elysia()
     }
   })
   .use(html())
-  .use(staticPlugin())
   .use(login)
   .use(authModule)
   .use(controllers)

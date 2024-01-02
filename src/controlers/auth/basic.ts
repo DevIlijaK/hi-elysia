@@ -101,7 +101,7 @@ export const basic = new Elysia({
             set: set,
             headers: headers,
           },
-          "/sport/tenis"
+          "/blog/list"
         );
       } catch (e) {
         if (

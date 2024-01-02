@@ -11,7 +11,7 @@ RUN bun install
 
 COPY src src
 COPY tsconfig.json .
-# COPY public public
+COPY public public
 
 ENV NODE_ENV production
 ENV DATABASE_URL libsql://igor-blog-devilijak.turso.io

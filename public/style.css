@@ -1,6 +1,13 @@
 #proba {
-    border: 1px solid black;
+  border: 1px solid black;
 }
-.klasa{
-border: 1px solid black;
+.klasa {
+  border: 1px solid black;
+}
+#formattedInput {
+  border: 1px solid #ccc;
+  padding: 5px;
+  min-height: 50px;
+  font-family: Arial, sans-serif;
+  /* Add more styles as needed */
 }

@@ -8,6 +8,7 @@ import { eq } from "drizzle-orm";
 import path from "path";
 import os from "os";
 import cache from "elysia-cache";
+import { reoptimizationRetryCount } from "bun:jsc";
 
 export const blogController = new Elysia({
   prefix: "/blog",
@@ -25,11 +26,14 @@ export const blogController = new Elysia({
     let html: Children[] = [];
 
     blogPosts.forEach((blogPost) => {
+      const getLink = `/blog/text/${blogPost.title}`;
       html.push(
         <div
           class="bg-white transform transition-transform hover:scale-125 rounded shadow-md p-4 h-60
             flex items-center  justify-center
               md:justify-start"
+          hx-get={getLink}
+          hx-target="#content"
         >
           <div class="mr-4 ">
             <img
@@ -39,9 +43,10 @@ export const blogController = new Elysia({
             />
           </div>
           <div>
-            <h2 class="text-xl font-semibold">{blogPost.blogTitle}</h2>
+            <h2 class="text-xl font-semibold">{blogPost.title}</h2>
             <p class="text-gray-500">Posted on October 31, 2023</p>
-            <p class="mt-4">{blogPost.blogBody}</p>
+            {/* <p class="mt-4">{blogPost.blogBody}</p> */}
+            <p class="mt-4">123</p>
           </div>
         </div>
       );
@@ -50,13 +55,11 @@ export const blogController = new Elysia({
   })
   .post(
     "/new/create",
-    async ({
-      body: { blogTitle, mainBlogPicture, blogBody },
-      db,
-      cache,
-    }) => {
-      console.log('Ulazi ovde!')
+    async ({ body: { title, mainBlogPicture, blogBody }, db, cache }) => {
+      console.log("Ulazi ovde!");
       const imageType = extractFileNameFromPath(mainBlogPicture.type);
+
+      const imageName = extractContentFromHtml(title);
       /**
        * Ovaj path mora da se promeni kada ode na produkciju
        */
@@ -66,7 +69,7 @@ export const blogController = new Elysia({
         "/",
         "app",
         "images",
-        `${blogTitle}.${imageType}`
+        `${imageName}.${imageType}`
       );
       const nesto = await Bun.write(
         pathToMainBlogPicture,
@@ -74,7 +77,8 @@ export const blogController = new Elysia({
       );
       // await db.transaction(async (tx) => {
       const newBlog = {
-        blogTitle,
+        title: imageName,
+        titleHtml: title,
         blogBody,
         author: "ilija",
         url: "ilija",
@@ -84,7 +88,7 @@ export const blogController = new Elysia({
       } satisfies InsertBlog;
       console.log(newBlog);
       await db.insert(blog).values(newBlog);
-      cache.set(newBlog.blogTitle, newBlog);
+      cache.set(newBlog.title, newBlog);
       // });
     },
     {
@@ -92,9 +96,9 @@ export const blogController = new Elysia({
         /**
          * Ovo treba da se podesi kao validacija
          */
-        blogTitle: t.String({ maxLength: 100, minLength: 1 }),
+        title: t.String({ maxLength: 100, minLength: 1 }),
         mainBlogPicture: t.File(),
-        blogBody: t.String({ maxLength: 3000, minLength: 1 }),
+        blogBody: t.String({ maxLength: 30000, minLength: 1 }),
         // author: t.String(),
         // url: t.String(),
       }),
@@ -106,6 +110,18 @@ function extractFileNameFromPath(filePath: string): string {
   if (lastSlashIndex !== -1) {
     return filePath.slice(lastSlashIndex + 1);
   } else {
-    return filePath; 
+    return filePath;
   }
+}
+function extractContentFromHtml(htmlString: string): string {
+  const startIdx = htmlString.indexOf(">") + 1;
+  const endIdx = htmlString.indexOf("<", startIdx);
+
+  if (startIdx !== -1 && endIdx !== -1 && startIdx < endIdx) {
+    // Extract content between the first '>' and second '<'
+    return htmlString.substring(startIdx, endIdx).trim();
+  }
+  throw new Error(
+    "Content between tags not found in the provided HTML string."
+  );
 }

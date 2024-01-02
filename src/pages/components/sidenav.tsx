@@ -1,6 +1,3 @@
-import { html } from "@elysiajs/html";
-import Elysia from "elysia";
-
 export function SideNav({ children }: PropsWithChildren) {
   return (
     <div>
@@ -13,10 +10,8 @@ export function SideNav({ children }: PropsWithChildren) {
         <div class="container mx-auto flex items-center justify-between">
           <h1 class="text-2xl text-white font-bold">My Blog</h1>
           <button
-            _="
-            on click toggle .w-full on  #nav
-            then toggle .w-0 on #nav
-            "
+            _="on click toggle .w-full on  #nav
+               then toggle .w-0 on #nav"
             id="menu-button"
             class="block md:hidden text-white p-2"
           >
@@ -66,6 +61,8 @@ export function SideNav({ children }: PropsWithChildren) {
               hx-target="#content"
               hx-push-url="true"
               class="flex items-center flex-1"
+              _="on click toggle .w-full on  #nav
+                 then toggle .w-0 on #nav"
             >
               <i class="material-icons mr-2">description</i>
               <span>List</span>
@@ -76,6 +73,8 @@ export function SideNav({ children }: PropsWithChildren) {
               hx-target="#content"
               hx-push-url="true"
               class="flex items-center flex-1"
+              _="on click toggle .w-full on  #nav
+                 then toggle .w-0 on #nav"
             >
               <i class="material-icons mr-2">description</i>
               <span>Text</span>
@@ -85,6 +84,8 @@ export function SideNav({ children }: PropsWithChildren) {
               hx-target="#content"
               hx-push-url="true"
               class="flex items-center flex-1"
+              _="on click toggle .w-full on  #nav
+                 then toggle .w-0 on #nav"
             >
               <i class="material-icons mr-2">description</i>
               <span>Lista</span>
@@ -106,7 +107,7 @@ export function SideNav({ children }: PropsWithChildren) {
           ></div>
         </nav>
       </header>
-      <div id="content" class="h-full w-full">
+      <div id="content" class="container w-full  mx-auto">
         {children}
       </div>
     </div>

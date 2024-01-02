@@ -47,10 +47,22 @@ export const BaseHtml = async ({ children }: PropsWithChildren) => {
         </script>
         <script>{safeScript}</script> */}
       </head>
-      <div id="proba" class="klasa" style="w-64 h-64">
-        123
+      <div>
+        <div
+          id="proba123"
+          class="z-10 
+          fixed 
+          top-1/2 
+          left-1/2 
+          transform -translate-x-1/2 -translate-y-1/2 
+          h-24 
+          w-24 
+          border-solid border-2
+        border-indigo-600"
+        ></div>
       </div>
       <body class="select-none">{children}</body>
+      <script>{await Bun.file("public/script.js").text()}</script>
     </html>
   );
 };

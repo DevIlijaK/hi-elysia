@@ -5,6 +5,7 @@ import { blog } from "../../db/schema/index";
 import { UploadPicture } from "./uploadPicture";
 import { html } from "@elysiajs/html";
 import { cache } from "elysia-cache";
+import { SelectBlog } from "../../db/schema/blog";
 
 export const blogPages = new Elysia({
   prefix: "/blog",
@@ -15,7 +16,7 @@ export const blogPages = new Elysia({
   .get("/list", () => {
     let pageCount = 0;
     return (
-      <main class="container mx-auto py-8" >
+      <div>
         <div
           hx-get="/blog/posts/${$page}"
           hx-trigger="load, from:#leftButton"
@@ -37,7 +38,7 @@ export const blogPages = new Elysia({
             &gt;&gt;
           </button>
         </div>
-      </main>
+      </div>
     );
   })
   .get("/text", () => {
@@ -49,46 +50,33 @@ export const blogPages = new Elysia({
       ></div>
     );
   })
-  .get("text/:blogTitle", async ({ params, db, cache }) => {
-    let selectedBlog = null;
+  .get("text/:title", async ({ params, db, cache }) => {
+    let selectedBlog = cache.get(params.title);
 
-    if (cache.get(params.blogTitle)) {
-      selectedBlog = cache.get(params.blogTitle);
-    } else {
+    if (!selectedBlog) {
       selectedBlog = (
-        await db.select().from(blog).where(eq(blog.blogTitle, params.blogTitle))
+        await db.select().from(blog).where(eq(blog.title, params.title))
       )[0];
-      cache.set(selectedBlog.blogTitle, selectedBlog);
+      cache.set(selectedBlog.title, selectedBlog);
     }
 
-    console.log(1);
     const pathToMainBlogPicture = selectedBlog.pathToMainBlogPicture;
 
-    console.log(2);
     const file = Bun.file(pathToMainBlogPicture);
 
-    console.log(3);
     const bufferedArray = await file.arrayBuffer();
 
-    console.log(4);
     const bytes = new Uint8Array(bufferedArray);
 
-    console.log(5);
     const binaryString = String.fromCharCode.apply(null, bytes);
-
-    console.log(6);
 
     const base64String = btoa(binaryString);
 
-    console.log(7);
-
     const dataUrl = `data:${selectedBlog.typeOfMainBlogPicture};base64,${base64String}`;
-
-    console.log(8);
 
     return (
       <div class="bg-white p-4 rounded shadow-lg">
-        <h1>{selectedBlog.blogTitle}</h1>
+        {selectedBlog.titleHtml}
         <div style="aspect-ratio:3.2/1;" class="mt-6 mb-6 relative bg-blue-300">
           <div
             id="imageDiv"
@@ -103,15 +91,17 @@ export const blogPages = new Elysia({
             />
           </div>
         </div>
-        <textarea
+        {/* <textarea
           id="blogBody"
           name="blogBody"
           rows="10"
           class="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
           placeholder="Enter your blog body here..."
-        >
-          {selectedBlog.blogBody}
-        </textarea>
+        > */}
+        <div class="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500">
+          <pre style="white-space: pre-wrap;">{selectedBlog.blogBody}</pre>
+        </div>
+        {/* </textarea> */}
       </div>
     );
   })
@@ -126,13 +116,13 @@ export const blogPages = new Elysia({
           hx-post="/blog/new/create"
           hx-include="[name='mainBlogPicture']"
         >
-          <label for="blogTitle" class="block text-xl font-bold mb-2">
+          <label for="title" class="block text-xl font-bold mb-2">
             Blog Title:
           </label>
           <input
             type="text"
-            id="blogTitle"
-            name="blogTitle"
+            id="title"
+            name="title"
             class="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
           />
           {/* <h1 id="blogPreview" class="text-xl font-bold mb-2">

@@ -10,7 +10,8 @@ export const blog = sqliteTable(
   "blog",
   {
     id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-    blogTitle: text("title").notNull().unique(),
+    title: text("title").notNull().unique(),
+    titleHtml: text("title_html").notNull().unique(),
     blogBody: text("content").notNull(),
     author: text("author").notNull(),
     publicationDate: integer("publication_date", { mode: "timestamp" }),
@@ -30,7 +31,7 @@ export const blog = sqliteTable(
   },
   (table) => {
     return {
-      titleInx: index("title_index").on(table.blogTitle),
+      titleInx: index("title_index").on(table.title),
       authorInx: index("author_index").on(table.author),
     };
   }

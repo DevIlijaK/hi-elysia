@@ -1,5 +1,7 @@
 FROM oven/bun
 
+RUN mkdir -p /app/images
+
 WORKDIR /app
 
 COPY package.json .

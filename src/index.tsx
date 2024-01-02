@@ -1,33 +1,32 @@
+import { html } from "@elysiajs/html";
 import { Elysia } from "elysia";
 import { authModule } from "./controlers/auth";
 import { controllers } from "./controlers/intex";
 import { pages } from "./pages";
-import { login } from "./pages/login";
 import { BaseHtml } from "./pages/baseHTML";
 import { SideNav } from "./pages/components/sidenav";
-import { html } from "@elysiajs/html";
+import { login } from "./pages/login";
+import staticPlugin from "@elysiajs/static";
 
 const app = new Elysia()
 
-  .onAfterHandle(({ response, set, headers }) => {
-    console.log("Response", response);
-    console.log("Set: ", set);
-    console.log("Headers: ", headers);
-
-    set.headers["Content-Type"] = "text/html; charset=utf8";
-    const children: Children = response as Children;
-    if (headers["hx-request"] == "true") {
-      console.log("Uslo ovde!");
-      return children;
-    } else {
-      return (
-        <BaseHtml>
-          <SideNav>{children}</SideNav>
-        </BaseHtml>
-      );
+  .onAfterHandle(({ response, set, headers, cookie }) => {
+    if (set.status != 302) {
+      const children: Children = response as Children;
+      if (headers["hx-request"] == "true") {
+        return children;
+      } else {
+        set.headers["Content-Type"] = "text/html; charset=utf8";
+        return (
+          <BaseHtml>
+            <SideNav>{children}</SideNav>
+          </BaseHtml>
+        );
+      }
     }
   })
   .use(html())
+  .use(staticPlugin())
   .use(login)
   .use(authModule)
   .use(controllers)

@@ -14,11 +14,8 @@ export function SideNav({ children }: PropsWithChildren) {
           <h1 class="text-2xl text-white font-bold">My Blog</h1>
           <button
             _="
-            on click toggle .hidden on #sidebar 
-            then add .opacity-50 to #sidenavClose
-            then remove .opacity-0 from #sidenavClose 
-            then add .w-64 to #nav
-            then remove .w-0 from #nav      
+            on click toggle .w-full on  #nav
+            then toggle .w-0 on #nav
             "
             id="menu-button"
             class="block md:hidden text-white p-2"
@@ -40,13 +37,6 @@ export function SideNav({ children }: PropsWithChildren) {
             </svg>
           </button>
           <div id="menu-list" class="hidden md:flex space-x-4">
-            <button
-              hx-get="/sport/court"
-              hx-target="#content"
-              hx-push-url="true"
-            >
-              Tenis
-            </button>
             <button hx-get="/blog/list" hx-target="#content" hx-push-url="true">
               Lista
             </button>
@@ -62,58 +52,59 @@ export function SideNav({ children }: PropsWithChildren) {
             </button>
           </div>
         </div>
-        <div
-          class="fixed left-0 top-0 h-full w-full z-20 
-                text-white 
-                hidden md:hidden 
-                flex
-                "
-          id="sidebar"
-        >
-          <nav
-            id="nav"
-            class="
-            h-full w-0 bg-gray-800 
+        <nav
+          id="nav"
+          class="
+            fixed left-0 top-0 h-full w-0 bg-gray-800 flex
             transition-all duration-500 ease-out 
             overflow-hidden
             "
-          >
-            <div class="p-4 h-full flex flex-col justify-between">
-              <a href="/blog/list" class="flex items-center flex-1">
-                <i class="material-icons mr-2">description</i>
-                <span>About</span>
-              </a>
-              <a href="/blog/list" class="flex items-center flex-1">
-                <i class="material-icons mr-2">description</i>
-                <span>About</span>
-              </a>
-              <a href="/blog/list" class="flex items-center flex-1">
-                <i class="material-icons mr-2">description</i>
-                <span>About</span>
-              </a>
-              <a href="/blog/list" class="flex items-center flex-1">
-                <i class="material-icons mr-2">description</i>
-                <span>About</span>
-              </a>
-            </div>
-          </nav>
+        >
+          <div class="p-4 h-full w-48 flex flex-col justify-between">
+            <button
+              hx-get="/blog/list"
+              hx-target="#content"
+              hx-push-url="true"
+              class="flex items-center flex-1"
+            >
+              <i class="material-icons mr-2">description</i>
+              <span>List</span>
+            </button>
+
+            <button
+              hx-get="/blog/text"
+              hx-target="#content"
+              hx-push-url="true"
+              class="flex items-center flex-1"
+            >
+              <i class="material-icons mr-2">description</i>
+              <span>Text</span>
+            </button>
+            <button
+              hx-get="/blog/create"
+              hx-target="#content"
+              hx-push-url="true"
+              class="flex items-center flex-1"
+            >
+              <i class="material-icons mr-2">description</i>
+              <span>Lista</span>
+            </button>
+          </div>
           <div
             class="
             h-full 
             flex-1 
             bg-black 
             opacity-50
+            w-full
+            "
+            _="
+            on click toggle .w-full on  #nav
+            then toggle .w-0 on #nav
             "
             id="sidenavClose"
-            _="
-            on click remove .w-64 from #nav 
-            then add .w-0 to #nav settle 
-            then add .opacity-0 to me
-            then remove .opacity-50 from me 
-            then toggle .hidden on #sidebar
-            "
           ></div>
-        </div>
+        </nav>
       </header>
       <div id="content" class="h-full w-full">
         {children}

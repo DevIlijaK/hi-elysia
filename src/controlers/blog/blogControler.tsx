@@ -5,11 +5,15 @@ import { html } from "@elysiajs/html";
 import { db } from "../../db";
 import * as fs from "fs";
 import { eq } from "drizzle-orm";
+import path from "path";
+import os from "os";
+import cache from "elysia-cache";
 
 export const blogController = new Elysia({
   prefix: "/blog",
 })
   .use(ctx)
+  .use(cache())
   .get("/posts/:page", async ({ db, params: { page } }) => {
     const pageSize = 9;
     const blogPosts = await db
@@ -45,13 +49,25 @@ export const blogController = new Elysia({
     return html.join(" ");
   })
   .post(
-    "/create",
-    async ({ body: { blogTitle, mainBlogPicture, blogBody }, session, db }) => {
+    "/new/create",
+    async ({
+      body: { blogTitle, mainBlogPicture, blogBody },
+      db,
+      cache,
+    }) => {
+      console.log('Ulazi ovde!')
       const imageType = extractFileNameFromPath(mainBlogPicture.type);
       /**
        * Ovaj path mora da se promeni kada ode na produkciju
        */
-      const pathToMainBlogPicture = `/home/ilijak/Desktop/projekti/hi-elysia/pictures/${blogTitle}.${imageType}`;
+      const homeDirectory = os.homedir();
+      const pathToMainBlogPicture = path.join(
+        homeDirectory,
+        "/",
+        "app",
+        "images",
+        `${blogTitle}.${imageType}`
+      );
       const nesto = await Bun.write(
         pathToMainBlogPicture,
         await Bun.readableStreamToBlob(mainBlogPicture.stream())
@@ -68,6 +84,7 @@ export const blogController = new Elysia({
       } satisfies InsertBlog;
       console.log(newBlog);
       await db.insert(blog).values(newBlog);
+      cache.set(newBlog.blogTitle, newBlog);
       // });
     },
     {
@@ -89,6 +106,6 @@ function extractFileNameFromPath(filePath: string): string {
   if (lastSlashIndex !== -1) {
     return filePath.slice(lastSlashIndex + 1);
   } else {
-    return filePath; // If no slash is found, return the original path
+    return filePath; 
   }
 }

@@ -6,7 +6,7 @@ import { parseCookie, serializeCookie } from "lucia/utils";
 export const github = new Elysia({
   prefix: "/github",
 })
-  .get("/login", async () => {
+  .get("/login", async ({ set }) => {
     const [url, state] = await githubAuth.getAuthorizationUrl();
 
     const stateCookie = serializeCookie("github_oauth_state", state, {
@@ -16,15 +16,15 @@ export const github = new Elysia({
       maxAge: 60 * 60,
     });
 
-    return new Response(null, {
-      status: 302,
-      headers: {
-        Location: url.toString(),
-        "Set-Cookie": stateCookie,
-      },
-    });
+    console.log("Ulazi ovde! ", stateCookie);
+
+    set.headers = {
+      Location: url.toString(),
+      "Set-Cookie": stateCookie,
+    };
+    set.status = 302;
   })
-  .get("/callback", async ({ request }) => {
+  .get("/callback", async ({ request, set }) => {
     const cookies = parseCookie(request.headers.get("Cookie") ?? "");
     const storedState = cookies.github_oauth_state;
     const url = new URL(request.url);
@@ -58,13 +58,11 @@ export const github = new Elysia({
       });
       const sessionCookie = auth.createSessionCookie(session);
       // redirect to profile page
-      return new Response(null, {
-        headers: {
-          Location: "/",
-          "Set-Cookie": sessionCookie.serialize(), // store session cookie
-        },
-        status: 302,
-      });
+      set.headers = {
+        Location: "/blog/list",
+        "Set-Cookie": sessionCookie.serialize(), // store session cookie
+      };
+      set.status = 302;
     } catch (e) {
       if (e instanceof OAuthRequestError) {
         // invalid code

@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@elysiajs/html": "^0.7.3",
+    "@elysiajs/static": "^0.8.1",
     "@libsql/client": "0.3.5-pre.13",
     "@lucia-auth/adapter-sqlite": "^2.0.0",
     "@lucia-auth/oauth": "^3.2.0",
@@ -15,6 +16,7 @@
     "better-sqlite3": "^9.0.0",
     "drizzle-orm": "^0.28.6",
     "elysia": "latest",
+    "elysia-cache": "^0.1.0",
     "flowbite": "^1.8.1",
     "fs": "^0.0.1-security",
     "lucia": "^2.7.2"

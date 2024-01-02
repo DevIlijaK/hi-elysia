@@ -44,7 +44,6 @@ export function UploadPicture() {
       >
         <img
           id="imagePreview"
-          src="#"
           alt="Preview"
           class="object-cover w-full h-full"
         />

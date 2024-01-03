@@ -55,10 +55,10 @@ export const BaseHtml = async ({ children }: PropsWithChildren) => {
           top-1/2 
           left-1/2 
           transform -translate-x-1/2 -translate-y-1/2 
-          h-24 
+          h-24
           w-24 
           border-solid border-2
-        border-indigo-600"
+          border-indigo-600"
         ></div>
       </div>
       <body class="select-none">{children}</body>

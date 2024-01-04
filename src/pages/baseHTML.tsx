@@ -51,7 +51,7 @@ export const BaseHtml = async ({ children }: PropsWithChildren) => {
       <p>This test: Results should be approximately 5 fps</p>
       <p id="results">Results:</p>
       <canvas id="canvas" width="300" height="300"></canvas> */}
-      <div>
+      {/* <div>
         <div
           id="proba123"
           class="z-10 
@@ -69,13 +69,16 @@ export const BaseHtml = async ({ children }: PropsWithChildren) => {
           />
         </div>
         <div id="horizontalLine"></div>
+      </div> */}
+      <div id="touchpad">
+        <div id="indicator">&#x2195;</div>
       </div>
-      <body
+      {/* <body
         class="select-none"
         // style="cursor: none;"
       >
         {children}
-      </body>
+      </body> */}
       <script>{await Bun.file("public/script.js").text()}</script>
     </html>
   );

@@ -12,9 +12,9 @@
   /* Add more styles as needed */
 }
 
-#horizontalLine {
+#horizontalLineLowerLeft{
   position: fixed;
-  top: 440px;
+  top: 200px;
   left: 0;
   width: 50%;
   height: 1px;
@@ -22,14 +22,27 @@
   z-index: 999; /* Optional: Specify a z-index if needed */
 }
 
+#horizontalLine{
+position: fixed;
+  top: 600px;
+  width: 100%;
+  height: 1px;
+  background-color: black;
+  z-index: 999; /* Optional: Specify a z-index if needed */
+}
+
+#horizontalLineLowerRight {
+  position: fixed;
+  top: 400px;
+  left: 600px;
+  width: 50%;
+  height: 1px;
+  background-color: black;
+  z-index: 999; /* Optional: Specify a z-index if needed */
+}
 
 
-
-
-
-
-
-body {
+/* body {
     margin: 0;
     overflow: hidden;
     display: flex;
@@ -57,4 +70,5 @@ body {
     font-size: 18px;
     color: #fff;
     user-select: none;
-  }
+  } */
+  } */

@@ -47,11 +47,11 @@ export const BaseHtml = async ({ children }: PropsWithChildren) => {
         </script>
         <script>{safeScript}</script> */}
       </head>
-      {/* <h3>Throttling requestAnimationFrame to a FPS</h3>
+      <h3>Throttling requestAnimationFrame to a FPS</h3>
       <p>This test: Results should be approximately 5 fps</p>
       <p id="results">Results:</p>
-      <canvas id="canvas" width="300" height="300"></canvas> */}
-      {/* <div>
+      <canvas id="canvas" width="300" height="300"></canvas>
+      <div>
         <div
           id="proba123"
           class="z-10 
@@ -69,10 +69,12 @@ export const BaseHtml = async ({ children }: PropsWithChildren) => {
           />
         </div>
         <div id="horizontalLine"></div>
-      </div> */}
-      <div id="touchpad">
-        <div id="indicator">&#x2195;</div>
+        <div id="horizontalLineLowerLeft"></div>
+        <div id="horizontalLineLowerRight"></div>
       </div>
+      {/* <div id="touchpad">
+        <div id="indicator">&#x2195;</div>
+      </div> */}
       {/* <body
         class="select-none"
         // style="cursor: none;"

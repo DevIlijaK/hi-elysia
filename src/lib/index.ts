@@ -20,3 +20,19 @@ export function redirect(
     set.redirect = href;
   }
 }
+export async function createImageULR(
+  pathToMainBlogPicture: string,
+  imageType: string
+): Promise<string> {
+  const file = Bun.file(pathToMainBlogPicture);
+
+  const bufferedArray = await file.arrayBuffer();
+
+  const bytes = new Uint8Array(bufferedArray);
+
+  const binaryString = String.fromCharCode.apply(null, bytes);
+
+  const base64String = btoa(binaryString);
+
+  return `data:${imageType};base64,${base64String}`;
+}

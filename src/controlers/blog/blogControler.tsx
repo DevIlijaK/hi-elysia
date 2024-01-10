@@ -1,14 +1,10 @@
 import Elysia, { t } from "elysia";
-import { InsertBlog, blog } from "../../db/schema/blog";
-import { ctx } from "../../context/context";
-import { html } from "@elysiajs/html";
-import { db } from "../../db";
-import * as fs from "fs";
-import { eq } from "drizzle-orm";
-import path from "path";
-import os from "os";
 import cache from "elysia-cache";
-import { reoptimizationRetryCount } from "bun:jsc";
+import os from "os";
+import path from "path";
+import { ctx } from "../../context/context";
+import { InsertBlog, blog } from "../../db/schema/blog";
+import { createImageULR } from "../../lib";
 
 export const blogController = new Elysia({
   prefix: "/blog",
@@ -24,29 +20,38 @@ export const blogController = new Elysia({
       .offset(pageSize * Number(page));
 
     let html: Children[] = [];
-
+    const imageUrl = await createImageULR("pictures/platform.png", "png");
+    const divBackgound = `background-image: url('${imageUrl}')`;
     blogPosts.forEach((blogPost) => {
       const getLink = `/blog/text/${blogPost.title}`;
       html.push(
-        <div
-          class="bg-white transform transition-transform hover:scale-125 rounded shadow-md p-4 h-60
-            flex items-center  justify-center
-              md:justify-start"
-          hx-get={getLink}
-          hx-target="#content"
-        >
-          <div class="mr-4 ">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCWCuRr561z0xxOwIh3uGZVZBrU_ZmFcM1uQ&usqp=CAU"
-              alt="Blog Post Image"
-              class="w-16 h-16 object-cover rounded-full"
-            />
+        <div class="h-60 bg-white rounded-md shadow-md border border-gray-300 flex flex-col">
+          <div
+            class="p-4 pb-0 h-48 flex items-center justify-center md:justify-start"
+            hx-get={getLink}
+            hx-target="#content"
+          >
+            <div class="mr-4 ">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCWCuRr561z0xxOwIh3uGZVZBrU_ZmFcM1uQ&usqp=CAU"
+                alt="Blog Post Image"
+                class="w-16 h-16 object-cover rounded-full"
+              />
+            </div>
+            <div>
+              <h2 class="text-xl font-semibold">{blogPost.title}</h2>
+              <p class="text-gray-500">Posted on October 31, 2023</p>
+              <p class="mt-4">123</p>
+            </div>
           </div>
-          <div>
-            <h2 class="text-xl font-semibold">{blogPost.title}</h2>
-            <p class="text-gray-500">Posted on October 31, 2023</p>
-            {/* <p class="mt-4">{blogPost.blogBody}</p> */}
-            <p class="mt-4">123</p>
+          <div style="height: 50px;" class="ramp rounded-md overflow-hidden">
+            <div class="h-full">
+              <img
+                src={imageUrl}
+                alt="Blog Post Image"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
           </div>
         </div>
       );

@@ -2,22 +2,24 @@
 //  * Logika za kretanje
 //  */
 
-const cube = document.getElementById("proba123");
-const image = document.getElementById("image123");
-const horizontalLine = document.getElementById("horizontalLine");
-const horizontalLineLowerLeft = document.getElementById(
-  "horizontalLineLowerLeft"
-);
-const horizontalLineLowerRight = document.getElementById(
-  "horizontalLineLowerRight"
-);
-let isMoving = false;
-let cubeLeft = cube.getBoundingClientRect().left;
-let cubeTop = cube.getBoundingClientRect().top;
-let cubeRight = cube.getBoundingClientRect().right;
-let cubeBottom = cube.getBoundingClientRect().bottom;
-const pressedKeys = new Set();
-let step = 5;
+var cube = document.getElementById("proba123");
+var image = document.getElementById("image123");
+var elements = document.querySelectorAll(".ramp");
+
+// const horizontalLine = document.getElementById("horizontalLine");
+// const horizontalLineLowerLeft = document.getElementById(
+//   "horizontalLineLowerLeft"
+// );
+// const horizontalLineLowerRight = document.getElementById(
+//   "horizontalLineLowerRight"
+// );
+var isMoving = false;
+var cubeLeft = cube.getBoundingClientRect().left;
+var cubeTop = cube.getBoundingClientRect().top;
+var cubeRight = cube.getBoundingClientRect().right;
+var cubeBottom = cube.getBoundingClientRect().bottom;
+var pressedKeys = new Set();
+var step = 5;
 
 // var jumpHeight = 800; // Adjust the jump height as needed
 var proba = cube.getBoundingClientRect().y;
@@ -44,6 +46,8 @@ var fps, fpsInterval, startTime, now, then, elapsed;
 document.addEventListener("keydown", (event) => {
   pressedKeys.add(event.key.toLowerCase());
   console.log(cube.getBoundingClientRect());
+  elements = document.querySelectorAll(".ramp");
+  console.log("Elementi su: ", elements);
   if (!isMoving) {
     isMoving = true;
 
@@ -113,94 +117,16 @@ function jump(jumpAngle, landAngle) {
       moveDiagonaly(jumpAngle);
     } else {
       moveDiagonaly(landAngle);
-      if (
-        cube.getBoundingClientRect().bottom >=
-        horizontalLine.getBoundingClientRect().top
-      ) {
-        console.log(
-          "cube.getBoundingClientRect().bottom",
-          cube.getBoundingClientRect().bottom
-        );
-        console.log(
-          "horizontalLine.getBoundingClientRect().top",
-          horizontalLine.getBoundingClientRect().top
-        );
-        console.log(
-          "cube.getBoundingClientRect().bottom < horizontalLineLowerLeft.getBoundingClientRect().top",
-          cube.getBoundingClientRect().bottom <
-            horizontalLineLowerLeft.getBoundingClientRect().top
-        );
-        console.log("Uslo ovde?", cube.getBoundingClientRect().bottom);
-        console.log("Uslo ovde?", cube.getBoundingClientRect().bottom);
-        isJumping = false;
-        isMoving = false;
-        cubeBottom = horizontalLine.getBoundingClientRect().top;
-        cubeTop =
-          horizontalLine.getBoundingClientRect().top -
-          cube.getBoundingClientRect().height;
-        cube.style.bottom = `${cubeBottom}px`;
-        cube.style.top = `${cubeTop}px`;
-        cube.style.left = `${cubeLeft}px`;
-        cancelAnimationFrame(mainJumpAnimation);
-        cancelAnimationFrame(sideJumpAnimation);
-        cancelAnimationFrame(cubeMoveAnimation);
-        return;
-      }
-      //   } else if (
+      //   if (
       //     cube.getBoundingClientRect().bottom >=
-      //       horizontalLineLowerRight.getBoundingClientRect().top &&
-      //     cube.getBoundingClientRect().top >
-      //       horizontalLineLowerLeft.getBoundingClientRect().top &&
-      //     cube.getBoundingClientRect().top <
-      //       horizontalLine.getBoundingClientRect().top
+      //     horizontalLine.getBoundingClientRect().top
       //   ) {
-      //     console.log(
-      //       "cube.getBoundingClientRect().bottom",
-      //       cube.getBoundingClientRect().bottom
-      //     );
-      //     console.log(
-      //       "horizontalLineLowerRight.getBoundingClientRect().top",
-      //       horizontalLineLowerRight.getBoundingClientRect().top
-      //     );
-      //     console.log(
-      //       "cube.getBoundingClientRect().bottom <= horizontalLineLowerLeft.getBoundingClientRect().top",
-      //       cube.getBoundingClientRect().bottom >=
-      //         horizontalLineLowerRight.getBoundingClientRect().top
-      //     );
+
       //     isJumping = false;
       //     isMoving = false;
-      //     cubeBottom = horizontalLineLowerRight.getBoundingClientRect().top;
+      //     cubeBottom = horizontalLine.getBoundingClientRect().top;
       //     cubeTop =
-      //       horizontalLineLowerRight.getBoundingClientRect().top -
-      //       cube.getBoundingClientRect().height;
-      //     cube.style.bottom = `${cubeBottom}px`;
-      //     cube.style.top = `${cubeTop}px`;
-      //     cube.style.left = `${cubeLeft}px`;
-      //     cancelAnimationFrame(mainJumpAnimation);
-      //     cancelAnimationFrame(sideJumpAnimation);
-      //     cancelAnimationFrame(cubeMoveAnimation);
-      //     return;
-      //   } else if (
-      //     cube.getBoundingClientRect().bottom >=
-      //       horizontalLineLowerLeft.getBoundingClientRect().top &&
-      //     cube.getBoundingClientRect().top <
-      //       horizontalLineLowerRight.getBoundingClientRect().top &&
-      //     cube.getBoundingClientRect().top <
-      //       horizontalLine.getBoundingClientRect().top
-      //   ) {
-      //     console.log(
-      //       "cube.getBoundingClientRect().bottom?",
-      //       horizontalLine.getBoundingClientRect().top
-      //     );
-      //     console.log(
-      //       "Uslo ovde?",
-      //       horizontalLineLowerRight.getBoundingClientRect().top
-      //     );
-      //     isJumping = false;
-      //     isMoving = false;
-      //     cubeBottom = horizontalLineLowerLeft.getBoundingClientRect().top;
-      //     cubeTop =
-      //       horizontalLineLowerLeft.getBoundingClientRect().top -
+      //       horizontalLine.getBoundingClientRect().top -
       //       cube.getBoundingClientRect().height;
       //     cube.style.bottom = `${cubeBottom}px`;
       //     cube.style.top = `${cubeTop}px`;
@@ -232,56 +158,56 @@ function jump(jumpAngle, landAngle) {
   sideJumpAnimation = requestAnimationFrame(update);
 }
 
-startAnimating(90);
+// startAnimating(90);
 
-function startAnimating(fps) {
-  fpsInterval = 1000 / fps;
-  then = Date.now();
-  startTime = then;
-  animate();
-}
-document.addEventListener("keydown", (event) => {});
-fpsInterval = 1000 / 120;
-then = Date.now();
-startTime = then;
-animate();
+// function startAnimating(fps) {
+//   fpsInterval = 1000 / fps;
+//   then = Date.now();
+//   startTime = then;
+//   animate();
+// }
+// document.addEventListener("keydown", (event) => {});
+// fpsInterval = 1000 / 120;
+// then = Date.now();
+// startTime = then;
+// animate();
 
-function animate() {
-  // stop
-  if (stop) {
-    return;
-  }
+// function animate() {
+//   // stop
+//   if (stop) {
+//     return;
+//   }
 
-  // request another frame
+//   // request another frame
 
-  requestAnimationFrame(animate);
+//   requestAnimationFrame(animate);
 
-  // calc elapsed time since last loop
+//   // calc elapsed time since last loop
 
-  now = Date.now();
-  elapsed = now - then;
+//   now = Date.now();
+//   elapsed = now - then;
 
-  // if enough time has elapsed, draw the next frame
+//   // if enough time has elapsed, draw the next frame
 
-  if (elapsed > fpsInterval) {
-    // Get ready for next frame by setting then=now, but...
-    // Also, adjust for fpsInterval not being multiple of 16.67
-    then = now - (elapsed % fpsInterval);
+//   if (elapsed > fpsInterval) {
+//     // Get ready for next frame by setting then=now, but...
+//     // Also, adjust for fpsInterval not being multiple of 16.67
+//     then = now - (elapsed % fpsInterval);
 
-    // draw stuff here
+//     // draw stuff here
 
-    // TESTING...Report #seconds since start and achieved fps.
-    var sinceStart = now - startTime;
-    var currentFps =
-      Math.round((1000 / (sinceStart / ++frameCount)) * 100) / 100;
-    $results.textContent =
-      "Elapsed time= " +
-      Math.round((sinceStart / 1000) * 100) / 100 +
-      " secs @ " +
-      currentFps +
-      " fps.";
-  }
-}
+//     // TESTING...Report #seconds since start and achieved fps.
+//     var sinceStart = now - startTime;
+//     var currentFps =
+//       Math.round((1000 / (sinceStart / ++frameCount)) * 100) / 100;
+//     $results.textContent =
+//       "Elapsed time= " +
+//       Math.round((sinceStart / 1000) * 100) / 100 +
+//       " secs @ " +
+//       currentFps +
+//       " fps.";
+//   }
+// }
 
 /**
  * Pokusaj kontrolera za telefon

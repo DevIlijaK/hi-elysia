@@ -83,6 +83,7 @@ export const BaseHtml = async ({ children }: PropsWithChildren) => {
       <script>{await Bun.file("public/variables.js").text()}</script>
       <script>{await Bun.file("public/script.js").text()}</script>
       <script>{await Bun.file("public/falling.js").text()}</script>
+      <script>{await Bun.file("public/obliqueThrow.js").text()}</script>
     </html>
   );
 };

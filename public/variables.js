@@ -8,12 +8,11 @@ var cubeBottom = cube.getBoundingClientRect().bottom;
 
 var footerTop = footer.getBoundingClientRect().top;
 
+var jumpVelocity = 450; // Početna brzina u pikselima po sekundi
 /**
  * Varijable vezane za pocetnu animaciju
  */
 var initialVelocity = 800; // Početna brzina u pikselima po sekundi
-var angle = 70; // Ugao kosog hitca u stepenima
+
 var gravity = 9.8; // Gravitaciona konstanta (može se prilagoditi)
-var initialY = cube.getBoundingClientRect().y;
-var initialX = cube.getBoundingClientRect().x;
-var initialTime = performance.now();
+

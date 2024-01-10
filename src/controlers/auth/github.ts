@@ -16,7 +16,6 @@ export const github = new Elysia({
       maxAge: 60 * 60,
     });
 
-    console.log("Ulazi ovde! ", stateCookie);
 
     set.headers = {
       Location: url.toString(),

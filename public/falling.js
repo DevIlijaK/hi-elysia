@@ -1,3 +1,8 @@
+var angle = 70; // Ugao kosog hitca u stepenima
+var initialY = cube.getBoundingClientRect().y;
+var initialX = cube.getBoundingClientRect().x;
+var initialTime = performance.now();
+
 // Pretvaranje ugla u radiane
 var angleInRadians = (angle * Math.PI) / 180;
 
@@ -5,6 +10,8 @@ var angleInRadians = (angle * Math.PI) / 180;
 var initialVelocityX = initialVelocity * Math.cos(angleInRadians);
 var initialVelocityY = initialVelocity * Math.sin(angleInRadians);
 var gravitationVelocity = 0;
+var firstFallingAnimation = null;
+var secondFallingAnimation = null;
 
 function animate(currentTime) {
   const time = (initialTime - currentTime) / 1000;
@@ -18,14 +25,22 @@ function animate(currentTime) {
   cube.style.left = leftPosition + "px";
   const cubeRect = cube.getBoundingClientRect();
   if (cubeRect.bottom < footerTop) {
-    requestAnimationFrame((newTime) => animate(newTime));
+    secondFallingAnimation = requestAnimationFrame((newTime) =>
+      animate(newTime)
+    );
   } else {
     cube.style.top = footerTop - cubeRect.height + "px";
     cubeLeft = cubeRect.left;
     cubeTop = footerTop - cubeRect.height;
     cubeRight = cubeRect.right;
     cubeBottom = footerTop;
+    cube.style.top = cubeTop + "px";
+
+    cancelAnimationFrame(firstFallingAnimation);
+    cancelAnimationFrame(secondFallingAnimation);
   }
 }
 
-requestAnimationFrame((currentTime) => animate(currentTime));
+firstFallingAnimation = requestAnimationFrame((currentTime) =>
+  animate(currentTime)
+);

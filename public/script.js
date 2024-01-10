@@ -2,7 +2,6 @@
 //  * Logika za kretanje
 //  */
 
-var cube = document.getElementById("proba123");
 var image = document.getElementById("image123");
 var elements = document.querySelectorAll(".ramp");
 

@@ -44,7 +44,7 @@ export const blogController = new Elysia({
               <p class="mt-4">123</p>
             </div>
           </div>
-          <div style="height: 50px;" class="ramp rounded-md overflow-hidden">
+          <div style="height: 50px;" class="ramp rounded-b-md overflow-hidden">
             <div class="h-full">
               <img
                 src={imageUrl}

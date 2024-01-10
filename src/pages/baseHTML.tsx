@@ -57,7 +57,6 @@ export const BaseHtml = async ({ children }: PropsWithChildren) => {
           class="z-10 
           fixed 
           top-1/2 
-          left-1/2 
           h-24 
           w-24 
           border-solid border-2
@@ -81,7 +80,9 @@ export const BaseHtml = async ({ children }: PropsWithChildren) => {
       >
         {children}
       </body>
+      <script>{await Bun.file("public/variables.js").text()}</script>
       <script>{await Bun.file("public/script.js").text()}</script>
+      <script>{await Bun.file("public/falling.js").text()}</script>
     </html>
   );
 };

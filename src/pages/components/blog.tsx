@@ -22,7 +22,7 @@ export const blogPages = new Elysia({
           hx-trigger="load, from:#leftButton"
           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8"
         ></div>
-        <div id="pagination-controls" class="flex justify-center mt-4">
+        {/* <div id="pagination-controls" class="flex justify-center mt-4">
           <button
             class="mx-2 p-2 bg-blue-500 text-white rounded hidden"
             id="leftButton"
@@ -37,7 +37,7 @@ export const blogPages = new Elysia({
           >
             &gt;&gt;
           </button>
-        </div>
+        </div> */}
       </div>
     );
   })

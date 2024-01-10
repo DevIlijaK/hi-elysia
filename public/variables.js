@@ -1,9 +1,12 @@
 var cube = document.getElementById("proba123");
+var footer = document.getElementById("footer");
 
 var cubeLeft = cube.getBoundingClientRect().left;
 var cubeTop = cube.getBoundingClientRect().top;
 var cubeRight = cube.getBoundingClientRect().right;
 var cubeBottom = cube.getBoundingClientRect().bottom;
+
+var footerTop = footer.getBoundingClientRect().top;
 
 /**
  * Varijable vezane za pocetnu animaciju
@@ -14,6 +17,3 @@ var gravity = 9.8; // Gravitaciona konstanta (može se prilagoditi)
 var initialY = cube.getBoundingClientRect().y;
 var initialX = cube.getBoundingClientRect().x;
 var initialTime = performance.now();
-var gravitation = 0;
-
-

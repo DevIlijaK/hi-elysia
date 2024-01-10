@@ -4,27 +4,27 @@ var angleInRadians = (angle * Math.PI) / 180;
 // Početna brzina u x i y smeru
 var initialVelocityX = initialVelocity * Math.cos(angleInRadians);
 var initialVelocityY = initialVelocity * Math.sin(angleInRadians);
+var gravitationVelocity = 0;
 
 function animate(currentTime) {
-  const cubeRect = cube.getBoundingClientRect();
-
   const time = (initialTime - currentTime) / 1000;
-  gravitation += time - 0.5 * gravity * Math.pow(time, 2);
+  gravitationVelocity += time - 0.5 * gravity * Math.pow(time, 2);
 
-  const topPosition = initialY + initialVelocityY * time - gravitation;
+  const topPosition = initialY + initialVelocityY * time - gravitationVelocity;
 
   const leftPosition = initialX - initialVelocityX * time;
 
   cube.style.top = topPosition + "px";
   cube.style.left = leftPosition + "px";
-
-  if (cubeRect.bottom < window.innerHeight * 0.9) {
+  const cubeRect = cube.getBoundingClientRect();
+  if (cubeRect.bottom < footerTop) {
     requestAnimationFrame((newTime) => animate(newTime));
   } else {
+    cube.style.top = footerTop - cubeRect.height + "px";
     cubeLeft = cubeRect.left;
-    cubeTop = cubeRect.top;
+    cubeTop = footerTop - cubeRect.height;
     cubeRight = cubeRect.right;
-    cubeBottom = cubeRect.bottom;
+    cubeBottom = footerTop;
   }
 }
 

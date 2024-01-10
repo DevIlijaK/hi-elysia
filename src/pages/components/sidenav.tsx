@@ -110,6 +110,14 @@ export function SideNav({ children }: PropsWithChildren) {
       <div id="content" class="container w-full  mx-auto">
         {children}
       </div>
+      <footer
+        id="footer"
+        class="fixed bottom-0 w-full bg-gray-800 text-white text-center py-4 h-12"
+      >
+        <div class="container mx-auto">
+          <p>&copy; 2024 Your Company. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 }

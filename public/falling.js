@@ -14,7 +14,7 @@
 // var secondFallingAnimation = null;
 
 // function animate(currentTime) {
-//   const time = (initialTime - currentTime) / 1000;
+//   const time = ((initialTime - currentTime) / 1000).toFixed(3);
 //   gravitationVelocity += time - 0.5 * gravity * Math.pow(time, 2);
 
 //   const topPosition = initialY + initialVelocityY * time - gravitationVelocity;

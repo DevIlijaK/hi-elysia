@@ -14,7 +14,7 @@ function obliqueThrow(angle) {
   function throwAnimation(currentTime) {
     const cubeRect = cube.getBoundingClientRect();
 
-    const time = (initialTime - currentTime) / 1000;
+    const time = ((initialTime - currentTime) / 1000).toFixed(3);;
     gravitationVelocity += time - 0.5 * gravity * Math.pow(time, 2);
 
     const topPosition =
@@ -26,7 +26,28 @@ function obliqueThrow(angle) {
 
     cube.style.top = Math.round(topPosition) + "px";
     cube.style.left = leftPosition + "px";
-
+    if (topPosition + cubeRect.height < maxHeight) {
+      maxHeight = topPosition + cubeRect.height;
+    } else {
+      for (let i = 0; i < elements.length; i++) {
+        let rect = elements[i].getBoundingClientRect();
+        console.log("Bottom ej: " + cubeRect.bottom);
+        console.log("rect.top: " + rect.top);
+        if (cubeRect.bottom > rect.top && maxHeight < rect.top) {
+          isJumping = false;
+          isMoving = false;
+          cube.style.top = rect.top - cubeRect.height + "px";
+          cubeLeft = cubeRect.left;
+          cubeTop = rect.top - cubeRect.height;
+          cubeRight = cubeRect.right;
+          cubeBottom = rect.top;
+          cancelAnimationFrame(mainJumpAnimation);
+          cancelAnimationFrame(sideJumpAnimation);
+          cancelAnimationFrame(cubeMoveAnimation);
+          return;
+        }
+      }
+    }
     if (cubeRect.bottom <= footerTop) {
       mainJumpAnimation = requestAnimationFrame((newTime) =>
         throwAnimation(newTime)

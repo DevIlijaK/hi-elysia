@@ -20,24 +20,8 @@ export const blogPages = new Elysia({
         <div
           hx-get="/blog/posts/${$page}"
           hx-trigger="load, from:#leftButton"
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-16 gap-y-8"
         ></div>
-        {/* <div id="pagination-controls" class="flex justify-center mt-4">
-          <button
-            class="mx-2 p-2 bg-blue-500 text-white rounded hidden"
-            id="leftButton"
-            _="on click decrement $page then log $page"
-          >
-            &lt;&lt;
-          </button>
-          <button class="mx-2 p-2 bg-blue-500 text-white rounded">1</button>
-          <button
-            class="mx-2 p-2 bg-blue-500 text-white rounded"
-            _="on click increment $page then log $page then if $page is greater than 0 remove .hidden from #leftButton"
-          >
-            &gt;&gt;
-          </button>
-        </div> */}
       </div>
     );
   })

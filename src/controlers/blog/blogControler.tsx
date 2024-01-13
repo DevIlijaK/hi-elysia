@@ -17,10 +17,10 @@ export const blogController = new Elysia({
       .select()
       .from(blog)
       .limit(pageSize)
-      .offset(pageSize * Number(page));
+      .offset(pageSize * 0);
 
     let html: Children[] = [];
-    const imageUrl = await createImageULR("pictures/platform.png", "png");
+    const imageUrl = await createImageULR("public/platform.png", "png");
     const divBackgound = `background-image: url('${imageUrl}')`;
     blogPosts.forEach((blogPost) => {
       const getLink = `/blog/text/${blogPost.title}`;

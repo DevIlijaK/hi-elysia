@@ -7,8 +7,8 @@ export function SideNav({ children }: PropsWithChildren) {
           class="z-10 
           fixed 
           top-1/2 
-          h-24 
-          w-24 
+          h-20 
+          w-20 
           border-solid border-2
         border-indigo-600"
         >

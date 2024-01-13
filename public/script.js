@@ -16,6 +16,9 @@ document.addEventListener("keyup", (event) => {
 
 function moveCube() {
   if (isMoving) {
+    if (isFalling) {
+      cubeTop += step;
+    }
     if (
       (pressedKeys.has("a") && pressedKeys.has("w")) ||
       jumpAnimation.has("aw")
@@ -50,6 +53,66 @@ function moveCube() {
         cubeTop += step;
       }
     }
+    if (isFalling) {
+      for (let i = 0; i < elements.length; i++) {
+        let rect = elements[i].getBoundingClientRect();
+        console.log(
+          "cubeTop + cubeHeight > rect.top",
+          cubeTop + cubeHeight > rect.top
+        );
+        console.log(
+          "rect.left <= cubeLeft + cubeWidth ",
+          rect.left <= cubeLeft + cubeWidth
+        );
+        console.log("maxHeight <= rect.top", maxHeight <= rect.top);
+        console.log(
+          "rect.left + rect.width >= cubeLeft",
+          rect.left + rect.width >= cubeLeft
+        );
+        if (
+          cubeTop + cubeHeight > rect.top &&
+          maxHeight <= rect.top &&
+          rect.left <= cubeLeft + cubeWidth &&
+          rect.left + rect.width >= cubeLeft
+        ) {
+          cubeTop = rect.top - cubeHeight;
+          jumpAnimation.clear();
+          isJumping = false;
+          maxHeight = rect.top;
+          time = 0;
+          isFalling = false;
+          standingElement = rect;
+        } else {
+          isFalling = true;
+        }
+      }
+
+      if (cubeTop + cubeHeight > footerTop) {
+        cubeTop = footerTop - cubeHeight;
+        jumpAnimation.clear();
+        isJumping = false;
+        maxHeight = footerTop;
+        time = 0;
+        isFalling = false;
+        standingElement = footer.getBoundingClientRect();
+      }
+    }
+    if (standingElement) {
+      if (
+        standingElement.left <= cubeLeft + cubeWidth &&
+        standingElement.left + standingElement.width >= cubeLeft
+      ) {
+        // cubeTop = rect.top - cubeHeight;
+        // jumpAnimation.clear();
+        // isJumping = false;
+        // maxHeight = rect.top;
+        // time = 0;
+        isFalling = false;
+      } else {
+        isFalling = true;
+      }
+    }
+
     cube.style.top = `${cubeTop}px`;
     cube.style.left = `${cubeLeft}px`;
     requestAnimationFrame(moveCube);

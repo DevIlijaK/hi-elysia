@@ -9,6 +9,7 @@ var elements = document.querySelectorAll(".ramp");
  */
 var isJumping = false;
 var isMoving = false;
+var isFalling = true;
 
 /**
  * Pressed key variables
@@ -21,6 +22,7 @@ var jumpAnimation = new Set();
 var cubeLeft = cube.getBoundingClientRect().left;
 var cubeTop = cube.getBoundingClientRect().top;
 var cubeHeight = cube.getBoundingClientRect().height;
+var cubeWidth = cube.getBoundingClientRect().width;
 var footerTop = footer.getBoundingClientRect().top;
 /**
  * Varijable vezane za ponasanje sistema
@@ -28,8 +30,9 @@ var footerTop = footer.getBoundingClientRect().top;
 var jumpVelocity = 25;
 // var initialVelocity = 800;
 var gravity = 0.1;
-var maxHeight = Number.MAX_SAFE_INTEGER;
+var maxHeight = cubeTop + cubeWidth;
 var obliqueAngle = 0;
 var step = 10;
 
 var time = 0;
+var standingElement = null;

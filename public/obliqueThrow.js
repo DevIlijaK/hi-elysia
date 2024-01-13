@@ -1,34 +1,36 @@
 function throwAnimation() {
-  console.log("Ulazi ovde!", isMoving);
+  console.log("Ulazi ovde!", isFalling);
   gravitationVelocity += 0.5 * gravity * Math.pow(time, 2);
 
   cubeTop = initialY - initialVelocityY * time + gravitationVelocity;
 
   cubeLeft = Math.round(initialX - initialVelocityX * time);
   time++;
-
-  if (cubeTop + cubeHeight < maxHeight) {
+  console.log("cubeTop + cubeHeight", cubeTop + cubeHeight);
+  console.log("maxHeight", maxHeight);
+  if (cubeTop + cubeHeight <= maxHeight) {
     maxHeight = cubeTop + cubeHeight;
   } else {
-    for (let i = 0; i < elements.length; i++) {
-      let rect = elements[i].getBoundingClientRect();
-      if (cubeTop + cubeHeight > rect.top && maxHeight < rect.top) {
-        cubeTop = rect.top - cubeHeight;
-        jumpAnimation.clear();
-        isJumping = false;
-        maxHeight = Number.MAX_SAFE_INTEGER;
-        time = 0;
-      }
-    }
+    isFalling = true;
+    // for (let i = 0; i < elements.length; i++) {
+    //   let rect = elements[i].getBoundingClientRect();
+    //   if (cubeTop + cubeHeight > rect.top && maxHeight < rect.top) {
+    //     cubeTop = rect.top - cubeHeight;
+    //     jumpAnimation.clear();
+    //     isJumping = false;
+    //     maxHeight = Number.MAX_SAFE_INTEGER;
+    //     time = 0;
+    //   }
+    // }
   }
 
-  if (cubeTop + cubeHeight > footerTop) {
-    cubeTop = footerTop - cubeHeight;
-    jumpAnimation.clear();
-    isJumping = false;
-    maxHeight = Number.MAX_SAFE_INTEGER;
-    time = 0;
-  }
+  //   if (cubeTop + cubeHeight > footerTop) {
+  //     cubeTop = footerTop - cubeHeight;
+  //     jumpAnimation.clear();
+  //     isJumping = false;
+  //     maxHeight = Number.MAX_SAFE_INTEGER;
+  //     time = 0;
+  //   }
 }
 
 function obliqueThrowConfig(angle, key) {

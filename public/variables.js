@@ -2,14 +2,15 @@
  * HTML element variables
  */
 var cube = document.getElementById("proba123");
-var footer = document.getElementById("footer");
+// var footer = document.getElementById("footer");
 var elements = document.querySelectorAll(".ramp");
 /**
  * State variables
  */
 var isJumping = false;
 var isMoving = false;
-var isFalling = true;
+var isFalling = false;
+var isTouchingSides = false;
 
 /**
  * Pressed key variables
@@ -23,7 +24,7 @@ var cubeLeft = cube.getBoundingClientRect().left;
 var cubeTop = cube.getBoundingClientRect().top;
 var cubeHeight = cube.getBoundingClientRect().height;
 var cubeWidth = cube.getBoundingClientRect().width;
-var footerTop = footer.getBoundingClientRect().top;
+// var footerTop = footer.getBoundingClientRect().top;
 /**
  * Varijable vezane za ponasanje sistema
  */
@@ -36,3 +37,7 @@ var step = 10;
 
 var time = 0;
 var standingElement = null;
+
+initialY = null;
+initialX = null;
+gravitationVelocity = 0;

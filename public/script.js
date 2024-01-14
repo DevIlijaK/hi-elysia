@@ -16,9 +16,6 @@ document.addEventListener("keyup", (event) => {
 
 function moveCube() {
   if (isMoving) {
-    if (isFalling) {
-      cubeTop += step;
-    }
     if (
       (pressedKeys.has("a") && pressedKeys.has("w")) ||
       jumpAnimation.has("aw")
@@ -27,9 +24,11 @@ function moveCube() {
         obliqueThrowConfig(45, "aw");
       }
       throwAnimation();
-    } else if (pressedKeys.has("a") && pressedKeys.has("s")) {
-      moveDiagonaly(225);
-    } else if (
+    }
+    // else if (pressedKeys.has("a") && pressedKeys.has("s")) {
+    //   moveDiagonaly(225);
+    // }
+    else if (
       (pressedKeys.has("d") && pressedKeys.has("w")) ||
       jumpAnimation.has("dw")
     ) {
@@ -37,38 +36,45 @@ function moveCube() {
         obliqueThrowConfig(125, "dw");
       }
       throwAnimation();
-    } else if (pressedKeys.has("d") && pressedKeys.has("s")) {
-      moveDiagonaly(315);
-    } else {
-      if (pressedKeys.has("d")) {
-        cubeLeft += step;
-      } else if (pressedKeys.has("w") || jumpAnimation.has("w")) {
-        if (!isJumping) {
-          obliqueThrowConfig(90, "w");
+    }
+    //  else if (pressedKeys.has("d") && pressedKeys.has("s")) {
+    //   moveDiagonaly(315);
+    // }
+    else {
+      if (!isFalling) {
+        if ((!isJumping && pressedKeys.has("w")) || jumpAnimation.has("w")) {
+          if (!isJumping) {
+            obliqueThrowConfig(90, "w");
+          }
+          throwAnimation();
+        } else {
+          if (pressedKeys.has("d")) {
+            cubeLeft += step;
+          } else if (pressedKeys.has("a")) {
+            cubeLeft -= step;
+          }
+          //  else if (pressedKeys.has("s")) {
+          // cubeTop += step;
+          // }
         }
-        throwAnimation();
-      } else if (pressedKeys.has("a")) {
-        cubeLeft -= step;
-      } else if (pressedKeys.has("s")) {
-        cubeTop += step;
       }
     }
     if (isFalling) {
+      if (!isJumping) {
+        gravityFall();
+      }
+
       for (let i = 0; i < elements.length; i++) {
         let rect = elements[i].getBoundingClientRect();
-        console.log(
-          "cubeTop + cubeHeight > rect.top",
-          cubeTop + cubeHeight > rect.top
-        );
-        console.log(
-          "rect.left <= cubeLeft + cubeWidth ",
-          rect.left <= cubeLeft + cubeWidth
-        );
-        console.log("maxHeight <= rect.top", maxHeight <= rect.top);
-        console.log(
-          "rect.left + rect.width >= cubeLeft",
-          rect.left + rect.width >= cubeLeft
-        );
+        if (elements[i].id == "footer") {
+          console.log("1");
+          console.log("cubeLeft", cubeLeft);
+          console.log("rect.left + rect.width", rect.left + rect.width);
+          console.log(
+            "rect.left + rect.width >= cubeLeft",
+            rect.left + rect.width >= cubeLeft
+          );
+        }
         if (
           cubeTop + cubeHeight > rect.top &&
           maxHeight <= rect.top &&
@@ -81,20 +87,11 @@ function moveCube() {
           maxHeight = rect.top;
           time = 0;
           isFalling = false;
+          gravitationVelocity = 0;
           standingElement = rect;
         } else {
           isFalling = true;
         }
-      }
-
-      if (cubeTop + cubeHeight > footerTop) {
-        cubeTop = footerTop - cubeHeight;
-        jumpAnimation.clear();
-        isJumping = false;
-        maxHeight = footerTop;
-        time = 0;
-        isFalling = false;
-        standingElement = footer.getBoundingClientRect();
       }
     }
     if (standingElement) {
@@ -111,8 +108,19 @@ function moveCube() {
       } else {
         isFalling = true;
       }
+    } else {
+      isFalling = true;
+    }
+    if (cubeLeft <= 0 || cubeLeft + cubeWidth >= window.innerWidth) {
+      cubeLeft <= 0
+        ? (cubeLeft = 0)
+        : (cubeLeft = window.innerWidth - cubeWidth);
+      isTouchingSides = true;
+    } else {
+      isTouchingSides = false;
     }
 
+    // console.log(isTouchingSides);
     cube.style.top = `${cubeTop}px`;
     cube.style.left = `${cubeLeft}px`;
     requestAnimationFrame(moveCube);

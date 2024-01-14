@@ -7,8 +7,8 @@ export function SideNav({ children }: PropsWithChildren) {
           class="z-10 
           fixed 
           top-1/2 
-          h-20 
-          w-20 
+          h-10 
+          w-10 
           border-solid border-2
         border-indigo-600"
         >
@@ -133,7 +133,7 @@ export function SideNav({ children }: PropsWithChildren) {
       </div>
       <footer
         id="footer"
-        class="fixed bottom-0 w-full bg-gray-800 text-white text-center py-4 h-15"
+        class="ramp fixed bottom-0 w-full bg-gray-800 text-white text-center py-4 h-15"
       >
         <div class="container mx-auto">
           <p>&copy; 2024 Your Company. All rights reserved.</p>

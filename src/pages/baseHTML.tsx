@@ -51,15 +51,12 @@ export const BaseHtml = async ({ children }: PropsWithChildren) => {
       <p>This test: Results should be approximately 5 fps</p>
       <p id="results">Results:</p>
       <canvas id="canvas" width="300" height="300"></canvas> */}
-      <body
-        class="select-none"
-      >
-        {children}
-      </body>
+      <body class="select-none">{children}</body>
       <script>{await Bun.file("public/variables.js").text()}</script>
       <script>{await Bun.file("public/script.js").text()}</script>
       <script>{await Bun.file("public/falling.js").text()}</script>
       <script>{await Bun.file("public/obliqueThrow.js").text()}</script>
+      <script>{await Bun.file("public/gravity.js").text()}</script>
     </html>
   );
 };

@@ -16,13 +16,11 @@ export const blogPages = new Elysia({
   .get("/list", () => {
     let pageCount = 0;
     return (
-      <div>
-        <div
-          hx-get="/blog/posts/${$page}"
-          hx-trigger="load, from:#leftButton"
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-36 gap-y-8"
-        ></div>
-      </div>
+      <div
+        hx-get="/blog/posts/${$page}"
+        hx-trigger="load, from:#leftButton"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-36 gap-y-8"
+      ></div>
     );
   })
   .get("/text", () => {

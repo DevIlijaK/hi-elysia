@@ -126,7 +126,7 @@ export function SideNav({ children }: PropsWithChildren) {
       <div
         id="content"
         style={children.backgroundUrl}
-        class="proba123 container h-full w-full mx-auto flex items-center justify-center"
+        class="w-full mx-auto flex items-center justify-center"
       >
         {children.children}
       </div>

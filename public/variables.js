@@ -28,7 +28,7 @@ var cubeWidth = cube.getBoundingClientRect().width;
 /**
  * Varijable vezane za ponasanje sistema
  */
-var jumpVelocity = 25;
+var jumpVelocity = 22;
 // var initialVelocity = 800;
 var gravity = 0.1;
 var maxHeight = cubeTop + cubeWidth;

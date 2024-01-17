@@ -4,7 +4,7 @@ function throwAnimation() {
   cubeTop = initialY - initialVelocityY * time + gravitationVelocity;
   if (!isTouchingSides) {
     cubeLeft = Math.round(initialX - initialVelocityX * time);
-    console.log("Ulazi ovde!");
+    // console.log("Ulazi ovde!");
   }
   time++;
   // console.log("Ulazi ovde! ", cubeTop + cubeHeight);

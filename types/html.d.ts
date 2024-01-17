@@ -7,6 +7,8 @@ type Children =
   | undefined
   | Children[];
 
-type PropsWithChildren<T = {}> = {
-  children?: Children;
+type PropsWithChildren<t = {}> = {
+  children?: children;
+  backgroundUrl?: string;
+  heroImageUrl?; string;
 } & T;

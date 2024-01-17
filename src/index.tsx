@@ -9,7 +9,21 @@ import { login } from "./pages/login";
 
 const app = new Elysia()
 
-  .onAfterHandle(({ response, set, headers, cookie }) => {
+  .onAfterHandle(async ({ response, set, headers, cookie }) => {
+    const file = Bun.file("public/pozadina.gif");
+    console.log("Prolazi ovo");
+    const arrbuf = await file.arrayBuffer();
+    const buffer = Buffer.from(arrbuf);
+    const base64String = buffer.toString("base64");
+
+    const backgroundUrl = `background-image: url('data:image/gif;base64,${base64String}');
+    background-size: cover;
+    background-repeat: no-repeat;`;
+
+    const heroImage = Bun.file("public/mrPlanet.png");
+    const heroImageUrl = `data:image/png;base64,${Buffer.from(
+      await heroImage.arrayBuffer()
+    ).toString("base64")}`;
     if (set.status != 302) {
       const children: Children = response as Children;
       if (headers["hx-request"] == "true") {
@@ -18,7 +32,7 @@ const app = new Elysia()
         set.headers["Content-Type"] = "text/html; charset=utf8";
         return (
           <BaseHtml>
-            <SideNav>{children}</SideNav>
+            <SideNav>{{ children, backgroundUrl, heroImageUrl }}</SideNav>
           </BaseHtml>
         );
       }

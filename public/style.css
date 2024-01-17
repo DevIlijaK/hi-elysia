@@ -6,6 +6,12 @@
 }
 .ramp {
 }
+
+.proba123{
+  background-image: url('./pozadina.GIF');
+  background-size: cover; /* Opciono: prilagodi veličinu slike da pokrije celu pozadinu */
+  background-repeat: no-repeat; 
+}
 #formattedInput {
   border: 1px solid #ccc;
   padding: 5px;

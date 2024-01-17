@@ -8,10 +8,11 @@ export function SideNav({ children }: PropsWithChildren) {
           class="z-10 
           fixed 
           top-1/2 
-          h-20 
-          w-20 
+          
+          
           border-solid border-2
         border-indigo-600"
+          style="height: 77px; width: 50px;"
         >
           <img id="image123" src={children.heroImageUrl} />
         </div>
@@ -126,7 +127,7 @@ export function SideNav({ children }: PropsWithChildren) {
       <div
         id="content"
         style={children.backgroundUrl}
-        class="w-full mx-auto flex items-center justify-center"
+        class="h-full w-full mx-auto flex items-center justify-center"
       >
         {children.children}
       </div>

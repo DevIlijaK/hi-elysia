@@ -119,17 +119,18 @@ function moveCube() {
           isFalling = true;
         }
       }
+    } else {
+      if (pressedKeys.has("d")) {
+        gravityConfig(3.92699);
+      } else if (pressedKeys.has("a")) {
+        gravityConfig(5.49779);
+      }
     }
     if (standingElement) {
       if (
         standingElement.left <= cubeLeft + cubeWidth &&
         standingElement.left + standingElement.width >= cubeLeft
       ) {
-        // cubeTop = rect.top - cubeHeight;
-        // jumpAnimation.clear();
-        // isJumping = false;
-        // maxHeight = rect.top;
-        // time = 0;
         isFalling = false;
       } else {
         isFalling = true;

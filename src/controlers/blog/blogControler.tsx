@@ -25,7 +25,7 @@ export const blogController = new Elysia({
     blogPosts.forEach((blogPost) => {
       const getLink = `/blog/text/${blogPost.title}`;
       html.push(
-        <div class="h-60 bg-white rounded-md shadow-md border border-gray-300 flex flex-col">
+        <div class="h-60  rounded-md shadow-md border border-gray-300 flex flex-col">
           <div
             class="p-4 pb-0 h-48 flex items-center justify-center md:justify-start"
             hx-get={getLink}

@@ -1,6 +1,5 @@
 export const BaseHtml = async ({ children }: PropsWithChildren) => {
   const proba = await Bun.file("public/style.css");
-  console.log("proba je: ", proba);
   return (
     <html>
       <head>
@@ -18,45 +17,15 @@ export const BaseHtml = async ({ children }: PropsWithChildren) => {
           rel="stylesheet"
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
         />
-        {/* <link rel="stylesheet" href="public/style.css" /> */}
-        <style>{await Bun.file("public/style.css").text()}</style>
-
-        {/* <script>htmx.config.globalViewTransitions = true;</script>
-        <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js"></script>
-        <script src="https://unpkg.com/htmx.org/dist/ext/loading-states.js"></script>
-        <script src="https://unpkg.com/hyperscript.org@0.9.11"></script>
-        <style>
-          {`
-            [data-loading] {
-              display: none;
-            }
-          `}
-        </style>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/@unocss/reset/tailwind.min.css"
-        />
-        <link rel="stylesheet" href="/public/dist/unocss.css" />
-        <script type="text/hyperscript">
-          {`
-          def copySelectorToClipboard(selector)
-            get the innerHTML of selector
-            call navigator.clipboard.writeText(the result)
-          end
-        `}
-        </script>
-        <script>{safeScript}</script> */}
+        <style>{await Bun.file("public/css/style.css").text()}</style>
       </head>
-      {/* <h3>Throttling requestAnimationFrame to a FPS</h3>
-      <p>This test: Results should be approximately 5 fps</p>
-      <p id="results">Results:</p>
-      <canvas id="canvas" width="300" height="300"></canvas> */}
+
       <body class="select-none">{children}</body>
-      <script>{await Bun.file("public/variables.js").text()}</script>
-      <script>{await Bun.file("public/script.js").text()}</script>
-      <script>{await Bun.file("public/falling.js").text()}</script>
-      <script>{await Bun.file("public/obliqueThrow.js").text()}</script>
-      <script>{await Bun.file("public/gravity.js").text()}</script>
+      <script>{await Bun.file("public/js/variables.js").text()}</script>
+      <script>{await Bun.file("public/js/script.js").text()}</script>
+      {/* <script>{await Bun.file("public/js/falling.js").text()}</script> */}
+      <script>{await Bun.file("public/js/obliqueThrow.js").text()}</script>
+      <script>{await Bun.file("public/js/gravity.js").text()}</script>
     </html>
   );
 };

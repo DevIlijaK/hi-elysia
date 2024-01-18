@@ -1,6 +1,6 @@
 function gravityConfig(angle) {
   ugao = angle;
-  silaPoX = 1.5 * Math.cos(ugao);
+  silaPoX = Math.cos(ugao) * 0.5;
 }
 
 function gravityFall() {
@@ -11,7 +11,7 @@ function gravityFall() {
     cubeLeft -= silaPoX * time;
     // console.log("Ulazi ovde!");
   }
-  time+=2;
+  time++;
   // console.log("Ulazi ovde! ", cubeTop + cubeHeight);
   // console.log("Nestp: ", maxHeight);
   // console.log("Nestp: ", cubeTop + cubeHeight <= maxHeight);

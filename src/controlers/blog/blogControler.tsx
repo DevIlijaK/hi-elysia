@@ -20,14 +20,20 @@ export const blogController = new Elysia({
       .offset(pageSize * 0);
 
     let html: Children[] = [];
-    const imageUrl = await createImageULR("public/platform.png", "png");
+    const imageUrl = await createImageULR("public/images/platform.png", "png");
     const divBackgound = `background-image: url('${imageUrl}')`;
     blogPosts.forEach((blogPost) => {
       const getLink = `/blog/text/${blogPost.title}`;
       html.push(
-        <div class="h-60  rounded-md shadow-md border border-gray-300 flex flex-col">
+        <div
+          class="
+blogWrapper
+       "
+        >
           <div
-            class="p-4 pb-0 h-48 flex items-center justify-center md:justify-start"
+            class="
+            blogCart
+            "
             hx-get={getLink}
             hx-target="#content"
           >
@@ -44,15 +50,13 @@ export const blogController = new Elysia({
               <p class="mt-4">123</p>
             </div>
           </div>
-          <div style="height: 50px;" class="ramp rounded-b-md overflow-hidden">
-            <div class="h-full">
-              <img
-                src={imageUrl}
-                alt="Blog Post Image"
-                class="w-full h-full object-cover object-top"
-              />
-            </div>
-          </div>
+          <div
+            class="
+            bg-cover bg-center
+            h-4 md:h-6 lg:h-8 
+            ramp rounded-b-md "
+            style={divBackgound}
+          />
         </div>
       );
     });

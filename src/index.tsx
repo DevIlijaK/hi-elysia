@@ -10,17 +10,18 @@ import { login } from "./pages/login";
 const app = new Elysia()
 
   .onAfterHandle(async ({ response, set, headers, cookie }) => {
-    const file = Bun.file("public/pozadina.gif");
+    const file = Bun.file("public/images/pozadina.gif");
     console.log("Prolazi ovo");
     const arrbuf = await file.arrayBuffer();
     const buffer = Buffer.from(arrbuf);
     const base64String = buffer.toString("base64");
 
     const backgroundUrl = `background-image: url('data:image/gif;base64,${base64String}');
-    background-size: cover;
-    background-repeat: no-repeat;`;
+    background-repeat:no-repeat;
+    background-size:contain;
+    background-position:center;`;
 
-    const heroImage = Bun.file("public/mrPlanet.png");
+    const heroImage = Bun.file("public/images/mrPlanet.png");
     const heroImageUrl = `data:image/png;base64,${Buffer.from(
       await heroImage.arrayBuffer()
     ).toString("base64")}`;

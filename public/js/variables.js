@@ -11,6 +11,7 @@ var isJumping = false;
 var isMoving = false;
 var isFalling = false;
 var isTouchingSides = false;
+var isInitialAnimation = true;
 
 /**
  * Pressed key variables

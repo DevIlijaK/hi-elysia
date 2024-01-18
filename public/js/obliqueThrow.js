@@ -6,7 +6,7 @@ function throwAnimation() {
     cubeLeft = Math.round(initialX - initialVelocityX * time);
     // console.log("Ulazi ovde!");
   }
-  time++;
+  time += 3;
   // console.log("Ulazi ovde! ", cubeTop + cubeHeight);
   // console.log("Nestp: ", maxHeight);
   // console.log("Nestp: ", cubeTop + cubeHeight <= maxHeight);

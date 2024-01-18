@@ -67,22 +67,23 @@ function moveCube() {
       for (let i = 0; i < elements.length; i++) {
         let rect = elements[i].getBoundingClientRect();
         if (elements[i].id == "footer") {
-          // console.log(
-          //   "1 cubeTop + cubeHeight > rect.top",
-          //   cubeTop + cubeHeight > rect.top
-          // );
-          // console.log("maxHeight <= rect.top", maxHeight <= rect.top);
-          // console.log(
-          //   "rect.left <= cubeLeft + cubeWidth ",
-          //   rect.left <= cubeLeft + cubeWidth
-          // );
-          // console.log(
-          //   "rect.left + rect.width >= cubeLeft",
-          //   rect.left + rect.width >= cubeLeft
-          // );
-          // console.log("cubeTop", cubeTop);
-          // console.log("rect top: ", rect.top);
-          // console.log("cubeTop < rect.top", cubeTop < rect.top);
+          console.log(
+            "1 cubeTop + cubeHeight > rect.top",
+            cubeTop + cubeHeight > rect.top
+          );
+          console.log("maxHeight <= rect.top", maxHeight <= rect.top);
+          console.log(
+            "rect.left <= cubeLeft + cubeWidth ",
+            rect.left <= cubeLeft + cubeWidth
+          );
+          console.log(
+            "rect.left + rect.width >= cubeLeft",
+            rect.left + rect.width >= cubeLeft
+          );
+          console.log("cubeTop", cubeTop);
+          console.log("rect top: ", rect.top);
+
+          console.log("cubeTop < rect.top", cubeTop < rect.top);
         }
 
         // console.log(

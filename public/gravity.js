@@ -11,7 +11,7 @@ function gravityFall() {
     cubeLeft -= silaPoX * time;
     // console.log("Ulazi ovde!");
   }
-  time++;
+  time+=2;
   // console.log("Ulazi ovde! ", cubeTop + cubeHeight);
   // console.log("Nestp: ", maxHeight);
   // console.log("Nestp: ", cubeTop + cubeHeight <= maxHeight);

@@ -11,6 +11,14 @@ export const blogController = new Elysia({
 })
   .use(ctx)
   .use(cache())
+  .get("/file123", ({ set }) => {
+ var ambientSound = Bun.file("public/sound/ambient.wav");
+    set.headers["Content-Type"] = ambientSound.type;
+    set.headers["HTML"] = 'false';
+    console.log('Ulazi ovde! ')
+   
+    return ambientSound;
+  })
   .get("/posts/:page", async ({ db, params: { page } }) => {
     const pageSize = 9;
     const blogPosts = await db

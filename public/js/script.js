@@ -6,13 +6,24 @@ document.addEventListener("keydown", (event) => {
     moveCube();
   }
 });
-
+document.addEventListener("click", (event) => {
+  var music = new Howl({
+    src: ["/blog/file123"],
+    autoplay: false,
+    loop: true,
+    duration: 3000,
+    format: "mp3"
+  });
+  console.log('Ulazi ovde: ', music)
+  music.play();
+});
 document.addEventListener("keyup", (event) => {
   pressedKeys.delete(event.key.toLowerCase());
   // if (pressedKeys.size == 0 && !isJumping) {
   //   isMoving = false;
   // }
 });
+nesto();
 
 function moveCube() {
   if (isMoving) {
@@ -66,25 +77,25 @@ function moveCube() {
 
       for (let i = 0; i < elements.length; i++) {
         let rect = elements[i].getBoundingClientRect();
-        if (elements[i].id == "footer") {
-          console.log(
-            "1 cubeTop + cubeHeight > rect.top",
-            cubeTop + cubeHeight > rect.top
-          );
-          console.log("maxHeight <= rect.top", maxHeight <= rect.top);
-          console.log(
-            "rect.left <= cubeLeft + cubeWidth ",
-            rect.left <= cubeLeft + cubeWidth
-          );
-          console.log(
-            "rect.left + rect.width >= cubeLeft",
-            rect.left + rect.width >= cubeLeft
-          );
-          console.log("cubeTop", cubeTop);
-          console.log("rect top: ", rect.top);
+        // if (elements[i].id == "footer") {
+        //   console.log(
+        //     "1 cubeTop + cubeHeight > rect.top",
+        //     cubeTop + cubeHeight > rect.top
+        //   );
+        //   console.log("maxHeight <= rect.top", maxHeight <= rect.top);
+        //   console.log(
+        //     "rect.left <= cubeLeft + cubeWidth ",
+        //     rect.left <= cubeLeft + cubeWidth
+        //   );
+        //   console.log(
+        //     "rect.left + rect.width >= cubeLeft",
+        //     rect.left + rect.width >= cubeLeft
+        //   );
+        //   console.log("cubeTop", cubeTop);
+        //   console.log("rect top: ", rect.top);
 
-          console.log("cubeTop < rect.top", cubeTop < rect.top);
-        }
+        //   console.log("cubeTop < rect.top", cubeTop < rect.top);
+        // }
 
         // console.log(
         //   "1 cubeTop + cubeHeight > rect.top",

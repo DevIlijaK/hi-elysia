@@ -1,5 +1,9 @@
 export const BaseHtml = async ({ children }: PropsWithChildren) => {
-  const proba = await Bun.file("public/style.css");
+  // const proba = await Bun.file("public/sound/ambient.wav");
+  //   const arrbuf = await proba.arrayBuffer();
+  //   const buffer = Buffer.from(arrbuf);
+  //   const base64String = buffer.toString("base64");
+  //   const backgroundUrl = `data:audio/mp3;base64,${base64String}`;
   return (
     <html>
       <head>
@@ -19,8 +23,11 @@ export const BaseHtml = async ({ children }: PropsWithChildren) => {
         />
         <style>{await Bun.file("public/css/style.css").text()}</style>
       </head>
+      {/* <audio id="myAudio" src={backgroundUrl} loop preload="auto"></audio> */}
 
       <body class="select-none">{children}</body>
+
+      <script>{await Bun.file("public/js/howler.core.js").text()}</script>
       <script>{await Bun.file("public/js/variables.js").text()}</script>
       <script>{await Bun.file("public/js/script.js").text()}</script>
       {/* <script>{await Bun.file("public/js/falling.js").text()}</script> */}

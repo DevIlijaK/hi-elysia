@@ -12,7 +12,7 @@ export function SideNav({ children }: PropsWithChildren) {
         top-1/2 
         border-solid border-2
       border-indigo-600"
-        style="height: 77px; width: 50px;"
+        style="height: 10vh; width: 7vh"
       >
         <img id="image123" src={children.heroImageUrl} />
       </div>

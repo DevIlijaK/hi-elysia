@@ -26,7 +26,7 @@ export const BaseHtml = async ({ children }: PropsWithChildren) => {
       {/* <audio id="myAudio" src={backgroundUrl} loop preload="auto"></audio> */}
 
       <body class="select-none">{children}</body>
-
+      <script>{await Bun.file("public/js/calculate-size.js").text()}</script>
       <script>{await Bun.file("public/js/howler.core.js").text()}</script>
       <script>{await Bun.file("public/js/variables.js").text()}</script>
       <script>{await Bun.file("public/js/script.js").text()}</script>

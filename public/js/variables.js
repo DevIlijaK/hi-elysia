@@ -4,6 +4,9 @@
 var cube = document.getElementById("proba123");
 // var footer = document.getElementById("footer");
 var elements = document.querySelectorAll(".ramp");
+
+var minRampHeight = Number.MAX_SAFE_INTEGER;
+
 /**
  * State variables
  */
@@ -29,14 +32,14 @@ var cubeWidth = cube.getBoundingClientRect().width;
 /**
  * Varijable vezane za ponasanje sistema
  */
-var jumpVelocity = 7;
+
 // var initialVelocity = 800;
-var gravity = 0.01;
+
 var maxHeight = cubeTop + cubeWidth;
 var obliqueAngle = 0;
 var step = 7;
 
-var time = 0;
+var time = 1;
 var standingElement = null;
 
 initialY = null;

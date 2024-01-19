@@ -12,15 +12,15 @@ export const blogController = new Elysia({
   .use(ctx)
   .use(cache())
   .get("/file123", ({ set }) => {
- var ambientSound = Bun.file("public/sound/ambient.wav");
+    var ambientSound = Bun.file("public/sound/ambient.wav");
     set.headers["Content-Type"] = ambientSound.type;
-    set.headers["HTML"] = 'false';
-    console.log('Ulazi ovde! ')
-   
+    set.headers["HTML"] = "false";
+    console.log("Ulazi ovde! ");
+
     return ambientSound;
   })
   .get("/posts/:page", async ({ db, params: { page } }) => {
-    const pageSize = 9;
+    const pageSize = 4;
     const blogPosts = await db
       .select()
       .from(blog)
@@ -33,11 +33,7 @@ export const blogController = new Elysia({
     blogPosts.forEach((blogPost) => {
       const getLink = `/blog/text/${blogPost.title}`;
       html.push(
-        <div
-          class="
-blogWrapper
-       "
-        >
+        <div class="blogWrapper">
           <div
             class="
             blogCart

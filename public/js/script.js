@@ -1,30 +1,43 @@
+nesto();
+
 document.addEventListener("keydown", (event) => {
   pressedKeys.add(event.key.toLowerCase());
-  elements = document.querySelectorAll(".ramp");
+
+  calculateRampHeight(elements);
+  calculateInitialJumpVelocity();
+  calculateInitialGravity();
   if (!isMoving) {
     isMoving = true;
     moveCube();
   }
 });
-document.addEventListener("click", (event) => {
-  var music = new Howl({
-    src: ["/blog/file123"],
-    autoplay: false,
-    loop: true,
-    duration: 3000,
-    format: "mp3"
-  });
-  console.log('Ulazi ovde: ', music)
-  music.play();
-});
+
+
+// htmx.addClass(cube, "hidden");
+
+// document.addEventListener("click", (event) => {
+//   var music = new Howl({
+//     src: ["/blog/file123"],
+//     autoplay: false,
+//     loop: true,
+//     duration: 3000,
+//     format: "mp3"
+//   });
+//   console.log('Ulazi ovde: ', music)
+//   music.play();
+// });
 document.addEventListener("keyup", (event) => {
   pressedKeys.delete(event.key.toLowerCase());
   // if (pressedKeys.size == 0 && !isJumping) {
   //   isMoving = false;
   // }
 });
-nesto();
-
+// document.addEventListener("click", (event) => {
+//   pressedKeys.delete(event.key.toLowerCase());
+//   // if (pressedKeys.size == 0 && !isJumping) {
+//   //   isMoving = false;
+//   // }
+// });
 function moveCube() {
   if (isMoving) {
     if (
@@ -117,12 +130,11 @@ function moveCube() {
           rect.left <= cubeLeft + cubeWidth &&
           rect.left + rect.width >= cubeLeft
         ) {
-          console.log("USLO OVDE!");
           cubeTop = rect.top - cubeHeight;
           jumpAnimation.clear();
           isJumping = false;
           maxHeight = rect.top;
-          time = 0;
+          time = 1;
           isFalling = false;
           gravitationVelocity = 0;
           standingElement = rect;

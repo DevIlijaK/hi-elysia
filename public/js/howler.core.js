@@ -10,7 +10,6 @@
 
 let nesto = function () {
   "use strict";
-  console.log('Radi i ovako ')
 
   /** Global Methods **/
   /***************************************************************************/
@@ -2826,4 +2825,4 @@ let nesto = function () {
     window.Sound = Sound;
   }
 };
-nesto()
+nesto();

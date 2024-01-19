@@ -19,8 +19,7 @@ export const blogPages = new Elysia({
       <div class="h-full flex items-center justify-center">
         <div
           id="blogGrid"
-          hx-get="/blog/posts/${$page}"
-          hx-trigger="load, from:#leftButton"
+ 
           class="blogGrid"
         ></div>
       </div>

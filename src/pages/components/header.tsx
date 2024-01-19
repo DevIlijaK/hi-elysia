@@ -4,7 +4,8 @@ export const Header = () => {
       // _="on load measure my bounds then add {
       //           margin-top: ${bounds.height}px;
       //       } to #content"
-      class="bg-blue-500 p-4 w-full z-50 h-16"
+      id="header"
+      class="bg-blue-500 p-4 w-full z-50"
     >
       <div class="container mx-auto flex items-center justify-between">
         <h1 class="text-2xl text-white font-bold">My Blog</h1>

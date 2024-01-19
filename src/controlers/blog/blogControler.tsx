@@ -19,53 +19,56 @@ export const blogController = new Elysia({
 
     return ambientSound;
   })
-  .get("/posts/:page", async ({ db, params: { page } }) => {
-    const pageSize = 4;
-    const blogPosts = await db
-      .select()
-      .from(blog)
-      .limit(pageSize)
-      .offset(pageSize * 0);
+  .post(
+    "/posts",
+    async ({ db, body: { page, offset } }) => {
+      const pageSize = offset;
+      const blogPosts = await db
+        .select()
+        .from(blog)
+        .limit(pageSize)
+        .offset(pageSize * page);
 
-    let html: Children[] = [];
-    const imageUrl = await createImageULR("public/images/platform.png", "png");
-    const divBackgound = `background-image: url('${imageUrl}')`;
-    blogPosts.forEach((blogPost) => {
-      const getLink = `/blog/text/${blogPost.title}`;
-      html.push(
-        <div class="blogWrapper">
-          <div
-            class="
-            blogCart
-            "
-            hx-get={getLink}
-            hx-target="#content"
-          >
-            <div class="mr-4 ">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCWCuRr561z0xxOwIh3uGZVZBrU_ZmFcM1uQ&usqp=CAU"
-                alt="Blog Post Image"
-                class="w-16 h-16 object-cover rounded-full"
-              />
-            </div>
-            <div>
-              <h2 class="text-xl font-semibold">{blogPost.title}</h2>
-              <p class="text-gray-500">Posted on October 31, 2023</p>
-              <p class="mt-4">123</p>
-            </div>
-          </div>
-          <div
-            class="
-            bg-cover bg-center
-            h-4 md:h-6 lg:h-8 
-            ramp rounded-b-md "
-            style={divBackgound}
-          />
-        </div>
+      let html: Children[] = [];
+      const imageUrl = await createImageULR(
+        "public/images/platform.png",
+        "png"
       );
-    });
-    return html.join(" ");
-  })
+      const divBackgound = `background-image: url('${imageUrl}')`;
+      blogPosts.forEach((blogPost) => {
+        const getLink = `/blog/text/${blogPost.title}`;
+        html.push(
+          <div class="blogWrapper" style="color:white;">
+            <div class="blogCart" hx-get={getLink} hx-target="#content">
+              <div>
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCWCuRr561z0xxOwIh3uGZVZBrU_ZmFcM1uQ&usqp=CAU"
+                  alt="Blog Post Image"
+                  class="w-16 h-16 object-cover rounded-full"
+                />
+              </div>
+              <div>
+                <h2 class="text-xl font-semibold">{blogPost.title}</h2>
+                <p class="text-gray-500">Posted on October 31, 2023</p>
+                <p class="mt-4">123</p>
+              </div>
+            </div>
+            <div
+              class="bg-cover bg-top h-4 md:h-6 lg:h-8 ramp rounded-b-md "
+              style={divBackgound}
+            />
+          </div>
+        );
+      });
+      return html.join(" ");
+    },
+    {
+      body: t.Object({
+        page: t.Numeric(),
+        offset: t.Numeric(),
+      }),
+    }
+  )
   .post(
     "/new/create",
     async ({ body: { title, mainBlogPicture, blogBody }, db, cache }) => {

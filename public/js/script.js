@@ -11,8 +11,59 @@ document.addEventListener("keydown", (event) => {
     moveCube();
   }
 });
+jumpButton = document.getElementById("jumpButton");
+leftButton = document.getElementById("leftButton");
+rightButton = document.getElementById("rightButton");
 
+  jumpButton.addEventListener("touchstart", () => {
+       console.log("Radi", event);
+       pressedKeys.add("w");
 
+       calculateRampHeight(elements);
+       calculateInitialJumpVelocity();
+       calculateInitialGravity();
+       if (!isMoving) {
+         isMoving = true;
+         moveCube();
+       }
+  });
+  jumpButton.addEventListener("touchend", () => {
+       pressedKeys.delete("w");
+
+  });
+  leftButton.addEventListener("touchstart", () => {
+       console.log("Radi", event);
+       pressedKeys.add("a");
+
+       calculateRampHeight(elements);
+       calculateInitialJumpVelocity();
+       calculateInitialGravity();
+       if (!isMoving) {
+         isMoving = true;
+         moveCube();
+       }
+  });
+  leftButton.addEventListener("touchend", () => {
+       pressedKeys.delete("a");
+
+  });
+
+  rightButton.addEventListener("touchstart", () => {
+       console.log("Radi", event);
+       pressedKeys.add("d");
+
+       calculateRampHeight(elements);
+       calculateInitialJumpVelocity();
+       calculateInitialGravity();
+       if (!isMoving) {
+         isMoving = true;
+         moveCube();
+       }
+  });
+  rightButton.addEventListener("touchend", () => {
+       pressedKeys.delete("d");
+
+  });
 // htmx.addClass(cube, "hidden");
 
 // document.addEventListener("click", (event) => {
@@ -66,6 +117,8 @@ function moveCube() {
     // }
     else {
       if (!isFalling) {
+        console.log("Falling", !isJumping && pressedKeys.has("w"))
+        console.log("jumpAnimation.has(w)", jumpAnimation.has("w"))
         if ((!isJumping && pressedKeys.has("w")) || jumpAnimation.has("w")) {
           if (!isJumping) {
             obliqueThrowConfig(90, "w");

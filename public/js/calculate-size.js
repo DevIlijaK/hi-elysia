@@ -68,6 +68,7 @@ function setElementSize() {
   setHeaderFooterHeight();
   wrappers = document.querySelectorAll(".blogWrapper");
   elements = document.querySelectorAll(".ramp");
+  buttons = document.querySelectorAll(".button");
 
   let widthPercentage = 0.7;
   let heightPercentage = 0.15;
@@ -75,13 +76,10 @@ function setElementSize() {
   if (windowWidth >= 1280) {
     widthPercentage = 0.2;
     numberOfColumns = 3;
-    console.log("Ulazi ovde!123123", numberOfColumns);
   } else if (windowWidth >= 1024) {
-    console.log("Ulazi ovde!");
     widthPercentage = 0.2;
     numberOfColumns = 3;
   } else if (windowWidth >= 768) {
-    console.log("Ulazi ovde!");
     widthPercentage = 0.3;
     numberOfColumns = 2;
   }
@@ -108,6 +106,11 @@ function setElementSize() {
     prviDivDalje.style.width = `${rampWidth * 0.4}px`;
     drugiDivDalje.style.height = `${rampHeight * 0.8}px`;
     drugiDivDalje.style.width = `${rampWidth * 0.6}px`;
+  }
+
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].style.width = `${windowWidth * 0.33}px`;
+    buttons[i].style.height= `${windowHeight * 0.1}px`;
   }
 }
 

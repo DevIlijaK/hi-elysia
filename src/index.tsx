@@ -20,6 +20,7 @@ const app = new Elysia()
 
       const backgroundUrl = `background-image: url('data:image/gif;base64,${base64String}');
     background-repeat:no-repeat;
+    background-size: cover;
     background-position:center;`;
 
       const heroImage = Bun.file("public/images/mrPlanet.png");

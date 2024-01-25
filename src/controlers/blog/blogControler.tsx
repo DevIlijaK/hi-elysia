@@ -48,9 +48,13 @@ export const blogController = new Elysia({
                 />
               </div>
               <div>
-                <h2 class="text-xl font-semibold">{blogPost.title}</h2>
-                <p class="text-gray-500">Posted on October 31, 2023</p>
-                <p class="mt-4">123</p>
+                <h2 class="font-semibold">{blogPost.title}</h2>
+                <p style="display:inline-block">
+                  Na blogu o JavaScriptu, posetitelji mogu pronaći obimne
+                  informacije o različitim aspektima ove moćne programske
+                  jezičke.
+                </p>
+                <p>Posted on October 31, 2023</p>
               </div>
             </div>
             <div

@@ -92,25 +92,49 @@ function setElementSize() {
 
     // console.log("Nesto: ", wrappers[i].style.gridTemplateColumns);
 
-    var sviDivovi = wrappers[i].getElementsByTagName("div");
-    var divoviDalje = sviDivovi[0].getElementsByTagName("div");
+    var arrayPlatformInformation = wrappers[i].getElementsByTagName("div");
+    var arrayPictureText =
+      arrayPlatformInformation[0].getElementsByTagName("div");
     // Dohvatanje drugog div-a (indeks 1 jer indeksi kreću od 0)
-    var prviDiv = sviDivovi[0];
-    var drugiDiv = sviDivovi[1];
-    prviDiv.style.height = `${rampHeight * 0.8}px`;
-    drugiDiv.style.height = `${rampHeight * 0.2}px`;
+    var blogCartInformation = arrayPlatformInformation[0];
+    var platformCart = arrayPlatformInformation[1];
+    blogCartInformation.style.height = `${rampHeight * 0.8}px`;
+    platformCart.style.height = `${rampHeight * 0.2}px`;
 
-    var prviDivDalje = divoviDalje[0];
-    var drugiDivDalje = divoviDalje[1];
-    prviDivDalje.style.height = `${rampHeight * 0.8}px`;
-    prviDivDalje.style.width = `${rampWidth * 0.4}px`;
-    drugiDivDalje.style.height = `${rampHeight * 0.8}px`;
-    drugiDivDalje.style.width = `${rampWidth * 0.6}px`;
+    var blogCartPicture = arrayPictureText[0];
+    var blogCartText = arrayPictureText[1];
+    blogCartPicture.style.height = `${rampHeight * 0.8}px`;
+    blogCartPicture.style.width = `${rampWidth * 0.4}px`;
+    blogCartText.style.height = `${rampHeight * 0.8}px`;
+    blogCartText.style.width = `${rampWidth * 0.6}px`;
+    var blogCartTextElements = blogCartText.getElementsByTagName("*");
+    // for (var j = 0; j < blogCartTextElements.length; j++) {
+    //   blogCartTextElements[j].style.color = "red"; // Primer: postavi boju teksta na crveno
+    // }
+    var blogCartTextTitle = blogCartTextElements[0];
+    var blogCartTextShortDescription = blogCartTextElements[1];
+    var blogCartTextDate = blogCartTextElements[2];
+
+    var totalHeightInformationDiv = rampHeight * 0.8;
+    console.log("Nesto je; ", totalHeightInformationDiv);
+    blogCartTextTitle.style.height = `${totalHeightInformationDiv * 0.2}px`;
+    blogCartTextShortDescription.style.height = `${
+      totalHeightInformationDiv * 0.5
+    }px`;
+    var visinaParagrafa = totalHeightInformationDiv * 0.4;
+
+    var newSize = visinaParagrafa / 4 + "px";
+    console.log("Nesto Bla", newSize);
+    blogCartTextShortDescription.style.fontSize = newSize;
+    blogCartTextShortDescription.style.lineHeight = newSize;
+    blogCartTextDate.style.height = `${totalHeightInformationDiv * 0.3}px`;
+    blogCartTextDate.style.fontSize = newSize;
+    console.log("Nakon je: ", blogCartTextDate);
   }
 
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].style.width = `${windowWidth * 0.33}px`;
-    buttons[i].style.height= `${windowHeight * 0.1}px`;
+    buttons[i].style.height = `${windowHeight * 0.1}px`;
   }
 }
 

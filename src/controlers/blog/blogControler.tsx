@@ -58,7 +58,7 @@ export const blogController = new Elysia({
               </div>
             </div>
             <div
-              class="bg-cover bg-top h-4 md:h-6 lg:h-8 ramp rounded-b-md "
+              class="bg-cover bg-top ramp rounded-b-md "
               style={divBackgound}
             />
           </div>

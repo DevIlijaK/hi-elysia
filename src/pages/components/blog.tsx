@@ -16,7 +16,7 @@ export const blogPages = new Elysia({
   .get("/list", () => {
     let pageCount = 0;
     return (
-      <div class="h-full flex items-center justify-center">
+      <div class="h-full flex items-start justify-center">
         <div
           id="blogGrid"
  

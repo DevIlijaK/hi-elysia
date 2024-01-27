@@ -9,13 +9,14 @@ export function SideNav({ children }: PropsWithChildren) {
         id="proba123"
         class="z-10 
         absolute 
-        top-1/2 
-        border-solid border-2
-      border-indigo-600"
-        style="height: 10vh; width: 7vh"
+       "
+        style="height: 10vh; width: 7vh; "
       >
         <img id="image123" src={children.heroImageUrl} />
       </div>
+      <button id="startGame" class="startGameButton">
+        Da li želite da započnete igricu?
+      </button>
       <Header />
       <div id="content" class="flex-grow">
         {children.children}

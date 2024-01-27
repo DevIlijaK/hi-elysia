@@ -7,9 +7,9 @@ function throwAnimation() {
     // console.log("Ulazi ovde!");
   }
   time += 3;
-  console.log("Ulazi ovde! ", cubeTop + cubeHeight);
-  console.log("Nestp: ", maxHeight);
-  console.log("Nestp: ", cubeTop + cubeHeight <= maxHeight);
+  // console.log("Ulazi ovde! ", cubeTop + cubeHeight);
+  // console.log("Nestp: ", maxHeight);
+  // console.log("Nestp: ", cubeTop + cubeHeight <= maxHeight);
   if (cubeTop + cubeHeight <= maxHeight) {
     maxHeight = cubeTop + cubeHeight;
   } else {

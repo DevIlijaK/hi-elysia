@@ -3,9 +3,9 @@ nesto();
 document.addEventListener("keydown", (event) => {
   pressedKeys.add(event.key.toLowerCase());
 
-  calculateRampHeight(elements);
-  calculateInitialJumpVelocity();
-  calculateInitialGravity();
+  // calculateRampHeight(elements);
+  // calculateInitialJumpVelocity();
+  // calculateInitialGravity();
   if (!isMoving) {
     isMoving = true;
     moveCube();
@@ -19,9 +19,9 @@ rightButton = document.getElementById("rightButton");
        console.log("Radi", event);
        pressedKeys.add("w");
 
-       calculateRampHeight(elements);
-       calculateInitialJumpVelocity();
-       calculateInitialGravity();
+      //  calculateRampHeight(elements);
+      //  calculateInitialJumpVelocity();
+      //  calculateInitialGravity();
        if (!isMoving) {
          isMoving = true;
          moveCube();
@@ -32,12 +32,11 @@ rightButton = document.getElementById("rightButton");
 
   });
   leftButton.addEventListener("touchstart", () => {
-       console.log("Radi", event);
        pressedKeys.add("a");
 
-       calculateRampHeight(elements);
-       calculateInitialJumpVelocity();
-       calculateInitialGravity();
+      //  calculateRampHeight(elements);
+      //  calculateInitialJumpVelocity();
+      //  calculateInitialGravity();
        if (!isMoving) {
          isMoving = true;
          moveCube();
@@ -49,12 +48,11 @@ rightButton = document.getElementById("rightButton");
   });
 
   rightButton.addEventListener("touchstart", () => {
-       console.log("Radi", event);
        pressedKeys.add("d");
 
-       calculateRampHeight(elements);
-       calculateInitialJumpVelocity();
-       calculateInitialGravity();
+      //  calculateRampHeight(elements);
+      //  calculateInitialJumpVelocity();
+      //  calculateInitialGravity();
        if (!isMoving) {
          isMoving = true;
          moveCube();
@@ -66,17 +64,20 @@ rightButton = document.getElementById("rightButton");
   });
 // htmx.addClass(cube, "hidden");
 
-// document.addEventListener("click", (event) => {
-//   var music = new Howl({
-//     src: ["/blog/file123"],
-//     autoplay: false,
-//     loop: true,
-//     duration: 3000,
-//     format: "mp3"
-//   });
-//   console.log('Ulazi ovde: ', music)
-//   music.play();
-// });
+document.addEventListener("click", (event) => {
+  // var music = new Howl({
+  //   src: ["/blog/file123"],
+  //   autoplay: false,
+  //   loop: true,
+  //   duration: 3000,
+  //   format: "mp3"
+  // });
+  // console.log('Ulazi ovde: ', music)
+  // var bodyElement = document.body;
+  // bodyElement.requestFullscreen();
+  // //isMoving = false;
+  // music.play();
+});
 document.addEventListener("keyup", (event) => {
   pressedKeys.delete(event.key.toLowerCase());
   // if (pressedKeys.size == 0 && !isJumping) {
@@ -117,8 +118,8 @@ function moveCube() {
     // }
     else {
       if (!isFalling) {
-        console.log("Falling", !isJumping && pressedKeys.has("w"))
-        console.log("jumpAnimation.has(w)", jumpAnimation.has("w"))
+        // console.log("Falling", !isJumping && pressedKeys.has("w"))
+        // console.log("jumpAnimation.has(w)", jumpAnimation.has("w"))
         if ((!isJumping && pressedKeys.has("w")) || jumpAnimation.has("w")) {
           if (!isJumping) {
             obliqueThrowConfig(90, "w");

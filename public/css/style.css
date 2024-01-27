@@ -66,8 +66,6 @@
 .blogGrid {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
-  column-gap: 9rem;
-  row-gap: 2rem;
 }
 .headerContainer {
   display: flex;
@@ -119,3 +117,21 @@ button {
 button:hover {
   background-color: #45a049;
 }
+
+
+
+
+
+
+
+.startGameButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+

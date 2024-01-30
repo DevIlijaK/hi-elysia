@@ -1,11 +1,31 @@
 var windowWidth = window.innerWidth;
 var windowHeight = window.innerHeight;
-// Dodavanje event listenera za promene dimenzija prozora
+console.log("Height 1 je: ", windowHeight);
+console.log("Width 1 je: ", windowWidth);
+var header = document.getElementById("header");
+var footer = document.getElementById("footer");
+var heroLeft = null;
+var heroTop = null;
+var heroHeight = null;
+var heroWidth = null;
+var footerTop = null;
+
+var maxHeight = null;
+/**
+ * Postavlja veličinu dugmića
+ */
+var buttons = document.querySelectorAll(".button");
+setControllsButtonSize(buttons);
+setHeaderFooterHeight();
 
 var startGameButton = document.getElementById("startGame");
 startGameButton.onclick = () => {
   document.body.requestFullscreen();
-  cube.style.display = "";
+
+  console.log("height je: ", window.screen.height);
+  console.log("width je: ", window.screen.width);
+  windowWidth = window.screen.width;
+  windowHeight = window.screen.height;
   loadElements();
   startGameButton.style.display = "none";
 };
@@ -17,8 +37,6 @@ var gravity = 0.01;
 // window.addEventListener("load");
 
 function loadElements() {
-  sirinaProzora = window.innerWidth;
-  visinaProzora = window.innerHeight;
   grid = document.getElementById("blogGrid");
   var numberOfColumns = 1;
   if (windowWidth >= 1024) {
@@ -27,19 +45,14 @@ function loadElements() {
     numberOfColumns = 2;
   }
   htmx
-    .ajax(
-      "POST",
-      "/blog/posts",
-
-      {
-        target: "#blogGrid",
-        swap: "innerHTML",
-        values: {
-          page: 0,
-          offset: 3 * numberOfColumns,
-        },
-      }
-    )
+    .ajax("POST", "/blog/posts", {
+      target: "#blogGrid",
+      swap: "innerHTML",
+      values: {
+        page: 0,
+        offset: 3 * numberOfColumns,
+      },
+    })
     .then(() => {
       setElementSize();
     });
@@ -51,10 +64,8 @@ var grid = document.getElementById("blogGrid");
 function setElementSize() {
   windowWidth = window.innerWidth;
   windowHeight = window.innerHeight;
-  setHeaderFooterHeight();
   wrappers = document.querySelectorAll(".blogWrapper");
   elements = document.querySelectorAll(".ramp");
-  buttons = document.querySelectorAll(".button");
 
   let widthPercentage = 0.7;
   let heightPercentage = 0.2;
@@ -82,9 +93,51 @@ function setElementSize() {
   grid.style.gridTemplateColumns = `repeat(${numberOfColumns}, minmax(0, 1fr))`;
   grid.style.columnGap = `${windowWidth * columnGapPercentage}px`;
   grid.style.rowGap = `${windowHeight * rowGapPercentage}px`;
+  setBlogCartDymensions(
+    widthPercentage,
+    heightPercentage,
+    shortDescriptionFontSize,
+    shortDescriptionLineHeight
+  );
+  setHeaderFooterHeight();
+  setControllsButtonSize(buttons);
+  setHeroDymension();
+  /**
+   * Varijable za skok
+   */
+  minRampHeight = windowHeight * 0.25;
+  jumpVelocity = minRampHeight * 0.04;
+  gravity = minRampHeight * 0.00009;
+}
+
+function setHeaderFooterHeight() {
+  console.log("Height je: ", windowHeight);
+  console.log("Height je: ", windowHeight * 0.1);
+  header.style.height = `${windowHeight * 0.1}px`;
+  footer.style.height = `${windowHeight * 0.1}px`;
+}
+function setHeroDymension() {
+  heroHeight = windowHeight * 0.1;
+  heroWidth = windowWidth * 0.07;
+  hero.style.height = `${heroHeight}px`;
+  hero.style.width = `${heroWidth}px`;
+  heroLeft = hero.getBoundingClientRect().left;
+  heroTop = hero.getBoundingClientRect().top;
+  maxHeight = heroTop + heroHeight;
+  hero.style.display = "";
+}
+function setBlogCartDymensions(
+  widthPercentage,
+  heightPercentage,
+  shortDescriptionFontSize
+) {
   for (let i = 0; i < wrappers.length; i++) {
+    console.log("Height percentage: ", heightPercentage);
+    console.log("window height: ", windowHeight);
+
     let rampWidth = windowWidth * widthPercentage;
     let rampHeight = windowHeight * heightPercentage;
+    console.log("window height: ", rampHeight);
     wrappers[i].style.width = `${rampWidth}px`;
     wrappers[i].style.height = `${rampHeight}px`;
 
@@ -115,30 +168,15 @@ function setElementSize() {
     // var visinaParagrafa = totalHeightInformationDiv * 0.4;
 
     blogCartTextShortDescription.style.fontSize = shortDescriptionFontSize;
-    // blogCartTextShortDescription.style.fontSize =
-    //   shortDescriptionFontSize + "px";
-    // blogCartTextShortDescription.style.lineHeight =
-    //   shortDescriptionLineHeight + "px";
+
     blogCartTextDate.style.height = `${totalHeightInformationDiv * 0.3}px`;
     // blogCartTextDate.style.fontSize = newSize;
-
-    /**
-     * Varijable za skok
-     */
-    minRampHeight = windowHeight * 0.25;
-    jumpVelocity = minRampHeight * 0.04;
-    gravity = minRampHeight * 0.00009;
   }
-
+}
+function setControllsButtonSize(buttons) {
+  // Dodavanje event listenera za promene dimenzija prozora
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].style.width = `${windowWidth * 0.33}px`;
     buttons[i].style.height = `${windowHeight * 0.1}px`;
   }
-}
-
-function setHeaderFooterHeight() {
-  header = document.getElementById("header");
-  footer = document.getElementById("footer");
-  header.style.height = `${windowHeight * 0.1}px`;
-  footer.style.height = `${windowHeight * 0.1}px`;
 }

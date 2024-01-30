@@ -1,5 +1,7 @@
 nesto();
 
+
+
 document.addEventListener("keydown", (event) => {
   pressedKeys.add(event.key.toLowerCase());
 
@@ -8,61 +10,58 @@ document.addEventListener("keydown", (event) => {
   // calculateInitialGravity();
   if (!isMoving) {
     isMoving = true;
-    moveCube();
+    moveHero();
   }
 });
 jumpButton = document.getElementById("jumpButton");
 leftButton = document.getElementById("leftButton");
 rightButton = document.getElementById("rightButton");
 
-  jumpButton.addEventListener("touchstart", () => {
-       console.log("Radi", event);
-       pressedKeys.add("w");
+jumpButton.addEventListener("touchstart", () => {
+  console.log("Radi", event);
+  pressedKeys.add("w");
 
-      //  calculateRampHeight(elements);
-      //  calculateInitialJumpVelocity();
-      //  calculateInitialGravity();
-       if (!isMoving) {
-         isMoving = true;
-         moveCube();
-       }
-  });
-  jumpButton.addEventListener("touchend", () => {
-       pressedKeys.delete("w");
+  //  calculateRampHeight(elements);
+  //  calculateInitialJumpVelocity();
+  //  calculateInitialGravity();
+  if (!isMoving) {
+    isMoving = true;
+    moveHero();
+  }
+});
+jumpButton.addEventListener("touchend", () => {
+  pressedKeys.delete("w");
+});
+leftButton.addEventListener("touchstart", () => {
+  pressedKeys.add("a");
 
-  });
-  leftButton.addEventListener("touchstart", () => {
-       pressedKeys.add("a");
+  //  calculateRampHeight(elements);
+  //  calculateInitialJumpVelocity();
+  //  calculateInitialGravity();
+  if (!isMoving) {
+    isMoving = true;
+    moveHero();
+  }
+});
+leftButton.addEventListener("touchend", () => {
+  pressedKeys.delete("a");
+});
 
-      //  calculateRampHeight(elements);
-      //  calculateInitialJumpVelocity();
-      //  calculateInitialGravity();
-       if (!isMoving) {
-         isMoving = true;
-         moveCube();
-       }
-  });
-  leftButton.addEventListener("touchend", () => {
-       pressedKeys.delete("a");
+rightButton.addEventListener("touchstart", () => {
+  pressedKeys.add("d");
 
-  });
-
-  rightButton.addEventListener("touchstart", () => {
-       pressedKeys.add("d");
-
-      //  calculateRampHeight(elements);
-      //  calculateInitialJumpVelocity();
-      //  calculateInitialGravity();
-       if (!isMoving) {
-         isMoving = true;
-         moveCube();
-       }
-  });
-  rightButton.addEventListener("touchend", () => {
-       pressedKeys.delete("d");
-
-  });
-// htmx.addClass(cube, "hidden");
+  //  calculateRampHeight(elements);
+  //  calculateInitialJumpVelocity();
+  //  calculateInitialGravity();
+  if (!isMoving) {
+    isMoving = true;
+    moveHero();
+  }
+});
+rightButton.addEventListener("touchend", () => {
+  pressedKeys.delete("d");
+});
+// htmx.addClass(hero, "hidden");
 
 document.addEventListener("click", (event) => {
   // var music = new Howl({
@@ -90,7 +89,7 @@ document.addEventListener("keyup", (event) => {
 //   //   isMoving = false;
 //   // }
 // });
-function moveCube() {
+function moveHero() {
   if (isMoving) {
     if (
       (pressedKeys.has("a") && pressedKeys.has("w")) ||
@@ -127,12 +126,12 @@ function moveCube() {
           throwAnimation();
         } else {
           if (pressedKeys.has("d")) {
-            cubeLeft += step;
+            heroLeft += step;
           } else if (pressedKeys.has("a")) {
-            cubeLeft -= step;
+            heroLeft -= step;
           }
           //  else if (pressedKeys.has("s")) {
-          // cubeTop += step;
+          // heroTop += step;
           // }
         }
       }
@@ -145,46 +144,46 @@ function moveCube() {
       for (let i = 0; i < elements.length; i++) {
         let rect = elements[i].getBoundingClientRect();
         // if (elements[i].id == "footer") {
-        //   console.log(
-        //     "1 cubeTop + cubeHeight > rect.top",
-        //     cubeTop + cubeHeight > rect.top
-        //   );
-        //   console.log("maxHeight <= rect.top", maxHeight <= rect.top);
-        //   console.log(
-        //     "rect.left <= cubeLeft + cubeWidth ",
-        //     rect.left <= cubeLeft + cubeWidth
-        //   );
-        //   console.log(
-        //     "rect.left + rect.width >= cubeLeft",
-        //     rect.left + rect.width >= cubeLeft
-        //   );
-        //   console.log("cubeTop", cubeTop);
-        //   console.log("rect top: ", rect.top);
-
-        //   console.log("cubeTop < rect.top", cubeTop < rect.top);
-        // }
-
         // console.log(
-        //   "1 cubeTop + cubeHeight > rect.top",
-        //   cubeTop + cubeHeight > rect.top
+        //   "heroTop + heroHeight > rect.top",
+        //   heroTop + heroHeight > rect.top
         // );
         // console.log("maxHeight <= rect.top", maxHeight <= rect.top);
         // console.log(
-        //   "rect.left <= cubeLeft + cubeWidth ",
-        //   rect.left <= cubeLeft + cubeWidth
+        //   "rect.left <= heroLeft + heroWidth ",
+        //   rect.left <= heroLeft + heroWidth
         // );
         // console.log(
-        //   "rect.left + rect.width >= cubeLeft",
-        //   rect.left + rect.width >= cubeLeft
+        //   "rect.left + rect.width >= heroLeft",
+        //   rect.left + rect.width >= heroLeft
+        // );
+        // console.log("heroTop", heroTop);
+        // console.log("rect top: ", rect.top);
+
+        // console.log("heroTop < rect.top", heroTop < rect.top);
+        // }
+
+        // console.log(
+        //   "1 heroTop + heroHeight > rect.top",
+        //   heroTop + heroHeight > rect.top
+        // );
+        // console.log("maxHeight <= rect.top", maxHeight <= rect.top);
+        // console.log(
+        //   "rect.left <= heroLeft + heroWidth ",
+        //   rect.left <= heroLeft + heroWidth
+        // );
+        // console.log(
+        //   "rect.left + rect.width >= heroLeft",
+        //   rect.left + rect.width >= heroLeft
         // );
         if (
-          cubeTop + cubeHeight > rect.top &&
-          cubeTop < rect.top &&
+          heroTop + heroHeight > rect.top &&
+          heroTop < rect.top &&
           maxHeight <= rect.top &&
-          rect.left <= cubeLeft + cubeWidth &&
-          rect.left + rect.width >= cubeLeft
+          rect.left <= heroLeft + heroWidth &&
+          rect.left + rect.width >= heroLeft
         ) {
-          cubeTop = rect.top - cubeHeight;
+          heroTop = rect.top - heroHeight;
           jumpAnimation.clear();
           isJumping = false;
           maxHeight = rect.top;
@@ -205,8 +204,8 @@ function moveCube() {
     }
     if (standingElement) {
       if (
-        standingElement.left <= cubeLeft + cubeWidth &&
-        standingElement.left + standingElement.width >= cubeLeft
+        standingElement.left <= heroLeft + heroWidth &&
+        standingElement.left + standingElement.width >= heroLeft
       ) {
         isFalling = false;
       } else {
@@ -215,19 +214,19 @@ function moveCube() {
     } else {
       isFalling = true;
     }
-    if (cubeLeft <= 0 || cubeLeft + cubeWidth >= window.innerWidth) {
-      cubeLeft <= 0
-        ? (cubeLeft = 0)
-        : (cubeLeft = window.innerWidth - cubeWidth);
+    if (heroLeft <= 0 || heroLeft + heroWidth >= window.innerWidth) {
+      heroLeft <= 0
+        ? (heroLeft = 0)
+        : (heroLeft = window.innerWidth - heroWidth);
       isTouchingSides = true;
     } else {
       isTouchingSides = false;
     }
 
     // console.log(isTouchingSides);
-    cube.style.top = `${cubeTop}px`;
-    cube.style.left = `${cubeLeft}px`;
-    requestAnimationFrame(moveCube);
+    hero.style.top = `${heroTop}px`;
+    hero.style.left = `${heroLeft}px`;
+    requestAnimationFrame(moveHero);
   }
 }
 
@@ -235,6 +234,6 @@ function moveDiagonaly(degree) {
   const angle = (degree * Math.PI) / 180;
   const deltaX = step * Math.cos(angle);
   const deltaY = -step * Math.sin(angle);
-  cubeLeft += deltaX;
-  cubeTop += deltaY;
+  heroLeft += deltaX;
+  heroTop += deltaY;
 }

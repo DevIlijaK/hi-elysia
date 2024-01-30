@@ -24,9 +24,14 @@ const app = new Elysia()
     background-position:center;`;
 
       const heroImage = Bun.file("public/images/mrPlanet.png");
-      const heroImageUrl = `data:image/png;base64,${Buffer.from(
+      const heroImageUrl = `background-image: url('data:image/gif;base64,${Buffer.from(
         await heroImage.arrayBuffer()
-      ).toString("base64")}`;
+      ).toString("base64")}'); 
+       background-repeat:no-repeat;
+    background-size: cover;
+    background-position:center;
+      
+      display:none;`;
       if (set.status != 302) {
         const children: Children = response as Children;
         if (headers["hx-request"] == "true") {

@@ -1,7 +1,7 @@
 /**
  * HTML element variables
  */
-var cube = document.getElementById("proba123");
+var hero = document.getElementById("hero");
 // var footer = document.getElementById("footer");
 var elements = document.querySelectorAll(".ramp");
 
@@ -24,10 +24,10 @@ var jumpAnimation = new Set();
 /**
  * Koordinate elemenata
  */
-var cubeLeft = cube.getBoundingClientRect().left;
-var cubeTop = cube.getBoundingClientRect().top;
-var cubeHeight = cube.getBoundingClientRect().height;
-var cubeWidth = cube.getBoundingClientRect().width;
+// var heroLeft = hero.getBoundingClientRect().left;
+// var heroTop = hero.getBoundingClientRect().top;
+// var heroHeight = hero.getBoundingClientRect().height;
+// var heroWidth = hero.getBoundingClientRect().width;
 // var footerTop = footer.getBoundingClientRect().top;
 /**
  * Varijable vezane za ponasanje sistema
@@ -35,9 +35,9 @@ var cubeWidth = cube.getBoundingClientRect().width;
 
 // var initialVelocity = 800;
 
-var maxHeight = cubeTop + cubeWidth;
+// var maxHeight = heroTop + heroWidth;
 var obliqueAngle = 0;
-var step = 7;
+var step = 10;
 
 var time = 1;
 var standingElement = null;

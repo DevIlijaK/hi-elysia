@@ -17,11 +17,7 @@ export const blogPages = new Elysia({
     let pageCount = 0;
     return (
       <div class="h-full flex items-start justify-center">
-        <div
-          id="blogGrid"
- 
-          class="blogGrid"
-        ></div>
+        <div id="blogGrid" class="blogGrid"></div>
       </div>
     );
   })
@@ -39,28 +35,20 @@ export const blogPages = new Elysia({
 
     if (!selectedBlog) {
       selectedBlog = (
-        await db.select().from(blog).where(eq(blog.title, params.title))
+        await db.select().from(blog).where(eq(blog.searchTitle, params.title))
       )[0];
       cache.set(selectedBlog.title, selectedBlog);
     }
-
     const pathToMainBlogPicture = selectedBlog.pathToMainBlogPicture;
-
     const file = Bun.file(pathToMainBlogPicture);
 
-    const bufferedArray = await file.arrayBuffer();
-
-    const bytes = new Uint8Array(bufferedArray);
-
-    const binaryString = String.fromCharCode.apply(null, bytes);
-
-    const base64String = btoa(binaryString);
-
-    const dataUrl = `data:${selectedBlog.typeOfMainBlogPicture};base64,${base64String}`;
-
+    const dataUrl = `data:image/png;base64,${Buffer.from(
+      await file.arrayBuffer()
+    ).toString("base64")}`;
+    console.log("Stiglo");
     return (
-      <div class="bg-white p-4 rounded shadow-lg">
-        {selectedBlog.titleHtml}
+      <div class="blogTextContainer">
+        <h1>{selectedBlog.title}</h1>
         <div style="aspect-ratio:3.2/1;" class="mt-6 mb-6 relative bg-blue-300">
           <div
             id="imageDiv"

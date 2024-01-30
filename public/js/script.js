@@ -1,13 +1,8 @@
 nesto();
 
-
-
 document.addEventListener("keydown", (event) => {
   pressedKeys.add(event.key.toLowerCase());
 
-  // calculateRampHeight(elements);
-  // calculateInitialJumpVelocity();
-  // calculateInitialGravity();
   if (!isMoving) {
     isMoving = true;
     moveHero();
@@ -207,6 +202,10 @@ function moveHero() {
         standingElement.left <= heroLeft + heroWidth &&
         standingElement.left + standingElement.width >= heroLeft
       ) {
+        if (pressedKeys.has("k")) {
+          enterBlog(standingElement);
+          isMoving = false;
+        }
         isFalling = false;
       } else {
         isFalling = true;
@@ -236,4 +235,20 @@ function moveDiagonaly(degree) {
   const deltaY = -step * Math.sin(angle);
   heroLeft += deltaX;
   heroTop += deltaY;
+}
+
+function enterBlog(element) {
+  //  htmx
+  //   .ajax("POST", "/blog/posts", {
+  //     target: "#blogGrid",
+  //     swap: "innerHTML",
+  //     values: {
+  //       page: 0,
+  //       offset: 3 * numberOfColumns,
+  //     },
+  //   })
+  //   .then(() => {
+  //     setElementSize();
+  //   });
+  console.log("Element je: ", element);
 }

@@ -9,7 +9,11 @@ var heroTop = null;
 var heroHeight = null;
 var heroWidth = null;
 var footerTop = null;
-
+var step = null;
+/**
+ * Ovo mora da se refakotrise
+ */
+var cartPlatformArray = [];
 var maxHeight = null;
 /**
  * Postavlja veličinu dugmića
@@ -22,8 +26,6 @@ var startGameButton = document.getElementById("startGame");
 startGameButton.onclick = () => {
   document.body.requestFullscreen();
 
-  console.log("height je: ", window.screen.height);
-  console.log("width je: ", window.screen.width);
   windowWidth = window.screen.width;
   windowHeight = window.screen.height;
   loadElements();
@@ -107,18 +109,18 @@ function setElementSize() {
    */
   minRampHeight = windowHeight * 0.25;
   jumpVelocity = minRampHeight * 0.04;
-  gravity = minRampHeight * 0.00009;
+  gravity = minRampHeight * 0.00005;
+
+  step = windowWidth * 0.005;
 }
 
 function setHeaderFooterHeight() {
-  console.log("Height je: ", windowHeight);
-  console.log("Height je: ", windowHeight * 0.1);
   header.style.height = `${windowHeight * 0.1}px`;
   footer.style.height = `${windowHeight * 0.1}px`;
 }
 function setHeroDymension() {
   heroHeight = windowHeight * 0.1;
-  heroWidth = windowWidth * 0.07;
+  heroWidth = windowWidth * 0.05;
   hero.style.height = `${heroHeight}px`;
   hero.style.width = `${heroWidth}px`;
   heroLeft = hero.getBoundingClientRect().left;
@@ -132,12 +134,8 @@ function setBlogCartDymensions(
   shortDescriptionFontSize
 ) {
   for (let i = 0; i < wrappers.length; i++) {
-    console.log("Height percentage: ", heightPercentage);
-    console.log("window height: ", windowHeight);
-
     let rampWidth = windowWidth * widthPercentage;
     let rampHeight = windowHeight * heightPercentage;
-    console.log("window height: ", rampHeight);
     wrappers[i].style.width = `${rampWidth}px`;
     wrappers[i].style.height = `${rampHeight}px`;
 

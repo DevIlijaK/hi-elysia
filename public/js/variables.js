@@ -37,7 +37,6 @@ var jumpAnimation = new Set();
 
 // var maxHeight = heroTop + heroWidth;
 var obliqueAngle = 0;
-var step = 10;
 
 var time = 1;
 var standingElement = null;

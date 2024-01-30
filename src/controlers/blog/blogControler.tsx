@@ -36,7 +36,8 @@ export const blogController = new Elysia({
       );
       const divBackgound = `background-image: url('${imageUrl}')`;
       blogPosts.forEach((blogPost) => {
-        const getLink = `/blog/text/${blogPost.title}`;
+        console.log("Naslov je: ", blogPost.title);
+        const getLink = `/blog/text/${blogPost.searchTitle}`;
         html.push(
           <div class="blogWrapper" style="color:white;">
             <div class="blogCart" hx-get={getLink} hx-target="#content">
@@ -78,8 +79,9 @@ export const blogController = new Elysia({
     async ({ body: { title, mainBlogPicture, blogBody }, db, cache }) => {
       console.log("Ulazi ovde!");
       const imageType = extractFileNameFromPath(mainBlogPicture.type);
-
-      const imageName = extractContentFromHtml(title);
+      const searchTitle = title.split(' ').join('');
+      // console.log("Proslo ovo", selectedBlog);
+      // const imageName = extractContentFromHtml(title);
       /**
        * Ovaj path mora da se promeni kada ode na produkciju
        */
@@ -89,7 +91,7 @@ export const blogController = new Elysia({
         "/",
         "app",
         "images",
-        `${imageName}.${imageType}`
+        `${title}.${imageType}`
       );
       const nesto = await Bun.write(
         pathToMainBlogPicture,
@@ -97,8 +99,8 @@ export const blogController = new Elysia({
       );
       // await db.transaction(async (tx) => {
       const newBlog = {
-        title: imageName,
-        titleHtml: title,
+        title,
+        searchTitle,
         blogBody,
         author: "ilija",
         url: "ilija",
@@ -133,15 +135,15 @@ function extractFileNameFromPath(filePath: string): string {
     return filePath;
   }
 }
-function extractContentFromHtml(htmlString: string): string {
-  const startIdx = htmlString.indexOf(">") + 1;
-  const endIdx = htmlString.indexOf("<", startIdx);
+// function extractContentFromHtml(htmlString: string): string {
+//   const startIdx = htmlString.indexOf(">") + 1;
+//   const endIdx = htmlString.indexOf("<", startIdx);
 
-  if (startIdx !== -1 && endIdx !== -1 && startIdx < endIdx) {
-    // Extract content between the first '>' and second '<'
-    return htmlString.substring(startIdx, endIdx).trim();
-  }
-  throw new Error(
-    "Content between tags not found in the provided HTML string."
-  );
-}
+//   if (startIdx !== -1 && endIdx !== -1 && startIdx < endIdx) {
+//     // Extract content between the first '>' and second '<'
+//     return htmlString.substring(startIdx, endIdx).trim();
+//   }
+//   throw new Error(
+//     "Content between tags not found in the provided HTML string."
+//   );
+// }

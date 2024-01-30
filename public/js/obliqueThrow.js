@@ -6,7 +6,7 @@ function throwAnimation() {
     heroLeft = Math.round(initialX - initialVelocityX * time);
     // console.log("Ulazi ovde!");
   }
-  time += 3;
+  time += 1.5;
   // console.log("Ulazi ovde! ", heroTop + heroHeight);
   // console.log("Nestp: ", maxHeight);
   // console.log("Nestp: ", heroTop + heroHeight <= maxHeight);

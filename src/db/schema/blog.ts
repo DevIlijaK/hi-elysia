@@ -11,7 +11,7 @@ export const blog = sqliteTable(
   {
     id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
     title: text("title").notNull().unique(),
-    titleHtml: text("title_html").notNull().unique(),
+    searchTitle: text("search_title").notNull().unique(),
     blogBody: text("content").notNull(),
     author: text("author").notNull(),
     publicationDate: integer("publication_date", { mode: "timestamp" }),
@@ -31,7 +31,7 @@ export const blog = sqliteTable(
   },
   (table) => {
     return {
-      titleInx: index("title_index").on(table.title),
+      titleInx: index("title_index").on(table.searchTitle),
       authorInx: index("author_index").on(table.author),
     };
   }

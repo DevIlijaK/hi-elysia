@@ -3,7 +3,7 @@
  */
 var hero = document.getElementById("hero");
 // var footer = document.getElementById("footer");
-var elements = document.querySelectorAll(".ramp");
+// var elements = document.querySelectorAll(".ramp");
 
 var minRampHeight = Number.MAX_SAFE_INTEGER;
 

@@ -136,8 +136,13 @@ function moveHero() {
         gravityFall();
       }
 
-      for (let i = 0; i < elements.length; i++) {
-        let rect = elements[i].getBoundingClientRect();
+      for (let i = 0; i < platforms.length; i++) {
+        let rect = null;
+        if (platforms[i].querySelector(".ramp")) {
+          rect = platforms[i].querySelector(".ramp").getBoundingClientRect();
+        } else {
+          rect = platforms[i].getBoundingClientRect();
+        }
         // if (elements[i].id == "footer") {
         // console.log(
         //   "heroTop + heroHeight > rect.top",
@@ -185,7 +190,7 @@ function moveHero() {
           time = 1;
           isFalling = false;
           gravitationVelocity = 0;
-          standingElement = rect;
+          standingElement = { dimension: rect, platform: platforms[i] };
         } else {
           isFalling = true;
         }
@@ -199,8 +204,9 @@ function moveHero() {
     }
     if (standingElement) {
       if (
-        standingElement.left <= heroLeft + heroWidth &&
-        standingElement.left + standingElement.width >= heroLeft
+        standingElement.dimension.left <= heroLeft + heroWidth &&
+        standingElement.dimension.left + standingElement.dimension.width >=
+          heroLeft
       ) {
         if (pressedKeys.has("k")) {
           enterBlog(standingElement);
@@ -221,7 +227,13 @@ function moveHero() {
     } else {
       isTouchingSides = false;
     }
-
+    if (pressedKeys.has("j")) {
+      blogContainer.remove();
+      const content = document.getElementById("content");
+      content.append(grid);
+      gameWrapper.style.backgroundImage = gitBackgroundImageValue;
+      isMoving = false;
+    }
     // console.log(isTouchingSides);
     hero.style.top = `${heroTop}px`;
     hero.style.left = `${heroLeft}px`;
@@ -238,17 +250,26 @@ function moveDiagonaly(degree) {
 }
 
 function enterBlog(element) {
-  //  htmx
-  //   .ajax("POST", "/blog/posts", {
-  //     target: "#blogGrid",
-  //     swap: "innerHTML",
-  //     values: {
-  //       page: 0,
-  //       offset: 3 * numberOfColumns,
-  //     },
-  //   })
-  //   .then(() => {
-  //     setElementSize();
-  //   });
-  console.log("Element je: ", element);
+  const url = element.platform
+    .querySelector(".blogCart")
+    .getAttribute("hx-get");
+  htmx
+    .ajax("GET", url, {
+      target: "#content",
+      swap: "innerHTML",
+    })
+    .then(() => enterReadingBlogPage());
+  console.log(
+    "Element je: ",
+    element.platform.querySelector(".blogCart").getAttribute("hx-get")
+  );
+}
+function enterReadingBlogPage() {
+  standingElement = null;
+  blogContainer = document.querySelector(".blogTextContainer");
+  console.log("Element je: ", blogContainer);
+  blogContainer.style.maxHeight = `${windowHeight * 0.8}px`;
+  console.log("Ulazi ovde ");
+  gameWrapper.style.backgroundImage = staticBackgroundImageValue;
+  // document.getElementById("content").append(grid);
 }

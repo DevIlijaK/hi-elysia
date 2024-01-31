@@ -4,7 +4,11 @@ import { Header } from "./header";
 export function SideNav({ children }: PropsWithChildren) {
   console.log("Children je: ", children);
   return (
-    <div class="relative flex flex-col h-screen" style={children.backgroundUrl}>
+    <div
+      id="gameWrapper"
+      class="relative flex flex-col h-screen"
+      style={children.backgroundGifUrl}
+    >
       {/* <div  style={children.heroImageUrl}></div> */}
       <img
         id="hero"
@@ -20,6 +24,7 @@ export function SideNav({ children }: PropsWithChildren) {
         {children.children}
       </div>
       <Footer />
+      <div id="staticImage" style={children.backgroundStaticUrl}></div>
     </div>
   );
 }

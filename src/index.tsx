@@ -12,21 +12,32 @@ const app = new Elysia()
 
   .onAfterHandle(async ({ response, set, headers, cookie }) => {
     if (!set.headers["HTML"]) {
-      const file = Bun.file("public/images/proba.gif");
-      console.log("Prolazi ovo");
-      const arrbuf = await file.arrayBuffer();
-      const buffer = Buffer.from(arrbuf);
-      const base64String = buffer.toString("base64");
+      const backgroundGif = Bun.file("public/images/pozadina.gif");
 
-      const backgroundUrl = `background-image: url('data:image/gif;base64,${base64String}');
-    background-repeat:no-repeat;
-    background-size: cover;
-    background-position:center;`;
+      const backgroundGifUrl = `
+      background-image: url('data:image/gif;base64,${Buffer.from(
+        await backgroundGif.arrayBuffer()
+      ).toString("base64")}');
+      background-repeat:no-repeat;
+      background-size: cover;
+      background-position:center;
+      `;
+
+      const backgroundStatic = Bun.file("public/images/pozadinaStatic.jpg");
+
+      const backgroundStaticUrl = `
+      background-image: url('data:image/gif;base64,${Buffer.from(
+        await backgroundStatic.arrayBuffer()
+      ).toString("base64")}');
+      display:none;
+      `;
 
       const heroImage = Bun.file("public/images/mrPlanet.png");
-      const heroImageUrl = `data:image/png;base64,${Buffer.from(
+      const heroImageUrl = `
+      data:image/png;base64,${Buffer.from(
         await heroImage.arrayBuffer()
-      ).toString("base64")}`;
+      ).toString("base64")}
+      `;
       if (set.status != 302) {
         const children: Children = response as Children;
         if (headers["hx-request"] == "true") {
@@ -35,7 +46,14 @@ const app = new Elysia()
           set.headers["Content-Type"] = "text/html; charset=utf8";
           return (
             <BaseHtml>
-              <SideNav>{{ children, backgroundUrl, heroImageUrl }}</SideNav>
+              <SideNav>
+                {{
+                  children,
+                  backgroundGifUrl,
+                  heroImageUrl,
+                  backgroundStaticUrl,
+                }}
+              </SideNav>
             </BaseHtml>
           );
         }

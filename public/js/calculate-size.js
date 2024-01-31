@@ -1,9 +1,9 @@
 var windowWidth = window.innerWidth;
 var windowHeight = window.innerHeight;
-console.log("Height 1 je: ", windowHeight);
-console.log("Width 1 je: ", windowWidth);
 var header = document.getElementById("header");
 var footer = document.getElementById("footer");
+var blogContainer = null;
+var platforms = [footer];
 var heroLeft = null;
 var heroTop = null;
 var heroHeight = null;
@@ -19,6 +19,22 @@ var maxHeight = null;
  * Postavlja veličinu dugmića
  */
 var buttons = document.querySelectorAll(".button");
+var staticImageElement = document.getElementById("staticImage");
+var gameWrapper = document.getElementById("gameWrapper");
+
+var staticBackgroundImageValue = window
+  .getComputedStyle(staticImageElement)
+  .getPropertyValue("background-image");
+var gitBackgroundImageValue = window
+  .getComputedStyle(gameWrapper)
+  .getPropertyValue("background-image");
+
+var gifImageElement = document.getElementById("staticImage");
+
+var staticbackgroundImageValue = window
+  .getComputedStyle(staticImageElement)
+  .getPropertyValue("background-image");
+
 setControllsButtonSize(buttons);
 setHeaderFooterHeight();
 
@@ -67,8 +83,8 @@ function setElementSize() {
   windowWidth = window.innerWidth;
   windowHeight = window.innerHeight;
   wrappers = document.querySelectorAll(".blogWrapper");
-  elements = document.querySelectorAll(".ramp");
-
+  // elements = wrappers.querySelectorAll(".ramp");
+  platforms = [...platforms, ...wrappers];
   let widthPercentage = 0.7;
   let heightPercentage = 0.2;
   let columnGapPercentage = 0.1;

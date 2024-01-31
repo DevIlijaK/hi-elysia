@@ -47,7 +47,7 @@ export const blogPages = new Elysia({
     ).toString("base64")}`;
     console.log("Stiglo");
     return (
-      <div class="blogTextContainer">
+      <div class="blogTextContainer p-4" style=" overflow-x: hidden;">
         <h1>{selectedBlog.title}</h1>
         <div style="aspect-ratio:3.2/1;" class="mt-6 mb-6 relative bg-blue-300">
           <div
@@ -70,7 +70,7 @@ export const blogPages = new Elysia({
           class="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
           placeholder="Enter your blog body here..."
         > */}
-        <div class="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500">
+        <div class="w-full">
           <pre style="white-space: pre-wrap;">{selectedBlog.blogBody}</pre>
         </div>
         {/* </textarea> */}

@@ -1,10 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&display=swap");
 
 body {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
 }
-
 
 #proba {
   border: 1px solid black;
@@ -126,12 +124,6 @@ button:hover {
   background-color: #45a049;
 }
 
-
-
-
-
-
-
 .startGameButton {
   position: absolute;
   top: 50%;
@@ -144,4 +136,21 @@ button:hover {
 
 .blogTextContainer {
   color: white;
+}
+::-webkit-scrollbar {
+  width: 50px;
+  position: relative;
+}
+/* ::-webkit-scrollbar-track {
+  background: #d1e5ff;
+} */
+::-webkit-scrollbar-thumb {
+  /* background: linear-gradient(#642bff, #ff22e6); */
+  border: 3px solid white;
+  border-radius: 100vw;
+  padding: 5px;
+  /* background-image: url("https://media.istockphoto.com/id/1470130937/photo/young-plants-growing-in-a-crack-on-a-concrete-footpath-conquering-adversity-concept.webp?b=1&s=170667a&w=0&k=20&c=IRaA17rmaWOJkmjU_KD29jZo4E6ZtG0niRpIXQN17fc=");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; */
 }

@@ -10,21 +10,6 @@ export const Footer = () => {
       <button id="rightButton" class="button">
         Desno
       </button>
-      <button id="rightButton" class="button">
-        Desno
-      </button>
-      <button id="rightButton" class="button">
-        Desno
-      </button>
-      <button id="rightButton" class="button">
-        Desno
-      </button>
-      <button id="rightButton" class="button">
-        Desno
-      </button>
-      <button id="rightButton" class="button">
-        Desno
-      </button>
     </footer>
   );
 };

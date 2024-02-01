@@ -230,8 +230,8 @@ function moveHero() {
     if (pressedKeys.has("j")) {
       blogContainer.remove();
       const content = document.getElementById("content");
-      content.append(grid);
-      gameWrapper.style.backgroundImage = gitBackgroundImageValue;
+      content.append(blogGrid);
+      gameWrapper.style.backgroundImage = gifBackgroundImageValue;
       isMoving = false;
     }
     // console.log(isTouchingSides);

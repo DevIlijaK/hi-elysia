@@ -1,7 +1,30 @@
-var windowWidth = window.innerWidth;
-var windowHeight = window.innerHeight;
+/**
+ * HTML Elements
+ */
+
+var buttons = document.querySelectorAll(".button");
 var header = document.getElementById("header");
 var footer = document.getElementById("footer");
+var blogGrid = document.getElementById("blogGrid");
+var startGameButton = document.getElementById("startGame");
+/**
+ * Na ovom elementu se manja pozadinska slika
+ */
+var gameWrapper = document.getElementById("gameWrapper");
+/**
+ * Ovaj element se koristi samo da drzi pozadinsku static sliku
+ */
+var staticImageElement = document.getElementById("staticImage");
+var staticBackgroundImageValue = window
+  .getComputedStyle(staticImageElement)
+  .getPropertyValue("background-image");
+var gifBackgroundImageValue = window
+  .getComputedStyle(gameWrapper)
+  .getPropertyValue("background-image");
+
+var windowWidth = window.innerWidth;
+var windowHeight = window.innerHeight;
+
 var blogContainer = null;
 var platforms = [footer];
 var heroLeft = null;
@@ -18,27 +41,10 @@ var maxHeight = null;
 /**
  * Postavlja veličinu dugmića
  */
-var buttons = document.querySelectorAll(".button");
-var staticImageElement = document.getElementById("staticImage");
-var gameWrapper = document.getElementById("gameWrapper");
-
-var staticBackgroundImageValue = window
-  .getComputedStyle(staticImageElement)
-  .getPropertyValue("background-image");
-var gitBackgroundImageValue = window
-  .getComputedStyle(gameWrapper)
-  .getPropertyValue("background-image");
-
-var gifImageElement = document.getElementById("staticImage");
-
-var staticbackgroundImageValue = window
-  .getComputedStyle(staticImageElement)
-  .getPropertyValue("background-image");
 
 setControllsButtonSize(buttons);
 setHeaderFooterHeight();
 
-var startGameButton = document.getElementById("startGame");
 startGameButton.onclick = () => {
   document.body.requestFullscreen();
 
@@ -55,7 +61,6 @@ var gravity = 0.01;
 // window.addEventListener("load");
 
 function loadElements() {
-  grid = document.getElementById("blogGrid");
   var numberOfColumns = 1;
   if (windowWidth >= 1024) {
     numberOfColumns = 3;
@@ -76,9 +81,7 @@ function loadElements() {
     });
 }
 
-var grid = document.getElementById("blogGrid");
-
-// window.addEventListener("resize", setElementSize);
+window.addEventListener("resize", () => setElementSize());
 function setElementSize() {
   windowWidth = window.innerWidth;
   windowHeight = window.innerHeight;
@@ -108,9 +111,9 @@ function setElementSize() {
     widthPercentage = 0.3;
     numberOfColumns = 2;
   }
-  grid.style.gridTemplateColumns = `repeat(${numberOfColumns}, minmax(0, 1fr))`;
-  grid.style.columnGap = `${windowWidth * columnGapPercentage}px`;
-  grid.style.rowGap = `${windowHeight * rowGapPercentage}px`;
+  blogGrid.style.blogGridTemplateColumns = `repeat(${numberOfColumns}, minmax(0, 1fr))`;
+  blogGrid.style.columnGap = `${windowWidth * columnGapPercentage}px`;
+  blogGrid.style.rowGap = `${windowHeight * rowGapPercentage}px`;
   setBlogCartDymensions(
     widthPercentage,
     heightPercentage,
@@ -175,7 +178,13 @@ function setBlogCartDymensions(
     var blogCartTextShortDescription = blogCartTextElements[1];
     var blogCartTextDate = blogCartTextElements[2];
     var totalHeightInformationDiv = rampHeight * 0.8;
-    blogCartTextTitle.style.height = `${totalHeightInformationDiv * 0.2}px`;
+    var totalWidthInformationDiv = rampWidth * 0.6;
+    blogCartTextTitle.style.height = `${totalHeightInformationDiv * 0.3}px`;
+    blogCartTextTitle.style.width = `${totalWidthInformationDiv}px`;
+    blogCartTextTitle.style.fontSize = `${
+      totalHeightInformationDiv * 0.3 * 0.25
+    }px`;
+    blogCartTextTitle.style.wordWrap = `break-word`;
     blogCartTextShortDescription.style.height = `${
       totalHeightInformationDiv * 0.5
     }px`;
@@ -183,7 +192,10 @@ function setBlogCartDymensions(
 
     blogCartTextShortDescription.style.fontSize = shortDescriptionFontSize;
 
-    blogCartTextDate.style.height = `${totalHeightInformationDiv * 0.3}px`;
+    blogCartTextDate.style.height = `${totalHeightInformationDiv * 0.2}px`;
+    blogCartTextDate.style.fontSize = `${
+      totalHeightInformationDiv * 0.3 * 0.15
+    }px`;
     // blogCartTextDate.style.fontSize = newSize;
   }
 }

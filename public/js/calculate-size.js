@@ -111,7 +111,7 @@ function setElementSize() {
     widthPercentage = 0.3;
     numberOfColumns = 2;
   }
-  blogGrid.style.blogGridTemplateColumns = `repeat(${numberOfColumns}, minmax(0, 1fr))`;
+  blogGrid.style.gridTemplateColumns = `repeat(${numberOfColumns}, minmax(0, 1fr))`;
   blogGrid.style.columnGap = `${windowWidth * columnGapPercentage}px`;
   blogGrid.style.rowGap = `${windowHeight * rowGapPercentage}px`;
   setBlogCartDymensions(

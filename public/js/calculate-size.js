@@ -130,7 +130,7 @@ function setElementSize() {
   jumpVelocity = minRampHeight * 0.04;
   gravity = minRampHeight * 0.00005;
 
-  step = windowWidth * 0.005;
+  step = windowWidth * 0.002;
 }
 
 function setHeaderFooterHeight() {

@@ -2,7 +2,6 @@ import { Footer } from "./footer";
 import { Header } from "./header";
 
 export function SideNav({ children }: PropsWithChildren) {
-  console.log("Children je: ", children);
   return (
     <div
       id="gameWrapper"

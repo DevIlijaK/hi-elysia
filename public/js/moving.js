@@ -1,43 +1,107 @@
 var standingImageUrl = hero.src;
-var walkingRightImageUrl = null
+var runRightImageUrl = null
+var runLeftImageUrl = null
+var jumpLeftImageUrl = null
+var jumpRightImageUrl = null
 
 
-var imagePath = '/blog/hodanje';
+var runRightPath = '/images/runRight';
+var runLeftPath = '/images/runLeft';
+var jumpLeftPath = '/images/jumpLeft';
+var jumpRightPath = '/images/jumpRight';
+
 // Izvršavanje HTTP zahteva
-fetch(imagePath)
+fetch(runRightPath)
     .then(response => {
-        console.log(response);
         return response.blob()
     })
     .then(blob => {
-        // Kreiranje objekta URL za binarne podatke
-        // var blob = new Blob([blob], { type: 'desired/mime-type' });
-        // blob = new Blob([blob], { type: "image/gif" });
-        console.log(blob)
-        // var reader = new FileReader();
-        // var imageUrl = null
-        // reader.onload = function (event) {
-        //     imageUrl = event.target.result;
-        //     console.log('Base64 String:', imageUrl);
-        //     document.getElementById('hero').src =  imageUrl;
-        //     // You can use the base64String as needed
-        // };
-        //
-        // reader.readAsDataURL(blob);
-        walkingRightImageUrl = URL.createObjectURL(blob);
-
+        console.log('BLOB JE: ', blob)
+        let s = URL.createObjectURL(blob);
+        console.log('URL JE: ', s)
+        runRightImageUrl = s
     })
     .catch(error => console.error('Greška pri dohvatanju slike:', error));
 
-function changeWalkingPicture() {
-    if(!isDynamicPictureActive){
+fetch(runLeftPath)
+    .then(response => {
+        return response.blob()
+    })
+    .then(blob => {
+        runLeftImageUrl = URL.createObjectURL(blob);
+    })
+    .catch(error => console.error('Greška pri dohvatanju slike:', error));
 
-        if (pressedKeys.has("d")) {
-            hero.src = walkingRightImageUrl;
-            isDynamicPictureActive = true
+fetch(jumpLeftPath)
+    .then(response => {
+        return response.blob()
+    })
+    .then(blob => {
+        jumpLeftImageUrl = URL.createObjectURL(blob);
+    })
+    .catch(error => console.error('Greška pri dohvatanju slike:', error));
+
+fetch(jumpRightPath)
+    .then(response => {
+        return response.blob()
+    })
+    .then(blob => {
+        jumpRightImageUrl = URL.createObjectURL(blob);
+    })
+    .catch(error => console.error('Greška pri dohvatanju slike:', error));
+
+
+function changeWalkingPicture() {
+    if (!isDynamicPictureActive) {
+
+        // if (pressedKeys.has("d")) {
+        //
+        // } else if (pressedKeys.has("a")) {
+        //
+        // } else if (
+        //     (pressedKeys.has("a") && pressedKeys.has("w")) ||
+        //     jumpAnimation.has("aw")
+        // ) {
+        //
+        // } else if (
+        //     (pressedKeys.has("d") && pressedKeys.has("w")) ||
+        //     jumpAnimation.has("dw")
+        // ) {
+        //
+        // }
+    if (
+        (pressedKeys.has("a") && pressedKeys.has("w")) ||
+        jumpAnimation.has("aw")
+    ) {
+        hero.src = jumpLeftImageUrl;
+        isDynamicPictureActive = true
+    } else if (
+        (pressedKeys.has("d") && pressedKeys.has("w")) ||
+        jumpAnimation.has("dw")
+    ) {
+        hero.src = jumpRightImageUrl;
+        isDynamicPictureActive = true
+    } else {
+        // if (!isFalling) {
+        if ((!isJumping && pressedKeys.has("w")) || jumpAnimation.has("w")) {
+            if (!isJumping) {
+                obliqueThrowConfig(90, "w");
+            }
+            throwAnimation();
         } else {
-            hero.src = standingImageUrl;
+            if (pressedKeys.has("d")) {
+                hero.src = runLeftImageUrl;
+                isDynamicPictureActive = true
+            } else if (pressedKeys.has("a")) {
+                hero.src = runRightImageUrl;
+                isDynamicPictureActive = true
+            } else {
+                hero.src = standingImageUrl;
+            }
         }
+        // }
+    }
+
     }
 
 }

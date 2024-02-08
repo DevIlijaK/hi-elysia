@@ -52,56 +52,64 @@ fetch(jumpRightPath)
 
 
 function changeWalkingPicture() {
+    // if (!isDynamicPictureActive) {
+    //
+    //     // if (pressedKeys.has("d")) {
+    //     //
+    //     // } else if (pressedKeys.has("a")) {
+    //     //
+    //     // } else if (
+    //     //     (pressedKeys.has("a") && pressedKeys.has("w")) ||
+    //     //     jumpAnimation.has("aw")
+    //     // ) {
+    //     //
+    //     // } else if (
+    //     //     (pressedKeys.has("d") && pressedKeys.has("w")) ||
+    //     //     jumpAnimation.has("dw")
+    //     // ) {
+    //     //
+    //     // }
+    // if (
+    //     (pressedKeys.has("a") && pressedKeys.has("w")) ||
+    //     jumpAnimation.has("aw")
+    // ) {
+    //     hero.src = jumpLeftImageUrl;
+    //     isDynamicPictureActive = true
+    // } else if (
+    //     (pressedKeys.has("d") && pressedKeys.has("w")) ||
+    //     jumpAnimation.has("dw")
+    // ) {
+    //     hero.src = jumpRightImageUrl;
+    //     isDynamicPictureActive = true
+    // } else {
+    //     // if (!isFalling) {
+    //     if ((!isJumping && pressedKeys.has("w")) || jumpAnimation.has("w")) {
+    //         if (!isJumping) {
+    //             obliqueThrowConfig(90, "w");
+    //         }
+    //         throwAnimation();
+    //     } else {
+    //         if (pressedKeys.has("d")) {
+    //             hero.src = runLeftImageUrl;
+    //             isDynamicPictureActive = true
+    //         } else if (pressedKeys.has("a")) {
+    //             hero.src = runRightImageUrl;
+    //             isDynamicPictureActive = true
+    //         } else {
+    //             hero.src = standingImageUrl;
+    //         }
+    //     }
+    //     // }
+    // }
+    //
+    // }
+
+}
+function changeHeroPicture(url) {
+    // console.log('isDinamicPicture', isDynamicPictureActive);
     if (!isDynamicPictureActive) {
-
-        // if (pressedKeys.has("d")) {
-        //
-        // } else if (pressedKeys.has("a")) {
-        //
-        // } else if (
-        //     (pressedKeys.has("a") && pressedKeys.has("w")) ||
-        //     jumpAnimation.has("aw")
-        // ) {
-        //
-        // } else if (
-        //     (pressedKeys.has("d") && pressedKeys.has("w")) ||
-        //     jumpAnimation.has("dw")
-        // ) {
-        //
-        // }
-    if (
-        (pressedKeys.has("a") && pressedKeys.has("w")) ||
-        jumpAnimation.has("aw")
-    ) {
-        hero.src = jumpLeftImageUrl;
+        // console.log('Ulazi ovde!', url);
+        hero.src = url;
         isDynamicPictureActive = true
-    } else if (
-        (pressedKeys.has("d") && pressedKeys.has("w")) ||
-        jumpAnimation.has("dw")
-    ) {
-        hero.src = jumpRightImageUrl;
-        isDynamicPictureActive = true
-    } else {
-        // if (!isFalling) {
-        if ((!isJumping && pressedKeys.has("w")) || jumpAnimation.has("w")) {
-            if (!isJumping) {
-                obliqueThrowConfig(90, "w");
-            }
-            throwAnimation();
-        } else {
-            if (pressedKeys.has("d")) {
-                hero.src = runLeftImageUrl;
-                isDynamicPictureActive = true
-            } else if (pressedKeys.has("a")) {
-                hero.src = runRightImageUrl;
-                isDynamicPictureActive = true
-            } else {
-                hero.src = standingImageUrl;
-            }
-        }
-        // }
     }
-
-    }
-
 }

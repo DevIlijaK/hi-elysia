@@ -75,8 +75,12 @@ document.addEventListener("click", (event) => {
 });
 document.addEventListener("keyup", (event) => {
     pressedKeys.delete(event.key.toLowerCase());
+    // console.log('Ulazi ovde keyup: ', isDynamicPictureActive)
     if (pressedKeys.size === 0 && !isJumping) {
+
+        // console.log('Ulazi ovde keyup: ', isDynamicPictureActive)
         isDynamicPictureActive = false
+        // changeHeroPicture(standingImageUrl);
     }
 });
 // document.addEventListener("click", (event) => {
@@ -92,43 +96,46 @@ function moveHero() {
             jumpAnimation.has("aw")
         ) {
             if (!isJumping) {
+
                 obliqueThrowConfig(45, "aw");
+                hero.src = jumpLeftImageUrl;
+                isDynamicPictureActive = true
+                console.log('Ulazi ovde')
             }
             throwAnimation();
-        }
-            // else if (pressedKeys.has("a") && pressedKeys.has("s")) {
-            //   moveDiagonaly(225);
-        // }
-        else if (
+        } else if (
             (pressedKeys.has("d") && pressedKeys.has("w")) ||
             jumpAnimation.has("dw")
         ) {
             if (!isJumping) {
                 obliqueThrowConfig(125, "dw");
+
+                hero.src = jumpRightImageUrl;
+                isDynamicPictureActive = true
+
             }
             throwAnimation();
-        }
-            //  else if (pressedKeys.has("d") && pressedKeys.has("s")) {
-            //   moveDiagonaly(315);
-        // }
-        else {
+        } else {
             if (!isFalling) {
-                // console.log("Falling", !isJumping && pressedKeys.has("w"))
-                // console.log("jumpAnimation.has(w)", jumpAnimation.has("w"))
                 if ((!isJumping && pressedKeys.has("w")) || jumpAnimation.has("w")) {
                     if (!isJumping) {
                         obliqueThrowConfig(90, "w");
+                        changeHeroPicture(standingImageUrl);
                     }
                     throwAnimation();
                 } else {
                     if (pressedKeys.has("d")) {
                         heroLeft += step;
+                        changeHeroPicture(runRightImageUrl);
                     } else if (pressedKeys.has("a")) {
                         heroLeft -= step;
+                        changeHeroPicture(runLeftImageUrl);
                     }
-                    //  else if (pressedKeys.has("s")) {
-                    // heroTop += step;
-                    // }
+                    else if (pressedKeys.size === 0) {
+                        // changeHeroPicture(standingImageUrl);
+                        hero.src = standingImageUrl;
+                        isDynamicPictureActive = false
+                    }
                 }
             }
         }
@@ -144,39 +151,6 @@ function moveHero() {
                 } else {
                     rect = platforms[i].getBoundingClientRect();
                 }
-                // if (elements[i].id == "footer") {
-                // console.log(
-                //   "heroTop + heroHeight > rect.top",
-                //   heroTop + heroHeight > rect.top
-                // );
-                // console.log("maxHeight <= rect.top", maxHeight <= rect.top);
-                // console.log(
-                //   "rect.left <= heroLeft + heroWidth ",
-                //   rect.left <= heroLeft + heroWidth
-                // );
-                // console.log(
-                //   "rect.left + rect.width >= heroLeft",
-                //   rect.left + rect.width >= heroLeft
-                // );
-                // console.log("heroTop", heroTop);
-                // console.log("rect top: ", rect.top);
-
-                // console.log("heroTop < rect.top", heroTop < rect.top);
-                // }
-
-                // console.log(
-                //   "1 heroTop + heroHeight > rect.top",
-                //   heroTop + heroHeight > rect.top
-                // );
-                // console.log("maxHeight <= rect.top", maxHeight <= rect.top);
-                // console.log(
-                //   "rect.left <= heroLeft + heroWidth ",
-                //   rect.left <= heroLeft + heroWidth
-                // );
-                // console.log(
-                //   "rect.left + rect.width >= heroLeft",
-                //   rect.left + rect.width >= heroLeft
-                // );
                 if (
                     heroTop + heroHeight > rect.top &&
                     heroTop < rect.top &&
@@ -192,6 +166,8 @@ function moveHero() {
                     isFalling = false;
                     gravitationVelocity = 0;
                     standingElement = {dimension: rect, platform: platforms[i]};
+                    changeHeroPicture(standingImageUrl);
+                    isDynamicPictureActive = false;
                 } else {
                     isFalling = true;
                 }
@@ -203,31 +179,8 @@ function moveHero() {
                 gravityConfig(0);
             }
         }
-        if (standingElement) {
-            if (
-                standingElement.dimension.left <= heroLeft + heroWidth &&
-                standingElement.dimension.left + standingElement.dimension.width >=
-                heroLeft
-            ) {
-                if (pressedKeys.has("k")) {
-                    enterBlog(standingElement);
-                    isMoving = false;
-                }
-                isFalling = false;
-            } else {
-                isFalling = true;
-            }
-        } else {
-            isFalling = true;
-        }
-        if (heroLeft <= 0 || heroLeft + heroWidth >= window.innerWidth) {
-            heroLeft <= 0
-                ? (heroLeft = 0)
-                : (heroLeft = window.innerWidth - heroWidth);
-            isTouchingSides = true;
-        } else {
-            isTouchingSides = false;
-        }
+        checkStandingElements();
+        checkSides();
         if (pressedKeys.has("j")) {
             blogContainer.remove();
             const content = document.getElementById("content");
@@ -235,7 +188,7 @@ function moveHero() {
             gameWrapper.style.backgroundImage = gifBackgroundImageValue;
             isMoving = false;
         }
-        changeWalkingPicture()
+        // changeWalkingPicture()
         // console.log(isTouchingSides);
         hero.style.top = `${heroTop}px`;
         hero.style.left = `${heroLeft}px`;
@@ -275,4 +228,37 @@ function enterReadingBlogPage() {
     console.log("Ulazi ovde ");
     gameWrapper.style.backgroundImage = staticBackgroundImageValue;
     // document.getElementById("content").append(grid);
+}
+
+function checkSides() {
+
+    if (heroLeft <= 0 || heroLeft + heroWidth >= window.innerWidth) {
+        heroLeft <= 0
+            ? (heroLeft = 0)
+            : (heroLeft = window.innerWidth - heroWidth);
+        isTouchingSides = true;
+    } else {
+        isTouchingSides = false;
+    }
+}
+
+function checkStandingElements() {
+
+    if (standingElement) {
+        if (
+            standingElement.dimension.left <= heroLeft + heroWidth &&
+            standingElement.dimension.left + standingElement.dimension.width >=
+            heroLeft
+        ) {
+            if (pressedKeys.has("k")) {
+                enterBlog(standingElement);
+                isMoving = false;
+            }
+            isFalling = false;
+        } else {
+            isFalling = true;
+        }
+    } else {
+        isFalling = true;
+    }
 }
